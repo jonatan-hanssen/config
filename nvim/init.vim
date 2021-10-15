@@ -1,5 +1,4 @@
 call plug#begin(stdpath('data') . '/plugged')
-	Plug 'nvim-lua/completion-nvim'
 	Plug 'ervandew/supertab'
 call plug#end()
 
