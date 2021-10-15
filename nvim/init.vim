@@ -3,7 +3,6 @@ call plug#begin(stdpath('data') . '/plugged')
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'nvim-lua/completion-nvim'
 	Plug 'ervandew/supertab'
-	"Plug 'git@github.com:vim-scripts/AutoComplPop.git'
 call plug#end()
 
 
