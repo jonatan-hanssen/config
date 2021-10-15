@@ -1,5 +1,4 @@
 call plug#begin(stdpath('data') . '/plugged')
-	Plug 'https://tpope.io/vim/fugitive.git'
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'nvim-lua/completion-nvim'
 	Plug 'ervandew/supertab'
