@@ -18,15 +18,18 @@ set clipboard+=unnamedplus
 set smartindent
 set tabstop=4
 set shiftwidth=4
-set cursorline
 
+"line highlight
+set cursorline
 hi CursorLine   cterm=NONE ctermbg=237 ctermfg=NONE
 
+"autoupdate changes to init.vim
 augroup reload_conf
 	autocmd!
 	autocmd! BufWritePost *.vim source %
 augroup end
 
+"put everything in the black hole
 nnoremap x "_x
 nnoremap d "_d
 nnoremap D "_D
@@ -36,6 +39,7 @@ nnoremap <leader>d ""d
 nnoremap <leader>D ""D
 vnoremap <leader>d ""d
 
+"move lines
 nnoremap <A-j> :m .+1<CR>==
 nnoremap <A-k> :m .-2<CR>==
 vnoremap <A-j> :m '>+1<CR>gv=gv
