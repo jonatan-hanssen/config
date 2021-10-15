@@ -46,9 +46,9 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 
 
 let mapleader=" "
-nnoremap <leader>gc :Git commit -am 
-nnoremap <leader>gp :Git push<CR>
-nnoremap <leader>gg :Git pull<CR>
+nnoremap <leader>gc :!git commit -am 
+nnoremap <leader>gp :!git push<CR>
+nnoremap <leader>gg :!git pull<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <Enter> :noh<CR>
 nnoremap <leader>h <C-w>h
