@@ -18,6 +18,7 @@ set shiftwidth=4
 "line highlight
 set cursorline
 hi CursorLine   cterm=NONE ctermbg=237 ctermfg=NONE
+hi MatchParen ctermbg=241
 
 "autoupdate changes to init.vim
 augroup reload_conf
