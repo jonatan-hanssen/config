@@ -4,7 +4,6 @@ call plug#end()
 
 
 let g:pyindent_open_paren=shiftwidth()
-let g:deoplete#enable_at_startup = 1
 let g:netrw_banner=0
 set relativenumber
 set number
@@ -15,12 +14,13 @@ set smartindent
 set tabstop=4
 set shiftwidth=4
 
-"line highlight
+" highlights
 set cursorline
 hi CursorLine   cterm=NONE ctermbg=237 ctermfg=NONE
 hi MatchParen ctermbg=241
 
-"autoupdate changes to init.vim
+" autoupdate changes to init.vim
+" det funker ikke tho
 augroup reload_conf
 	autocmd!
 	autocmd! BufWritePost *.vim source %
@@ -44,14 +44,28 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 
 
 let mapleader=" "
+" git stuff
 nnoremap <leader>gc :!git commit -am 
 nnoremap <leader>gp :!git push<CR>
 nnoremap <leader>gg :!git pull<CR>
-nnoremap <leader>w :w<CR>
 nnoremap <Enter> :noh<CR>
+" move mellom splits
 nnoremap <leader>h <C-w>h
 nnoremap <leader>l <C-w>l
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
+" move mellom tabs
+nnoremap H gT
+nnoremap L gt
+" aapne tabs og splits
+nnoremap <leader>t :tabnew 
+nnoremap <leader>v :vsplit 
+
+" build stuff
+
+" python
 autocmd FileType python map <buffer> <C-b> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <C-b> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+" latex
+autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex %'<CR>:silent exec '!xdg-open *.pdf'<CR>
+autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex %'<CR>:silent exec '!xdg-open *.pdf'<CR>
