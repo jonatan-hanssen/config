@@ -60,7 +60,10 @@ nnoremap L gt
 " aapne tabs og splits
 nnoremap <leader>t :tabnew 
 nnoremap <leader>v :vsplit 
+" search and replace
+nnoremap <leader>s :%s//gc<Left><Left><Left>
 
+map Y y$
 " build stuff
 
 " python
