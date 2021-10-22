@@ -72,3 +72,6 @@ autocmd FileType python imap <buffer> <C-b> <esc>:w<CR>:exec '!python3' shellesc
 " latex
 autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex %'<CR>:silent exec '!xdg-open *.pdf'<CR>
 autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex %'<CR>:silent exec '!xdg-open *.pdf'<CR>
+" C
+autocmd FileType c map <buffer> <C-b> :w<CR>:!gcc % -o %< <CR>:exec '!./%<'<CR>
+autocmd FileType c imap <buffer> <C-b> <esc> :w<CR>:!gcc % -o %< <CR>:exec '!./%<'<CR>
