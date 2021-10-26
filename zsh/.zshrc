@@ -36,7 +36,7 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
 
-alias ls="ls -a --color=auto"
+alias ls="ls --color=auto"
 alias tree="tree -L 3 -C"
 alias conf='function _(){ $EDITOR $HOME/.config/$1; }; _'
 alias mv='mv --no-clobber'
