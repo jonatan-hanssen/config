@@ -1,11 +1,12 @@
 call plug#begin(stdpath('data') . '/plugged')
 	Plug 'ervandew/supertab'
 	Plug 'numToStr/Comment.nvim'
-	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline-themes'
+	"Plug 'vim-airline/vim-airline'
+	"Plug 'vim-airline/vim-airline-themes'
+	Plug 'reedes/vim-pencil'
 	Plug 'tpope/vim-fugitive'
 call plug#end()
-lua require('Comment').setup()
+"lua require('Comment').setup()
 
 
 " let g:airline_theme='onedark'
