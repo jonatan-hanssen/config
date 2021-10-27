@@ -43,4 +43,4 @@ alias mv='mv --no-clobber'
 
 alias sshuio='ssh -YC jonatahh@login.ifi.uio.no'
 alias uiomount='sshfs jonatahh@login.ifi.uio.no:. ~/ifilokal'
-
+alias :q='exit'

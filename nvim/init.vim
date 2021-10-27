@@ -1,10 +1,14 @@
 call plug#begin(stdpath('data') . '/plugged')
 	Plug 'ervandew/supertab'
 	Plug 'numToStr/Comment.nvim'
+	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
+	Plug 'tpope/vim-fugitive'
 call plug#end()
 lua require('Comment').setup()
 
 
+" let g:airline_theme='onedark'
 let g:pyindent_open_paren=shiftwidth()
 let g:netrw_banner=0
 set relativenumber
