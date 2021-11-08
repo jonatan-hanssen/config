@@ -6,28 +6,33 @@ call plug#begin(stdpath('data') . '/plugged')
 	Plug 'reedes/vim-pencil'
 	Plug 'tpope/vim-fugitive'
 call plug#end()
-"lua require('Comment').setup()
+lua require('Comment').setup()
 
 
 " let g:airline_theme='onedark'
 let g:pyindent_open_paren=shiftwidth()
 let g:netrw_banner=0
-set relativenumber
-set number
-inoremap <CR> <CR>x<BS>
-set scrolloff=999
 set clipboard+=unnamedplus
+
+" indents
 set smartindent
 set tabstop=4
 set shiftwidth=4
 
-" highlights
+" visuals
+set relativenumber
+set number
+set scrolloff=999
 set cursorline
 hi CursorLine   cterm=NONE ctermbg=237 ctermfg=NONE
 hi MatchParen ctermbg=241
 
+" trailing whitespace er greit for meg
+inoremap <CR> <CR>x<BS>
+nnoremap o ox<BS>
+nnoremap O Ox<BS>
 
-"put everything in the black hole
+" put everything in the black hole
 nnoremap x "_x
 nnoremap d "_d
 nnoremap D "_D
@@ -37,13 +42,13 @@ nnoremap <leader>d ""d
 nnoremap <leader>D ""D
 vnoremap <leader>d ""d
 
-"move lines
+" move lines
 nnoremap <A-j> :m .+1<CR>==
 nnoremap <A-k> :m .-2<CR>==
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
-
+" leader kommandoer
 let mapleader=" "
 " git stuff
 nnoremap <leader>gc :!git commit -am 
@@ -63,8 +68,10 @@ nnoremap <leader>t :tabnew
 nnoremap <leader>v :vsplit 
 " search and replace
 nnoremap <leader>s :%s//gc<Left><Left><Left>
-
+" bedre shift yank
 map Y y$
+""""""""""""" Her maa de legges til conditional execution --------------
+
 " build stuff
 
 " ------- python --------
@@ -78,3 +85,7 @@ autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex %'<CR>:sile
 " --------- C -----------
 autocmd FileType c map <buffer> <C-b> :w<CR>:!gcc % -o %< <CR>:exec '!./%<'<CR>
 autocmd FileType c imap <buffer> <C-b> <esc> :w<CR>:!gcc % -o %< <CR>:exec '!./%<'<CR>
+
+" -------- Java ---------
+autocmd FileType java map <buffer> <C-b> :w<CR>:!javac *.java <CR>:exec '!java %<'<CR>
+autocmd FileType java imap <buffer> <C-b> <esc> :w<CR>:!javac *.java <CR>:exec '!java %<'<CR>
