@@ -26,11 +26,14 @@ set scrolloff=999
 set cursorline
 hi CursorLine   cterm=NONE ctermbg=237 ctermfg=NONE
 hi MatchParen ctermbg=241
+set list
+set listchars=lead:·,trail:·,tab:>·
+hi Whitespace ctermfg=024
 
 " trailing whitespace er greit for meg
 inoremap <CR> <CR>x<BS>
-nnoremap o ox<BS>
-nnoremap O Ox<BS>
+" nnoremap o ox<BS>
+" nnoremap O Ox<BS>
 
 " put everything in the black hole
 nnoremap x "_x
@@ -79,13 +82,13 @@ autocmd FileType python map <buffer> <C-b> :w<CR>:exec '!python3' shellescape(@%
 autocmd FileType python imap <buffer> <C-b> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 
 " ------- latex ---------
-autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex %'<CR>:silent exec '!xdg-open %<.pdf'<CR>
-autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex %'<CR>:silent exec '!xdg-open %<.pdf'<CR>
+autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex % && xdg-open %<.pdf'<CR>
+autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex % && xdg-open %<.pdf'<CR>
 
 " --------- C -----------
-autocmd FileType c map <buffer> <C-b> :w<CR>:!gcc % -o %< <CR>:exec '!./%<'<CR>
-autocmd FileType c imap <buffer> <C-b> <esc> :w<CR>:!gcc % -o %< <CR>:exec '!./%<'<CR>
+autocmd FileType c map <buffer> <C-b> :w<CR>:!gcc % -o %< && !./%<'<CR>
+autocmd FileType c imap <buffer> <C-b> <esc> :w<CR>:!gcc % -o %< && ./%<'<CR>
 
 " -------- Java ---------
-autocmd FileType java map <buffer> <C-b> :w<CR>:!javac *.java <CR>:exec '!java %<'<CR>
-autocmd FileType java imap <buffer> <C-b> <esc> :w<CR>:!javac *.java <CR>:exec '!java %<'<CR>
+autocmd FileType java map <buffer> <C-b> :w<CR>:exec '!javac *.java && java %<'<CR>
+autocmd FileType java imap <buffer> <C-b> <esc> :w<CR>:!javac *.java && java %<<CR>
