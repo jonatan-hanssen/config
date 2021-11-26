@@ -31,28 +31,22 @@ set listchars=lead:·,trail:·,tab:>·
 hi Whitespace ctermfg=024
 
 " trailing whitespace er greit for meg
-inoremap <CR> <CR>x<BS>
-" nnoremap o ox<BS>
-" nnoremap O Ox<BS>
+" inoremap <CR> <CR>x<BS>
 
-" put everything in the black hole
-nnoremap x "_x
-nnoremap d "_d
-nnoremap D "_D
-vnoremap d "_d
-
-nnoremap <leader>d ""d
-nnoremap <leader>D ""D
-vnoremap <leader>d ""d
 
 " move lines
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
+nnoremap <A-j> :m .+1<CR>
+nnoremap <A-k> :m .-2<CR>
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " leader kommandoer
 let mapleader=" "
+
+" clipboard
+nnoremap <leader>p "*p
+nnoremap <leader>y "*y
+
 " git stuff
 nnoremap <leader>gc :!git commit -am 
 nnoremap <leader>gp :!git push<CR>
