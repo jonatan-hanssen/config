@@ -27,6 +27,8 @@ rightarrow=$(echo -en '\u25aa')
 export PROMPT2=" ${rightarrow} "
 export PROMPT='[%?] %F{069}%~% %f ${vcs_info_msg_0_} %f${NEWLINE}${PROMPT2}'
 
+# this is to make pip not halt looking for some keyring
+export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
 
 # history
 export HISTFILE="$XDG_CACHE_HOME/zsh/history"
@@ -40,6 +42,9 @@ alias ls="ls --color=auto"
 alias tree="tree -L 3 -C"
 alias conf='function _(){ $EDITOR $HOME/.config/$1; }; _'
 alias mv='mv --no-clobber'
+
+# this is to make latex installer work
+alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
 
 alias sshuio='ssh -YC jonatahh@login.ifi.uio.no'
 alias uiomount='sshfs jonatahh@login.ifi.uio.no:. ~/ifilokal'

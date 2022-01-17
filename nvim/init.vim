@@ -5,6 +5,7 @@ call plug#begin(stdpath('data') . '/plugged')
 	"Plug 'vim-airline/vim-airline-themes'
 	Plug 'reedes/vim-pencil'
 	Plug 'tpope/vim-fugitive'
+	Plug 'stevearc/vim-arduino'
 call plug#end()
 lua require('Comment').setup()
 
@@ -26,13 +27,10 @@ set scrolloff=999
 set cursorline
 hi CursorLine   cterm=NONE ctermbg=237 ctermfg=NONE
 hi MatchParen ctermbg=241
+hi CursorLineNr cterm=NONE
 set list
 set listchars=lead:·,trail:·,tab:>·
 hi Whitespace ctermfg=024
-
-" trailing whitespace er greit for meg
-" inoremap <CR> <CR>x<BS>
-
 
 " move lines
 nnoremap <A-j> :m .+1<CR>
@@ -80,8 +78,12 @@ autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex % && xdg-open %<.
 autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex % && xdg-open %<.pdf'<CR>
 
 " --------- C -----------
-autocmd FileType c map <buffer> <C-b> :w<CR>:!gcc % -o %< && !./%<'<CR>
-autocmd FileType c imap <buffer> <C-b> <esc> :w<CR>:!gcc % -o %< && ./%<'<CR>
+autocmd FileType c map <buffer> <C-b> :w<CR>:!gcc % -o %< && !./%<<CR>
+autocmd FileType c imap <buffer> <C-b> <esc> :w<CR>:!gcc % -o %< && ./%<<CR>
+
+" --------- C++ ---------
+autocmd FileType cpp map <buffer> <C-b> :w<CR>:!g++ % && !./a.out<CR>
+autocmd FileType cpp imap <buffer> <C-b> <esc> :w<CR>:!g++ % -o %< && ./%<<CR>
 
 " -------- Java ---------
 autocmd FileType java map <buffer> <C-b> :w<CR>:exec '!javac *.java && java %<'<CR>
