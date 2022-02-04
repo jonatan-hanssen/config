@@ -23,7 +23,7 @@ set $menu wofi --dmenu --allow-images --show run
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/background.jpg fill
+output * bg /usr/share/backgrounds/sway/Figure_1.png fill
 #
 # Example configuration:
 #
@@ -85,7 +85,7 @@ output * bg /usr/share/backgrounds/sway/background.jpg fill
     bindsym $mod+Shift+e exec swaymsg exit
 
     # Lock pc
-	# bindsym $mod+l exec swaylock
+	bindsym $mod+p exec swaylock
 #
 # Moving around:
 #
