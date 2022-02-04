@@ -722,8 +722,6 @@ font:
 key_bindings:
   - { key: Paste,                                       action: Paste          }
   - { key: Copy,                                        action: Copy           }
-  - { key: Return,    mods: Control|Shift,  action: SpawnNewInstance}
-  - { key: T,         mods: Control,        action: SpawnNewInstance}
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
   #- { key: L,         mods: Control, mode: ~Vi|~Search, chars: "\x0c"          }
   #- { key: PageUp,    mods: Shift,   mode: ~Alt,        action: ScrollPageUp,  }
