@@ -46,6 +46,7 @@ alias mv='mv --no-clobber'
 # this is to make latex installer work
 alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
 
+alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
 alias sshuio='ssh -YC jonatahh@login.ifi.uio.no'
 alias uiomount='sshfs jonatahh@login.ifi.uio.no:. ~/ifilokal'
 alias :q='exit'
