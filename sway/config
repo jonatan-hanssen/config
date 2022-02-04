@@ -223,4 +223,9 @@ input * {
 	pointer_accel 0.5
 }
 
+input 1:1:AT_Translated_Set_2_keyboard {
+	repeat_delay 400
+	repeat_rate 20
+}
+
 include /etc/sway/config.d/*
