@@ -1,0 +1,10 @@
+#!/bin/sh
+
+date_info=$(date +'%d.%m.%Y %T')
+
+# we have to cut like this because upower separates by several spaces
+bat_info=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep "percentage" | cut -d ' ' -f 15)
+
+# this is bad
+tab=' '
+echo $bat_info "$tab" $date_info

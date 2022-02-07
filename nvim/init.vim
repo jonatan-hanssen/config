@@ -78,11 +78,11 @@ autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex % && xdg-open %<.
 autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex % && xdg-open %<.pdf'<CR>
 
 " --------- C -----------
-autocmd FileType c map <buffer> <C-b> :w<CR>:!gcc % -o %< && !./%<<CR>
+autocmd FileType c map <buffer> <C-b> :w<CR>:!gcc % -o %< && ./%<<CR>
 autocmd FileType c imap <buffer> <C-b> <esc> :w<CR>:!gcc % -o %< && ./%<<CR>
 
 " --------- C++ ---------
-autocmd FileType cpp map <buffer> <C-b> :w<CR>:!g++ % && !./a.out<CR>
+autocmd FileType cpp map <buffer> <C-b> :w<CR>:!g++ % && ./a.out<CR>
 autocmd FileType cpp imap <buffer> <C-b> <esc> :w<CR>:!g++ % -o %< && ./%<<CR>
 
 " -------- Java ---------
