@@ -2,9 +2,12 @@
 
 date_info=$(date +'%d.%m.%Y %T')
 
-# we have to cut like this because upower separates by several spaces
-bat_info=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep "percentage" | cut -d ' ' -f 15)
+# you cant just awk a specific line number because the number of lines change i think
+bat_perc=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep "percentage" | awk '{print $2}')
+bat_charge_status=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep "state" | awk '{print $2}')
+
 
 # this is bad
 tab=' '
-echo $bat_info "$tab" $date_info
+
+echo $bat_perc $bat_charge_status "$tab" $date_info
