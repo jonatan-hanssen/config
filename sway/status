@@ -2,14 +2,13 @@
 
 date_info=$(date +'%d.%m.%Y %T')
 
-# you cant just awk a specific line number because the number of lines change i think
-bat_perc=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep "percentage" | awk '{print $2}')
-bat_charge_status=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep "state" | awk '{print $2}')
+bat_perc=$(cat /sys/class/power_supply/BAT1/capacity)
+bat_charge_status=$(cat /sys/class/power_supply/BAT1/status)
 
-alert=""
-
-if [[ $(echo $bat_perc | sed 's/%//') -lt 7 ]] && [[ $(date +'%N') -lt 500000000 ]]; then
-	bat_charge_status="BATTERY CRITICAL"
+if (( "$bat_perc" < 10 )) \
+	&& [[ $(date +'%N') -lt 500000000 ]] \
+	&& [[ $bat_charge_status != "Charging" ]]; then
+	alert="BATTERY CRITICAL 							"
 fi
 
 # get volume level
@@ -20,4 +19,4 @@ if [[ $(amixer get Master | awk 'FNR==6 {print $6}') == "[off]" ]]; then
 	vol="mute"
 fi
 
-echo -e "$alert vol: $vol \t bat: $bat_perc $bat_charge_status \t $date_info"
+echo -e "$alert vol: $vol \t bat: $bat_perc% $bat_charge_status \t $date_info"

@@ -41,12 +41,12 @@ setopt INC_APPEND_HISTORY
 alias ls="ls --color=auto"
 alias tree="tree -L 3 -C"
 alias conf='$EDITOR $HOME/.config/$1'
-alias mv='mv --no-clobber'
+alias mv='mv --interactive'
 
 # this is to make latex installer work
 alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
 
-alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
+alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
 alias sshuio='ssh -YC jonatahh@login.ifi.uio.no'
 alias uiomount='sshfs jonatahh@login.ifi.uio.no:. ~/ifilokal'
 alias :q='exit'

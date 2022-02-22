@@ -721,6 +721,7 @@ font:
 # in the order they were defined in.
 key_bindings:
   - { key: Paste,                                       action: Paste          }
+  - { key: Return,         mods: Shift,                    action: SpawnNewInstance }
   - { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
   #- { key: L,         mods: Control, mode: ~Vi|~Search, chars: "\x0c"          }
