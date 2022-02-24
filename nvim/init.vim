@@ -6,6 +6,7 @@ call plug#begin(stdpath('data') . '/plugged')
 	Plug 'reedes/vim-pencil'
 	Plug 'tpope/vim-fugitive'
 	Plug 'stevearc/vim-arduino'
+	Plug 'junegunn/seoul256.vim'
 call plug#end()
 lua require('Comment').setup()
 
@@ -31,6 +32,9 @@ hi CursorLineNr cterm=NONE
 set list
 set listchars=lead:·,trail:·,tab:>·
 hi Whitespace ctermfg=024
+
+" alternatively this is uncommented and we have light theme
+colo seoul256-light
 
 " move lines
 nnoremap <A-j> :m .+1<CR>
@@ -74,8 +78,8 @@ autocmd FileType python map <buffer> <C-b> :w<CR>:exec '!python3' shellescape(@%
 autocmd FileType python imap <buffer> <C-b> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 
 " ------- latex ---------
-autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex % && xdg-open %<.pdf'<CR>
-autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex % && xdg-open %<.pdf'<CR>
+autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex % && zathura %<.pdf&'<CR>
+autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex % && zathura %<.pdf&'<CR>
 
 " --------- C -----------
 autocmd FileType c map <buffer> <C-b> :w<CR>:!gcc -g -Wall -Wextra -std=gnu11 % -o %< && ./%<<CR>
