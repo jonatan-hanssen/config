@@ -6,7 +6,8 @@ call plug#begin(stdpath('data') . '/plugged')
 	Plug 'reedes/vim-pencil'
 	Plug 'tpope/vim-fugitive'
 	Plug 'stevearc/vim-arduino'
-	Plug 'junegunn/seoul256.vim'
+	" Plug 'junegunn/seoul256.vim'
+	Plug 'sonph/onehalf', { 'rtp' : 'vim' }
 call plug#end()
 lua require('Comment').setup()
 
@@ -32,9 +33,9 @@ hi CursorLineNr cterm=NONE
 set list
 set listchars=lead:·,trail:·,tab:>·
 hi Whitespace ctermfg=024
-
 " alternatively this is uncommented and we have light theme
-colo seoul256-light
+colorscheme onehalflight
+
 
 " move lines
 nnoremap <A-j> :m .+1<CR>
