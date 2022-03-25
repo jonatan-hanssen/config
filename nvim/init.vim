@@ -36,6 +36,9 @@ hi Whitespace ctermfg=024
 " alternatively this is uncommented and we have light theme
 colorscheme onehalflight
 
+" do an operator on every line in the file (daG, yaG, =aG)
+xnoremap aG ggoG
+onoremap aG :normal VaG<cr>
 
 " move lines
 nnoremap <A-j> :m .+1<CR>
