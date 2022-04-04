@@ -15,7 +15,7 @@ lua require('Comment').setup()
 " let g:airline_theme='onedark'
 let g:pyindent_open_paren=shiftwidth()
 let g:netrw_banner=0
-set clipboard+=unnamedplus
+" set clipboard+=unnamedplus
 
 " indents
 set smartindent
@@ -50,8 +50,8 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 let mapleader=" "
 
 " clipboard
-nnoremap <leader>p "*p
-nnoremap <leader>y "*y
+nnoremap <leader>p "+p
+nnoremap <leader>y "+y
 
 " git stuff
 nnoremap <leader>gc :!git commit -am 
@@ -70,7 +70,7 @@ nnoremap L gt
 nnoremap <leader>t :tabnew 
 nnoremap <leader>v :vsplit 
 " search and replace
-nnoremap <leader>s :%s//gc<Left><Left><Left>
+nnoremap <leader>s :%s///g<Left><Left>
 " bedre shift yank
 map Y y$
 """"""""""""" Her maa de legges til conditional execution --------------
