@@ -59,6 +59,7 @@ nnoremap <leader>gp :!git push<CR>
 nnoremap <leader>gg :!git pull<CR>
 nnoremap <Enter> :noh<CR>
 " move mellom splits
+" dette bruker jeg aldri, burde replaces med noe mer nyttig
 nnoremap <leader>h <C-w>h
 nnoremap <leader>l <C-w>l
 nnoremap <leader>j <C-w>j
@@ -67,9 +68,9 @@ nnoremap <leader>k <C-w>k
 nnoremap H gT
 nnoremap L gt
 " aapne tabs og splits
-nnoremap <leader>t :tabnew 
-nnoremap <leader>v :vsplit 
-" search and replace
+nnoremap <leader>t :tabnew
+nnoremap <leader>v :vsplit
+" replace alt som ble soekt paa sist
 nnoremap <leader>s :%s///g<Left><Left>
 " bedre shift yank
 map Y y$
