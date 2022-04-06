@@ -68,8 +68,8 @@ nnoremap <leader>k <C-w>k
 nnoremap H gT
 nnoremap L gt
 " aapne tabs og splits
-nnoremap <leader>t :tabnew
-nnoremap <leader>v :vsplit
+nnoremap <leader>t :tabnew 
+nnoremap <leader>v :vsplit 
 " replace alt som ble soekt paa sist
 nnoremap <leader>s :%s///g<Left><Left>
 " bedre shift yank
