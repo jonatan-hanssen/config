@@ -54,7 +54,7 @@ nnoremap <leader>p "+p
 nnoremap <leader>y "+y
 
 " git stuff
-nnoremap <leader>gc :!git commit -am 
+nnoremap <leader>gc :!git commit -am ""<Left>
 nnoremap <leader>gp :!git push<CR>
 nnoremap <leader>gg :!git pull<CR>
 nnoremap <Enter> :noh<CR>
@@ -74,6 +74,10 @@ nnoremap <leader>v :vsplit
 nnoremap <leader>s :%s///g<Left><Left>
 " bedre shift yank
 map Y y$
+
+" go to the position I was when last editing the file
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+
 """"""""""""" Her maa de legges til conditional execution --------------
 
 " build stuff

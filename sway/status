@@ -1,14 +1,14 @@
 #!/bin/sh
 
 date_info=$(date +'%d.%m.%Y %T')
-
 bat_perc=$(cat /sys/class/power_supply/BAT1/capacity)
 bat_charge_status=$(cat /sys/class/power_supply/BAT1/status)
+wifi_status=$(nmcli | head -n1)
 
 if (( "$bat_perc" < 10 )) \
 	&& [[ $(date +'%N') -lt 500000000 ]] \
 	&& [[ $bat_charge_status != "Charging" ]]; then
-	alert="BATTERY CRITICAL 							"
+	alert="BATTERY CRITICAL 						"
 fi
 
 # get volume level
@@ -19,4 +19,4 @@ if [[ $(amixer get Master | awk 'FNR==6 {print $6}') == "[off]" ]]; then
 	vol="mute"
 fi
 
-echo -e "$alert vol: $vol \t bat: $bat_perc% $bat_charge_status \t $date_info"
+echo -e "$alert $wifi_status \t vol: $vol \t bat: $bat_perc% $bat_charge_status \t $date_info"
