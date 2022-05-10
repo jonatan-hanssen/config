@@ -20,4 +20,4 @@ if [[ $(amixer get Master | awk 'FNR==6 {print $6}') == "[off]" ]]; then
 	vol="mute"
 fi
 
-echo -e "$alert \t $eth_status \t $wifi_status \t vol: $vol \t bat: $bat_perc% $bat_charge_status \t $date_info"
+echo -e "$alert \t $wifi_status \t vol: $vol \t bat: $bat_perc% $bat_charge_status \t $date_info"

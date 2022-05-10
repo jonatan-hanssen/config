@@ -50,3 +50,5 @@ alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
 alias sshuio='ssh -YC jonatahh@login.ifi.uio.no'
 alias uiomount='sshfs jonatahh@login.ifi.uio.no:. ~/ifilokal'
 alias :q='exit'
+
+gpg-connect-agent updatestartuptty /bye >/dev/null
