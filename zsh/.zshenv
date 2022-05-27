@@ -7,8 +7,10 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_PICTURES_DIR="$HOME/pictures"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_BIN_HOME="$HOME/.local/bin"
-export DEBUGINFOD_URLS="https://debuginfod.archlinux.org"
-
 export XDG_DATA_DIRS="/usr/local/share:/usr/share"
 export XDG_CONFIG_DIRS="/etc/xdg"
+
+export GRIM_DEFAULT_DIR="$HOME/pictures"
+export DEBUGINFOD_URLS="https://debuginfod.archlinux.org"
+
 export GPG_TTY=$(tty)
