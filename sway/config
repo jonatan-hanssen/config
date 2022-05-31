@@ -36,12 +36,12 @@ output * bg /usr/share/backgrounds/sway/dog.jpg fill
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 1200 'swaylock' \
+         timeout 900 'swaylock' \
          timeout 1500 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          before-sleep 'swaylock'
 #
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
+# This will lock your screen after 900 seconds of inactivity, then turn off
+# your displays after another 1500 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Input configuration
