@@ -46,7 +46,7 @@ nnoremap <A-k> :m .-2<CR>
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
-" leader kommandoer
+" -------- leader kommandoer -----------
 let mapleader=" "
 
 " clipboard
@@ -57,7 +57,9 @@ nnoremap <leader>y "+y
 nnoremap <leader>gc :!git commit -am ""<Left>
 nnoremap <leader>gp :!git push<CR>
 nnoremap <leader>gg :!git pull<CR>
+
 nnoremap <Enter> :noh<CR>
+
 " move mellom tabs
 nnoremap H gT
 nnoremap L gt
@@ -68,13 +70,15 @@ nnoremap <leader>v :vsplit
 nnoremap <leader>s :%s///g<Left><Left>
 " bedre shift yank
 map Y y$
+" format python
 nnoremap <leader>b :black %<CR>
 
 " go to the position I was when last editing the file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 
-" ----------------- COC --------------- "
 
+
+" ------------ COC ---------------- "
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -126,9 +130,6 @@ function! ShowDocumentation()
   endif
 endfunction
 
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -137,8 +138,9 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocActionAsync('format')
+autocmd FileType python command Main execute "normal! odef main():<CR><CR><BS>if __name__ == '__main__':<CR>main()<ESC>gg"
+
+""""""""""""" Her maa de legges til conditional execution --------------
 
 " build stuff
 
