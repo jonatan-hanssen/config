@@ -138,8 +138,8 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-autocmd FileType python command! Main execute "normal! odef main():<CR><CR><BS>if __name__ == '__main__':<CR>main()<ESC>gg"
-
+autocmd FileType python command! Main execute "normal! idef main():<CR><CR><BS>if __name__ == '__main__':<CR>main()<ESC>gg$"
+autocmd FileType c command! Main execute "normal! i#include <stdlib.h><CR><CR>void main() {<CR>}<ESC>k$"
 """"""""""""" Her maa de legges til conditional execution --------------
 
 " build stuff
