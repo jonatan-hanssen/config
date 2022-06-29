@@ -1,0 +1,80 @@
+#!/bin/zsh
+
+# options
+setopt dotglob
+
+# autocompletion
+autoload -U compinit promptinit
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/zcompcache
+setopt COMPLETE_IN_WORD
+setopt MENU_COMPLETE
+
+# git
+autoload -Uz add-zsh-hook vcs_info
+setopt prompt_subst
+typeset -a precmd_functions
+add-zsh-hook precmd vcs_info
+zstyle ':vcs_info:*' unstagedstr '%F{160}'
+zstyle ':vcs_info:*' stagedstr '%F{226}'
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:git:*' formats '(%F{046}%c%u%b%f%f) '
+zstyle ':vcs_info:git:*' actionformats '(%b|%a)'
+
+# prompt
+export NEWLINE=$'\n'
+rightarrow=$(echo -en '\u25aa')
+export PROMPT2=" ${rightarrow} "
+export PROMPT='[%?] %F{069}%~% %f ${vcs_info_msg_0_} %f${NEWLINE}${PROMPT2}'
+
+# this is to make pip not halt looking for some keyring
+export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
+
+# history
+export HISTFILE="$XDG_CACHE_HOME/zsh/history"
+export HISTSIZE=2000
+export SAVEHIST=$HISTSIZE
+setopt HIST_IGNORE_ALL_DUPS
+setopt EXTENDED_HISTORY
+setopt INC_APPEND_HISTORY
+
+alias tree="tree -L 3 -C"
+alias conf='$EDITOR $HOME/.config/$1'
+
+# this is to make latex installer work
+alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
+
+alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
+alias sshuio='ssh -YC jonatahh@login.ifi.uio.no'
+alias uiomount='sshfs jonatahh@login.ifi.uio.no:. ~/ifilokal'
+alias :q='exit'
+alias v='nvim'
+alias act='source env/bin/activate'
+alias python='python3'
+alias ls='ls --color=always'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+function cd() {
+    new_directory="$*";
+    if [ $# -eq 0 ]; then 
+        new_directory=${HOME};
+    fi;
+    builtin cd "${new_directory}" && ls
+}
+
+bindkey -v
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+source .zshenv
+
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/jonatanhanssen/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jonatanhanssen/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/jonatanhanssen/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jonatanhanssen/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
