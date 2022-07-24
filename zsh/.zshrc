@@ -42,6 +42,24 @@ alias ls="ls --color=auto"
 alias tree="tree -L 3 -C"
 alias conf='$EDITOR $HOME/.config/$1'
 alias mv='mv --interactive'
+alias v='nvim'
+alias act='source env/bin/activate'
+alias python='python3'
+alias ls='ls --color=always'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias gs="git status"
+alias gc="git commit"
+alias ga="git add"
+
+function cd() {
+    new_directory="$*";
+    if [ $# -eq 0 ]; then 
+        new_directory=${HOME};
+    fi;
+    builtin cd "${new_directory}" && ls
+}
 
 # this is to make latex installer work
 alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
