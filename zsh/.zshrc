@@ -52,6 +52,7 @@ alias ....='cd ../../..'
 alias gs="git status"
 alias gc="git commit"
 alias ga="git add"
+alias gp="git push"
 
 function cd() {
     new_directory="$*";
