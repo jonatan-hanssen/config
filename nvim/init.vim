@@ -1,5 +1,5 @@
 call plug#begin(stdpath('data') . '/plugged')
-	Plug 'neoclide/coc.nvim'
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'numToStr/Comment.nvim'
 	"Plug 'vim-airline/vim-airline'
 	"Plug 'vim-airline/vim-airline-themes'
@@ -106,10 +106,12 @@ endif
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ CheckBackspace() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+highlight CocMenuSel ctermbg=252
 
 function! CheckBackspace() abort
   let col = col('.') - 1
