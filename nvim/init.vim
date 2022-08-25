@@ -132,9 +132,10 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 highlight CocMenuSel ctermbg=252
 
+
 function! CheckBackspace() abort
   let col = col('.') - 1
-  return !col || getline('.')[]  =~# '\s'
+  return !col || getline('.')[col-1] =~# '\s'
 endfunction
 
 " GoTo code navigation.
