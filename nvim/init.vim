@@ -4,10 +4,10 @@ call plug#begin(stdpath('data') . '/plugged')
 	"Plug 'vim-airline/vim-airline'
 	"Plug 'vim-airline/vim-airline-themes'
 	Plug 'reedes/vim-pencil'
-	Plug 'tpope/vim-fugitive'
 	Plug 'stevearc/vim-arduino'
 	" Plug 'junegunn/seoul256.vim'
 	Plug 'sonph/onehalf', { 'rtp' : 'vim' }
+	Plug 'itchyny/vim-gitbranch'
 call plug#end()
 lua require('Comment').setup()
 
@@ -22,7 +22,7 @@ set smartindent
 set tabstop=4
 set shiftwidth=4
 
-" visuals
+" -------- visuals ----------
 set relativenumber
 set number
 set scrolloff=999
@@ -35,6 +35,25 @@ set listchars=lead:·,trail:·,tab:>·
 hi Whitespace ctermfg=024
 " alternatively this is uncommented and we have light theme
 colorscheme onehalflight
+
+
+" statusline stuff
+
+set statusline=
+" set statusline+=%{FugitiveStatusline()}
+set statusline+=\ %{gitbranch#name()}\ 
+set statusline+=%#LineNr#
+set statusline+=%1*\ %<%F\ %m%r%h%w\ 
+set statusline+=%=
+set statusline+=%#CursorColumn#
+" set statusline+=\ %y
+set statusline+=\ \[%{&fileencoding?&fileencoding:&encoding}\]
+" set statusline+=\[%{&fileformat}\]
+set statusline+=\ %p%%
+set statusline+=\ %l:%c
+set statusline+=\ 
+
+" end statusline
 
 " do an operator on every line in the file (daG, yaG, =aG)
 xnoremap aG ggoG
@@ -115,7 +134,7 @@ highlight CocMenuSel ctermbg=252
 
 function! CheckBackspace() abort
   let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+  return !col || getline('.')[]  =~# '\s'
 endfunction
 
 " GoTo code navigation.
