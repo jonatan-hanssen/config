@@ -92,6 +92,9 @@ map Y y$
 " format python
 nnoremap <leader>b :black %<CR>
 
+" stop command line mode which i never use from appearing
+nnoremap q: <NOP>
+
 " go to the position I was when last editing the file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 
