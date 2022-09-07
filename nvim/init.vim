@@ -8,6 +8,7 @@ call plug#begin(stdpath('data') . '/plugged')
 	" Plug 'junegunn/seoul256.vim'
 	Plug 'sonph/onehalf', { 'rtp' : 'vim' }
 	Plug 'itchyny/vim-gitbranch'
+	Plug 'untitled-ai/jupyter_ascending.vim'
 call plug#end()
 lua require('Comment').setup()
 
