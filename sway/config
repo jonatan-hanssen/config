@@ -240,13 +240,18 @@ client.unfocused '#222222' '#333333' '#888888' '#292d2e'
 input * {
 	xkb_layout "us"
 	xkb_variant "altgr-intl"
+	# change to o.5 later and no flat
 	pointer_accel 0.5
-}
-
-input 1:1:AT_Translated_Set_2_keyboard {
+	# accel_profile "flat"
 	repeat_delay 400
 	repeat_rate 20
 	xkb_options caps:escape
+}
+
+input 1:1:AT_Translated_Set_2_keyboard {
+}
+
+input 12851:21265:Ducky_Ducky_One_3_SF_RGB {
 }
 
 # volume
