@@ -244,7 +244,7 @@ input * {
 	pointer_accel 0.5
 	# accel_profile "flat"
 	repeat_delay 400
-	repeat_rate 20
+	repeat_rate 30
 	xkb_options caps:escape
 }
 
