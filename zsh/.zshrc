@@ -3,9 +3,11 @@
 # options
 setopt dotglob
 
+# z
+source ${XDG_CONFIG_HOME}/zsh/z.zsh
+
 # autocompletion
-autoload -U compinit promptinit
-compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+autoload -U compinit && compinit
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/zcompcache
 setopt COMPLETE_IN_WORD
 setopt MENU_COMPLETE
@@ -38,9 +40,9 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
 
+# aliases
 alias ls="ls --color=auto"
 alias tree="tree -L 3 -C"
-alias conf='$EDITOR $HOME/.config/$1'
 alias mv='mv --interactive'
 alias v='nvim'
 alias act='source env/bin/activate'
@@ -54,7 +56,16 @@ alias gs="git status"
 alias gc="git commit"
 alias ga="git add"
 alias gp="git push"
+alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
+alias sshuio='ssh -YC jonatahh@login.ifi.uio.no'
+alias uiomount='sshfs jonatahh@login.ifi.uio.no:. ~/ifilokal'
+alias :q='exit'
+alias c='z' # c is easier to hit
 
+# this is to make latex installer work
+alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
+
+# cd also runs ls
 function cd() {
     new_directory="$*";
     if [ $# -eq 0 ]; then 
@@ -63,12 +74,6 @@ function cd() {
     builtin cd "${new_directory}" && ls
 }
 
-# this is to make latex installer work
-alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
-
-alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
-alias sshuio='ssh -YC jonatahh@login.ifi.uio.no'
-alias uiomount='sshfs jonatahh@login.ifi.uio.no:. ~/ifilokal'
-alias :q='exit'
 
 gpg-connect-agent updatestartuptty /bye >/dev/null
+
