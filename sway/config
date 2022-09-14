@@ -242,10 +242,18 @@ input * {
 	xkb_variant "altgr-intl"
 	# change to o.5 later and no flat
 	pointer_accel 0.5
-	# accel_profile "flat"
 	repeat_delay 400
 	repeat_rate 30
 	xkb_options caps:escape
+}
+
+input type:pointer {
+	pointer_accel 0.3
+	accel_profile "flat"
+}
+
+input type:touchpad {
+	pointer_accel 0.5
 }
 
 input 1:1:AT_Translated_Set_2_keyboard {
