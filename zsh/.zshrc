@@ -32,6 +32,9 @@ export PROMPT='[%?] %F{069}%~% %f ${vcs_info_msg_0_} %f${NEWLINE}${PROMPT2}'
 # this is to make pip not halt looking for some keyring
 export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
 
+export PAGER='less'
+
+
 # history
 export HISTFILE="$XDG_CACHE_HOME/zsh/history"
 export HISTSIZE=2000
