@@ -92,6 +92,8 @@ nnoremap <leader>s :%s///g<Left><Left>
 map Y y$
 " format python
 nnoremap <leader>b :black %<CR>
+" make print(x) into print(f"{x=}")
+nnoremap <leader>f 0wwaf"{<ESC>$i=}"<ESC>
 
 " stop command line mode which i never use from appearing
 nnoremap q: <NOP>
