@@ -1,3 +1,6 @@
 {
-	"suggest.noselect": true
+	"suggest.noselect": true,
+	"python.formatting.provider": "black",
+	"python.formatting.blackPath": "/home/jona/.local/bin/black",
+	"coc.preferences.formatOnSaveFiletypes": ["python"]
 }
