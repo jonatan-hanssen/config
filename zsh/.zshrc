@@ -60,6 +60,7 @@ alias gc="git commit"
 alias ga="git add"
 alias gp="git push"
 alias gd="git diff"
+alias py="python3"
 alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
 alias sshuio='ssh -YC jonatahh@login.ifi.uio.no'
 alias uiomount='sshfs jonatahh@login.ifi.uio.no:. ~/ifilokal'
