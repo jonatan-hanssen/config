@@ -175,6 +175,8 @@ autocmd FileType c command! Main execute "normal! i#include <stdlib.h><CR><CR>vo
 " ------- python --------
 autocmd FileType python map <buffer> <C-b> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <C-b> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+" pyright sucks at diagnostics
+autocmd FileType python let b:coc_diagnostic_disable=1
 
 " ------- latex ---------
 autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex % && zathura %<.pdf&'<CR>
