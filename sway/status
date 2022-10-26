@@ -1,6 +1,6 @@
 #!/bin/sh
 
-date_info=$(date +'%d.%m.%y \t W%V \t %H:%M')
+date_info=$(date +'%d.%m.%y | W%V | %H:%M')
 bat_perc=$(cat /sys/class/power_supply/BAT1/capacity)
 bat_charge_status=$(cat /sys/class/power_supply/BAT1/status)
 wifi_status=$(nmcli | grep --max-count 1 'wlo1')
