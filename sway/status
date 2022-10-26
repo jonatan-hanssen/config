@@ -24,4 +24,4 @@ fi
 # get time from last pacman -Syu
 diff=$(datediff --format="%d d %H h" $last_update now)
 
-echo -e "$alert \t Last update: $diff \t $wifi_status \t vol: $vol \t bat: $bat_perc% $bat_charge_status \t $date_info"
+echo -e "$alert \t Last update: $diff ago \t $wifi_status \t vol: $vol \t bat: $bat_perc% $bat_charge_status \t $date_info"
