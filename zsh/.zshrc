@@ -49,19 +49,27 @@ alias ls="ls --color=auto"
 alias tree="tree -L 3 -C"
 alias mv='mv --interactive'
 alias v='nvim'
-alias act='source env/bin/activate'
-alias python='python3'
-alias pip='pip3'
 alias ls='ls --color=always'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+
+
+# git aliases
 alias gs="git status"
 alias gc="git commit"
 alias ga="git add"
 alias gp="git push"
 alias gd="git diff"
+alias gr="git restore"
+
+
+# python aliases
+alias python='python3'
+alias pip='pip3'
 alias py="python3"
+alias act='source env/bin/activate'
+
 alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
 alias sshuio='ssh -YC jonatahh@login.ifi.uio.no'
 alias uiomount='sshfs jonatahh@login.ifi.uio.no:. ~/ifilokal'
