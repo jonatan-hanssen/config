@@ -62,6 +62,8 @@ alias ga="git add"
 alias gp="git push"
 alias gd="git diff"
 alias gr="git restore"
+alias gpl="git pull"
+alias gch="git checkout"
 
 
 # python aliases
