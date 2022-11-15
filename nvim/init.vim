@@ -9,6 +9,7 @@ call plug#begin(stdpath('data') . '/plugged')
 	Plug 'sonph/onehalf', { 'rtp' : 'vim' }
 	Plug 'itchyny/vim-gitbranch'
 	Plug 'untitled-ai/jupyter_ascending.vim'
+	Plug 'kshenoy/vim-signature'
 call plug#end()
 lua require('Comment').setup()
 
@@ -94,6 +95,7 @@ map Y y$
 nnoremap <leader>b :!black %<CR>
 " make print(x) into print(f"{x=}")
 nnoremap <leader>f 0f(af"{<ESC>$i=}"<ESC>
+nnoremap <leader>m :delmarks!<CR>
 
 " stop command line mode which i never use from appearing
 nnoremap q: <NOP>
