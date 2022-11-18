@@ -53,6 +53,7 @@ alias ls='ls --color=always'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias cal='cal -m'
 
 
 # git aliases
