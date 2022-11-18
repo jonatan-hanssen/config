@@ -24,6 +24,8 @@ set $menu wofi --dmenu --allow-images --show run
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg $XDG_CONFIG_HOME/sway/backgrounds/dog.jpg fill
+workspace 1 output HDMI-A-2
+workspace 1 output HDMI-A-1
 #
 # Example configuration:
 #
