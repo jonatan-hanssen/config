@@ -2,5 +2,12 @@
 	"suggest.noselect": true,
 	"python.formatting.provider": "black",
 	"python.formatting.blackPath": "/home/jona/.local/bin/black",
-	"coc.preferences.formatOnSaveFiletypes": ["python"]
+	"coc.preferences.formatOnSaveFiletypes": ["python"],
+    "languageserver": {
+        "godot": {
+            "host": "127.0.0.1",
+            "filetypes": ["gdscript"],
+            "port": 6008
+        }
+    }
 }
