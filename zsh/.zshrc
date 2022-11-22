@@ -73,11 +73,13 @@ alias pip='pip3'
 alias py="python3"
 alias act='source env/bin/activate'
 
+# other aliases
 alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
 alias sshuio='ssh -YC jonatahh@login.ifi.uio.no'
 alias uiomount='sshfs jonatahh@login.ifi.uio.no:. ~/ifilokal'
 alias :q='exit'
 alias c='z' # c is easier to hit
+alias pac='sudo pacman -Syu'
 
 # this is to make latex installer work
 alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
@@ -95,3 +97,4 @@ function cd() {
 gpg-connect-agent updatestartuptty /bye >/dev/null
 
 export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
+bindkey -v
