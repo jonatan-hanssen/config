@@ -23,7 +23,7 @@ set $menu wofi --dmenu --allow-images --show run
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg $XDG_CONFIG_HOME/sway/backgrounds/dog.jpg fill
+output * bg $XDG_CONFIG_HOME/sway/backgrounds/union.png fill
 #
 # Example configuration:
 #
