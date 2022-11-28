@@ -1,6 +1,6 @@
-.gtk-2.0/
-.gtk-3.0/
-.gtk-4.0/
+gtk-2.0/
+gtk-3.0/
+gtk-4.0/
 zoomus.conf
 yelp/
 ibus/
@@ -10,5 +10,12 @@ discord/
 gh/
 TUG/
 GIMP/
-FreeCad/
+FreeCAD/
 libreoffice/
+pulse/
+dconf/
+nautilus/
+nvm/
+totem/
+vlc/
+vifm/
