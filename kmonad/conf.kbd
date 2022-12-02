@@ -1,5 +1,5 @@
 (defcfg
-  input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+  input  (device-file "$KB_PATH")
   output (uinput-sink "My KMonad output")
   fallthrough false
   allow-cmd false
