@@ -1,5 +1,6 @@
 #!/bin/sh
 export PATH="/home/jona/.local/bin:$PATH"
+export EDITOR="nvim"
 
 export ZDOTDIR=${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}
 export XDG_CONFIG_HOME="$HOME/.config"
