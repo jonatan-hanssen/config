@@ -17,8 +17,8 @@ autoload -Uz add-zsh-hook vcs_info
 setopt prompt_subst
 typeset -a precmd_functions
 add-zsh-hook precmd vcs_info
-zstyle ':vcs_info:*' unstagedstr '%F{160}'
-zstyle ':vcs_info:*' stagedstr '%F{226}'
+zstyle ':vcs_info:*' unstagedstr '%F{196}'
+zstyle ':vcs_info:*' stagedstr '%F{208}'
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git:*' formats '(%F{046}%c%u%b%f%f) '
 zstyle ':vcs_info:git:*' actionformats '(%b|%a)'
@@ -27,7 +27,7 @@ zstyle ':vcs_info:git:*' actionformats '(%b|%a)'
 export NEWLINE=$'\n'
 rightarrow=$(echo -en '\u25aa')
 export PROMPT2=" ${rightarrow} "
-export PROMPT='[%?] %F{069}%~% %f ${vcs_info_msg_0_} %f${NEWLINE}${PROMPT2}'
+export PROMPT='[%?] %F{027}%~% %f ${vcs_info_msg_0_} %f${NEWLINE}${PROMPT2}'
 
 # this is to make pip not halt looking for some keyring
 export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring

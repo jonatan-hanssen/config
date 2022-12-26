@@ -20,10 +20,12 @@ set $term alacritty
 # on the original workspace that the command was run on.
 set $menu wofi --dmenu --allow-images --show run
 
+font pango:SourceCodePro Medium 13
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg $XDG_CONFIG_HOME/sway/backgrounds/union.png fill
+output * bg $XDG_CONFIG_HOME/sway/backgrounds/cat.png fill
 #
 # Example configuration:
 #
@@ -231,11 +233,17 @@ bar {
         inactive_workspace #222222 #333333 #888888
         focused_workspace #00aaee #0088cc #ffffff
     }
+
 }
+
+default_border pixel 5
+gaps inner 10
+# gaps outer 5
 
 # border background text indicator
 client.focused '#00aaee' '#0088cc' '#ffffff' '#dddddd'
 client.unfocused '#222222' '#333333' '#888888' '#292d2e'
+
 
 input * {
 	xkb_layout "us"
@@ -253,7 +261,7 @@ input type:pointer {
 }
 
 input type:touchpad {
-	pointer_accel 0.5
+	pointer_accel 0.3
 }
 
 input 1:1:AT_Translated_Set_2_keyboard {

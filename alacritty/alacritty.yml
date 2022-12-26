@@ -23,7 +23,8 @@
   # available, otherwise `xterm-256color` is used.
   #TERM: alacritty
 
-#window:
+# window:
+#   opacity: 0.98
   # Window dimensions (changes require restart)
   #
   # Number of lines/columns (not pixels) in the terminal. The number of columns
@@ -150,7 +151,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  size: 12.0
+  size: 14.5
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -174,6 +175,7 @@ font:
 
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
+
 colors:
   bright: 
     black: '#282c34'
@@ -203,13 +205,67 @@ colors:
       background: '#474e5d'
       text: '#dcdfe4'
 
+# Colors (One Half Light)
+colors:
+  primary:
+    background: '0xfafafa'
+    foreground: '0x383a42'
+    # foreground: '0x544863'
+
+  normal:
+    black: '0x383a42'
+    red: '0xe45649'
+    green: '0x50a14f'
+    yellow: '0xc18401'
+    blue: '0x0184bc'
+    magenta: '0xa626a4'
+    cyan: '0x0997b3'
+    white: '0xfafafa'
+
+  bright:
+    black: '0x383a42'
+    red: '0xe45649'
+    green: '0x50a14f'
+    yellow: '0xc18401'
+    blue: '0x0184bc'
+    magenta: '0xa626a4'
+    cyan: '0x0997b3'
+    white: '0xfafafa'
+
+# Colors (ayu)
+# colors:
+#   primary:
+#     background: '0xfafafa'
+#     foreground: '0x5b6672'
+#
+#   # Normal colors
+#   normal:
+#     black: '0x000000' #0
+#     red: '0xf2590b' #1
+#     green: '0x76cc00' #2
+#     yellow: '0xf29717' #3
+#     blue: '0x41a5d9' #4
+#     magenta: '0x9965cc' #5
+#     cyan: '0x4dbf98' #6
+#     white: '0xc7c7c7' #7
+#
+#   # Bright colors
+#   bright:
+#     black: '0x676767'
+#     red: '0xd6646a' #9
+#     green: '0xa3d900' #10
+#     yellow: '0xe7c446' #11
+#     blue: '0x6871ff' #12
+#     magenta: '0xa37acc' #13
+#     cyan: '0x56d9ad' #14
+#     white: '0xfeffff' #15
+
 # Colors (Tomorrow Night)
 #colors:
   # Default colors
   #primary:
   #  background: '#1d1f21'
   #  foreground: '#c5c8c6'
-
     # Bright and dim foreground colors
     #
     # The dimmed foreground color is calculated automatically if it is not
@@ -385,7 +441,6 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-#background_opacity: 1.0
 
 #selection:
   # This string contains all characters that are used as separators for
@@ -395,16 +450,17 @@ colors:
   # When set to `true`, selected text will be copied to the primary clipboard.
   #save_to_clipboard: false
 
-#cursor:
+cursor:
   # Cursor style
-  #style:
+  style:
     # Cursor shape
     #
     # Values for `shape`:
     #   - ▇ Block
     #   - _ Underline
     #   - | Beam
-    #shape: Block
+    shape: Block
+    # shape: Beam
 
     # Cursor blinking state
     #
@@ -413,7 +469,7 @@ colors:
     #   - Off: Disable blinking by default
     #   - On: Enable blinking by default
     #   - Always: Force the cursor to always blink
-    #blinking: Off
+    blinking: Off
 
   # Vi mode cursor style
   #
@@ -424,7 +480,7 @@ colors:
   #vi_mode_style: None
 
   # Cursor blinking interval in milliseconds.
-  #blink_interval: 750
+  # blink_interval: 750
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
@@ -432,7 +488,7 @@ colors:
 
   # Thickness of the cursor relative to the cell width as floating point number
   # from `0.0` to `1.0`.
-  #thickness: 0.15
+  # thickness: 0.15
 
 # Live config reload (changes require restart)
 #live_config_reload: true
