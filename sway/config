@@ -189,13 +189,16 @@ input type:touchpad {
 ### media controls
 
 # volume
-bindsym XF86AudioMute exec amixer -q sset Master toggle
-bindsym XF86AudioRaiseVolume exec amixer -q sset Master 5%+
-bindsym XF86AudioLowerVolume exec amixer -q sset Master 5%-
+bindsym XF86AudioMute exec amixer -q sset Headphone toggle
+bindsym XF86AudioRaiseVolume exec amixer -q sset Headphone 5%+
+bindsym XF86AudioLowerVolume exec amixer -q sset Headphone 5%-
+
+# printscreen
+bindsym Print exec grim
 
 # brightness
-bindsym XF86MonBrightnessDown exec sudo light -U 20
-bindsym XF86MonBrightnessUp exec sudo light -A 20
+bindsym XF86MonBrightnessDown exec light -U 20
+bindsym XF86MonBrightnessUp exec light -A 20
 
 include /etc/sway/config.d/*
 
