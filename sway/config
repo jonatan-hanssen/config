@@ -5,7 +5,7 @@ set $down j
 set $up k
 set $right l
 set $term alacritty
-set $menu wofi --dmenu --allow-images --show run
+set $menu wofi --config ../wofi/config --dmenu --allow-images --show run | xargs swaymsg exec --
 
 font pango:SourceCodePro Medium 13
 
