@@ -143,7 +143,7 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while ~/.config/sway/status ; do sleep 0.5; done
+    status_command ~/.config/sway/status
 
 	workspace_min_width 35
 
@@ -192,6 +192,11 @@ input type:touchpad {
 bindsym XF86AudioMute exec amixer -q sset Headphone toggle
 bindsym XF86AudioRaiseVolume exec amixer -q sset Headphone 5%+
 bindsym XF86AudioLowerVolume exec amixer -q sset Headphone 5%-
+
+
+# bindsym XF86Tools exec imv ${XDG_CONFIG_HOME}/sway/backgrounds/cat.png -s crop
+# bindsym XF86Tools exec $term --command htop & imv ${XDG_CONFIG_HOME}/sway/backgrounds/cat.png -s crop
+bindsym XF86Tools exec $term --command htop
 
 # printscreen
 bindsym Print exec grim

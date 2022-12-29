@@ -1,27 +1,32 @@
 #!/bin/sh
+while true;
 
-date_info=$(date +'%d.%m.%y | %V | %H:%M')
-bat_perc=$(cat /sys/class/power_supply/BAT1/capacity)
-bat_charge_status=$(cat /sys/class/power_supply/BAT1/status)
-wifi_status=$(nmcli | grep --max-count 1 'wlp')
-eth_status=$(nmcli | grep --max-count 1 'eno1')
-last_update=$(awk 'END{sub(/\[/,""); sub(/\]/,""); print $1}' /var/log/pacman.log)
+do
+	date_info=$(date +'%d.%m.%y | %V | %H:%M')
+	bat_perc=$(cat /sys/class/power_supply/BAT1/capacity)
+	bat_charge_status=$(cat /sys/class/power_supply/BAT1/status)
+	wifi_status=$(nmcli | grep --max-count 1 'wlp')
+	eth_status=$(nmcli | grep --max-count 1 'eno1')
+	last_update=$(awk 'END{sub(/\[/,""); sub(/\]/,""); print $1}' /var/log/pacman.log)
 
-if (( "$bat_perc" < 10 )) \
-	&& [[ $(date +'%N') -lt 500000000 ]] \
-	&& [[ $bat_charge_status != "Charging" ]]; then
-	alert="BATTERY CRITICAL 				"
-fi
+	if (( "$bat_perc" < 10 )) \
+		&& [[ $(date +'%N') -lt 500000000 ]] \
+		&& [[ $bat_charge_status != "Charging" ]]; then
+		alert="BATTERY CRITICAL 				"
+	fi
 
-# get volume level
-hvol=$(amixer get Headphone | awk 'FNR==6 {gsub("\\[|\\]",""); print $5}')
+	# get volume level
+	hvol=$(amixer get Headphone | awk 'FNR==6 {gsub("\\[|\\]",""); print $5}')
 
-# see if muted
-if [[ $(amixer get Master | awk 'FNR==6 {print $6}') == "[off]" ]]; then
-	hvol="mute"
-fi
+	# see if muted
+	if [[ $(amixer get Master | awk 'FNR==6 {print $6}') == "[off]" ]]; then
+		hvol="mute"
+	fi
 
-# get time from last pacman -Syu
-diff=$(datediff --format="%d d %H h" $last_update now)
+	# get time from last pacman -Syu
+	diff=$(datediff --format="%d d %H h" $last_update now)
 
-echo -e "$alert \t Last update: $diff ago \t $wifi_status \t hvol: $hvol \t bat: $bat_perc% $bat_charge_status \t $date_info"
+	echo -e "$alert \t Last update: $diff ago \t $wifi_status \t hvol: $hvol \t bat: $bat_perc% $bat_charge_status \t $date_info"
+
+	sleep 0.05;
+done;
