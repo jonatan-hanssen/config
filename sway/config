@@ -10,7 +10,7 @@ set $menu wofi --config ../wofi/config --dmenu --allow-images --show run | xargs
 font pango:SourceCodePro Medium 13
 
 ### Output configuration
-output * bg $XDG_CONFIG_HOME/sway/backgrounds/cat.png fill
+output * bg $XDG_CONFIG_HOME/sway/backgrounds/union.png fill
 #
 # Example configuration:
 #
