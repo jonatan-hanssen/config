@@ -7,11 +7,12 @@
 
 ;; define keyboard layout (whitespace doesnt matter)
 (defsrc
+  esc bru  brdn           vold volu
   `    1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   caps a    s    d    f    g    h    j    k    l    ;    '    ent
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           spc            ralt
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft        up
+  lctl lmet lalt           spc            ralt   rctl          left down right
 )
 
 (defalias
@@ -23,27 +24,20 @@
 ;; keycode corresponding to the new character at any position
 
 (deflayer defaultlayer
+  esc bru  brdn           vold volu
   `    1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   esc  a    s    d    f    g    h    j    k    l    ;    '    ent
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet @raise           spc            ralt
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft        up
+  lctl lmet @raise           spc           ralt  lmet          left down right
 )
-
-;; hardmode
-;; (deflayer defaultlayer
-;;   `    _    _    _    _    _    _    _    _    _    _    _    _    bspc
-;;   tab  q    w    e    r    t    y    u    i    o    p    _    _    _
-;;   caps a    s    d    f    g    h    j    k    l    ;    '    ent
-;;   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-;;   lctl lmet @raise           spc            ralt
-;; )
 
 ;; define keyboard layout when raise key is held
 (deflayer raiselayer
+  esc bru  brdn           vold volu
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   `    1    2    3    4    5    6    7    8    9    0    -    =    _
-  esc  !    @    #    $    %    ^    &    *   \(   \)   \_    _
-  lsft _    _    _    [    ]    {    }    =    +    /    rsft
-  lctl lmet lalt           spc            ralt
+  ~  !    @    #    $    %    ^    &    *   \(   \)   \_    _
+  lsft _    |    \\    [    ]    {    }    +    =    /    rsft        up
+  lctl lmet lalt           spc            ralt  lmet           left down right
 )
