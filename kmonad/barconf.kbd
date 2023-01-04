@@ -26,8 +26,8 @@
   `    1    2    3    4    5    6    7    8    9    0    -    =    0
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   esc  a    s    d    f    g    h    j    k    l    ;    '    ent
-  lsft z    x    c    v    b    n    m    ,    .    /    lmet        up
-  lctl lmet lalt        @raise     spc            ralt   rctl  left down right
+  lsft z    x    c    v    b    n    m    ,    .    /    ralt        up
+  lctl lmet lalt        @raise     spc            lmet   rctl  left down right
 )
 
 ;; define keyboard layout when raise key is held
@@ -35,6 +35,6 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   `    1    2    3    4    5    6    7    8    9    0    -    =    _
   ~    !    @    #    $    %    ^    &    *   \(   \)   \_    _
-  lsft _    |    \\   [    ]    {    }    +    =    /    lmet        up
-  lctl lmet lalt       bspc      bspc            ralt    rctl  left down right
+  lsft _    |    \\   [    ]    {    }    +    =    /    ralt        up
+  lctl lmet lalt       bspc      bspc            lmet    rctl  left down right
 )
