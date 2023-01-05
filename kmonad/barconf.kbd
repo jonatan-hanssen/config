@@ -34,7 +34,7 @@
 (deflayer raiselayer
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   `    1    2    3    4    5    6    7    8    9    0    -    =    _
-  ~    !    @    #    $    %    ^    &    *   \(   \)   \_    _
-  lsft _    |    \\   [    ]    {    }    +    =    /    ralt        up
+  ~    !    @    #    $    %    +    =    *   \(   \)   \_    _
+  lsft _    |    \\   [    ]    {    }    ^    &    /    ralt        up
   lctl lmet lalt       bspc      bspc            lmet    rctl  left down right
 )
