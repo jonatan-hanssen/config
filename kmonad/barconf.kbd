@@ -24,7 +24,7 @@
 
 (deflayer defaultlayer
   `    1    2    3    4    5    6    7    8    9    0    -    =    0
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  tab  q    w    e    r    t    y    u    i    o    p    ent  ]    \
   esc  a    s    d    f    g    h    j    k    l    ;    '    ent
   lsft z    x    c    v    b    n    m    ,    .    /    ralt        up
   lctl lmet lalt        @raise     spc            lmet   rctl  left down right
