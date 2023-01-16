@@ -234,6 +234,9 @@ bar {
     }
 }
 
+default_border pixel 4
+gaps inner 10
+
 # border background text indicator
 client.focused '#00aaee' '#0088cc' '#ffffff' '#dddddd'
 client.unfocused '#222222' '#333333' '#888888' '#292d2e'
@@ -245,13 +248,7 @@ input * {
 	accel_profile "flat"
 	xkb_options caps:escape
 	repeat_delay 400
-	repeat_rate 20
-}
-
-input 1:1:AT_Translated_Set_2_keyboard {
-	repeat_delay 400
-	repeat_rate 20
-	xkb_options caps:escape
+	repeat_rate 30
 }
 
 # volume
