@@ -190,9 +190,9 @@ input type:touchpad {
 ### media controls
 
 # volume
-bindsym XF86AudioMute exec amixer -q sset DAC toggle
-bindsym XF86AudioRaiseVolume exec amixer -q sset DAC 5%+
-bindsym XF86AudioLowerVolume exec amixer -q sset DAC 5%-
+bindsym XF86AudioMute exec amixer -q sset Master toggle
+bindsym XF86AudioRaiseVolume exec amixer -c0 -q sset DAC 5%+
+bindsym XF86AudioLowerVolume exec amixer -c0 -q sset DAC 5%-
 
 
 # bindsym XF86Tools exec imv ${XDG_CONFIG_HOME}/sway/backgrounds/cat.png -s crop
@@ -200,7 +200,7 @@ bindsym XF86AudioLowerVolume exec amixer -q sset DAC 5%-
 bindsym XF86Tools exec $term --command htop
 
 # printscreen
-bindsym Print exec grim
+bindsym Print exec slurp | grim -g -
 
 # brightness
 bindsym XF86MonBrightnessDown exec light -U 20

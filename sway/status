@@ -16,7 +16,7 @@ do
 	fi
 
 	# get volume level
-	hvol=$(amixer get DAC | awk 'FNR==6 {gsub("\\[|\\]",""); print $5}')
+	hvol=$(amixer -c0 get DAC | awk 'FNR==6 {gsub("\\[|\\]",""); print $5}')
 
 	# see if muted
 	if [[ $(amixer get Master | awk 'FNR==6 {print $6}') == "[off]" ]]; then
