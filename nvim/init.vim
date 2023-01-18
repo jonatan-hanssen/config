@@ -96,6 +96,7 @@ nnoremap <leader>b :!black %<CR>
 " make print(x) into print(f"{x=}")
 nnoremap <leader>f 0f(af"{<ESC>$i=}"<ESC>
 nnoremap <leader>m :delmarks!<CR>
+nnoremap <leader>z :!zathura %<.pdf & <CR>
 
 " stop command line mode which i never use from appearing
 nnoremap q: <NOP>
@@ -181,8 +182,8 @@ autocmd FileType python imap <buffer> <C-b> <esc>:w<CR>:exec '!python3' shellesc
 autocmd FileType python let b:coc_diagnostic_disable=1
 
 " ------- latex ---------
-autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex % && zathura %<.pdf&'<CR>
-autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex % && zathura %<.pdf&'<CR>
+autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex %'<CR>
+autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex %'<CR>
 
 " --------- C -----------
 autocmd FileType c map <buffer> <C-b> :w<CR>:!gcc -g -Wall -Wextra -std=gnu11 % -o %< && ./%<<CR>
