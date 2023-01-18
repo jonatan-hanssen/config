@@ -96,7 +96,7 @@ nnoremap <leader>b :!black %<CR>
 " make print(x) into print(f"{x=}")
 nnoremap <leader>f 0f(af"{<ESC>$i=}"<ESC>
 nnoremap <leader>m :delmarks!<CR>
-nnoremap <leader>z :!zathura %<.pdf & <CR>
+nnoremap <leader>z :!zathura %<.pdf & <CR><CR>
 
 " stop command line mode which i never use from appearing
 nnoremap q: <NOP>
