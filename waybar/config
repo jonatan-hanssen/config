@@ -101,7 +101,7 @@
         "format": "{title}",
         "max-length": 50,
         "rewrite": {
-            ".*(Mozilla Firefox)": "$1",
+            ".*(Mozilla Firefox).*": "$1",
             "(.*) - NVIM": "$1 - nvim",
             "Alacritty": "zsh"
         }
