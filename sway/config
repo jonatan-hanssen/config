@@ -135,26 +135,8 @@ bindsym $mod+g scratchpad show
 
 # Status Bar:
 
-# Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
-	font "Arial 13"
-	height 35
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command ~/.config/sway/status
-
-	workspace_min_width 35
-
-	colors {
-        statusline #dddddd
-        background #222222
-        # Outline, Background, Foreground
-        inactive_workspace #222222 #333333 #888888
-        focused_workspace #00aaee #0088cc #ffffff
-    }
-
+	swaybar_command waybar
 }
 
 default_border pixel 4
@@ -191,8 +173,8 @@ input type:touchpad {
 
 # volume
 bindsym XF86AudioMute exec amixer -q sset Master toggle
-bindsym XF86AudioRaiseVolume exec amixer -c0 -q sset DAC 5%+
-bindsym XF86AudioLowerVolume exec amixer -c0 -q sset DAC 5%-
+bindsym XF86AudioRaiseVolume exec amixer -q sset Master 5%+
+bindsym XF86AudioLowerVolume exec amixer -q sset Master 5%-
 
 
 # bindsym XF86Tools exec imv ${XDG_CONFIG_HOME}/sway/backgrounds/cat.png -s crop
