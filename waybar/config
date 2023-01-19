@@ -89,7 +89,7 @@
         "format-wifi": "  {essid}", // Icon: wifi
         "format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
         "format-disconnected": "⚠  Disconnected",
-        "tooltip-format": "{ifname}: {ipaddr}"
+        "tooltip-format": "Strength: {signalStrength}%"
     },
 
     "sway/mode": {
@@ -125,7 +125,7 @@
         "scroll-step": 1,
         "format": "{icon}  {volume}%",
         "format-bluetooth": "{icon}  {volume}%",
-        "format-muted": "",
+        "format-muted": "",
         "format-icons": {
             "headphones": "",
             "handsfree": "",
