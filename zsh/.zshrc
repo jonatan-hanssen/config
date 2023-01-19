@@ -1,5 +1,5 @@
 #!/bin/zsh
-
+echo -n -e "\033]0;zsh\007"
 # options
 setopt dotglob
 
