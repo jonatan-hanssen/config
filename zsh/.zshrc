@@ -93,6 +93,7 @@ function cd() {
 }
 
 
+# i dont remember why i did this
 gpg-connect-agent updatestartuptty /bye >/dev/null
 
 export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
