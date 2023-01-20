@@ -179,7 +179,7 @@ bindsym XF86AudioLowerVolume exec amixer -q sset Master 5%-
 
 # bindsym XF86Tools exec imv ${XDG_CONFIG_HOME}/sway/backgrounds/cat.png -s crop
 # bindsym XF86Tools exec $term --command htop & imv ${XDG_CONFIG_HOME}/sway/backgrounds/cat.png -s crop
-bindsym XF86Tools exec $term --command htop
+bindsym XF86Tools exec $term --command imv "$XDG_CONFIG_HOME"/sway/backgrounds/cat.png
 
 # printscreen
 bindsym Print exec slurp | grim -g -
