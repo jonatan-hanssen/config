@@ -13,6 +13,5 @@ export XDG_DATA_DIRS="/usr/local/share:/usr/share"
 export XDG_CONFIG_DIRS="/etc/xdg"
 
 export GRIM_DEFAULT_DIR="$HOME/pictures"
-export DEBUGINFOD_URLS="https://debuginfod.archlinux.org"
 
 export GPG_TTY=$(tty)

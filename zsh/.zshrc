@@ -32,9 +32,6 @@ export PROMPT='[%?] %F{027}%~% %f ${vcs_info_msg_0_} %f${NEWLINE}${PROMPT2}'
 export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
 export PAGER='less'
 
-# export NVM_DIR="$HOME/.config/nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
 # history
 export HISTFILE="$XDG_CACHE_HOME/zsh/history"
 export HISTSIZE=2000
