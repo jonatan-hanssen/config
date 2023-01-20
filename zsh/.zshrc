@@ -55,7 +55,7 @@ alias cal='cal -m'
 
 # git aliases
 alias gs="git status"
-alias gc="git commit"
+alias gc="git commit -s"
 alias ga="git add"
 alias gp="git push"
 alias gd="git diff"
