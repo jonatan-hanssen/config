@@ -4,7 +4,7 @@ setopt dotglob
 
 # z
 source ${XDG_CONFIG_HOME}/zsh/z.zsh
-source ${XDG_CONFIG_HOME}/zsh/dogshit.com
+source ${XDG_CONFIG_HOME}/zsh/termtitle.zsh
 
 # autocompletion
 autoload -U compinit && compinit
