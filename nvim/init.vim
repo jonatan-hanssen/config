@@ -105,7 +105,7 @@ nnoremap q: <NOP>
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 
 set title
-set titlestring=%F
+set titlestring=nvim\ \ %F
 
 
 " ------------ COC ---------------- "
