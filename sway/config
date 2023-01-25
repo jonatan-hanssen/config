@@ -154,7 +154,7 @@ input * {
 	xkb_layout "us"
 	xkb_variant "altgr-intl"
 	pointer_accel 0.5
-	repeat_delay 400
+	repeat_delay 350
 	repeat_rate 30
 	xkb_options caps:escape
 }
@@ -185,8 +185,8 @@ bindsym XF86Tools exec imv "$XDG_CONFIG_HOME"/sway/backgrounds/cat.png
 bindsym Print exec grim -g "$($XDG_CONFIG_HOME/sway/wl-select)" - | wl-copy
 
 # brightness
-bindsym XF86MonBrightnessDown exec light -U 20
-bindsym XF86MonBrightnessUp exec light -A 20
+bindsym XF86MonBrightnessDown exec light -U 10
+bindsym XF86MonBrightnessUp exec light -A 10
 
 include /etc/sway/config.d/*
 
