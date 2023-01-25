@@ -198,3 +198,7 @@ autocmd FileType cpp imap <buffer> <C-b> <esc> :w<CR>:!g++ % -o %< && ./%<<CR>
 " -------- Java ---------
 autocmd FileType java map <buffer> <C-b> :w<CR>:exec '!javac *.java && java %<'<CR>
 autocmd FileType java imap <buffer> <C-b> <esc> :w<CR>:!javac *.java && java %<<CR>
+
+" -------- VHDL ---------
+autocmd FileType vhdl set expandtab
+autocmd FileType vhdl set shiftwidth=2
