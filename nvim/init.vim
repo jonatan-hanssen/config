@@ -107,6 +107,9 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 set title
 set titlestring=nvim\ \ %F
 
+set undodir=$XDG_CONFIG_HOME/nvim/undo_dir
+set undofile
+
 
 " ------------ COC ---------------- "
 " TextEdit might fail if hidden is not set.
