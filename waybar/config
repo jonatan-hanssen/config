@@ -57,13 +57,15 @@
     "clock#time": {
         "interval": 1,
         "format": "{:%H:%M}",
-        "tooltip": false
+        "tooltip-format": "{:%T}",
+        "on-click": "alacritty --hold -e cal -3"
     },
 
     "clock#date": {
       "interval": 10,
       "format": "  {:%e %b %Y}", // Icon: calendar-alt
-      "tooltip-format": "{:%e %B %Y}"
+      "tooltip-format": "{:%e %B %Y, Week %w}",
+        "on-click": "alacritty --hold -e cal -3"
     },
 
     "cpu": {
@@ -90,7 +92,7 @@
         "interval": 5,
         "format-wifi": "  {essid}", // Icon: wifi
         "format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
-        "format-disconnected": "⚠  Disconnected",
+        "format-disconnected": "   Disconnected",
         "tooltip-format": "Strength: {signalStrength}%",
         "on-click": "alacritty -e nmtui"
     },
