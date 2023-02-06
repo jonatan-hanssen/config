@@ -6,6 +6,9 @@ setopt dotglob
 source ${XDG_CONFIG_HOME}/zsh/z.zsh
 source ${XDG_CONFIG_HOME}/zsh/termtitle.zsh
 
+export GRIM_DEFAULT_DIR="$HOME/pictures"
+export GPG_TTY=$(tty)
+
 # autocompletion
 autoload -U compinit && compinit
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/zcompcache
@@ -51,6 +54,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias cal='cal -m'
+alias jup='jupyter notebook'
 
 
 # git aliases
