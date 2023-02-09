@@ -1,11 +1,8 @@
 call plug#begin(stdpath('data') . '/plugged')
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'numToStr/Comment.nvim'
-	"Plug 'vim-airline/vim-airline'
-	"Plug 'vim-airline/vim-airline-themes'
 	Plug 'reedes/vim-pencil'
 	Plug 'stevearc/vim-arduino'
-	" Plug 'junegunn/seoul256.vim'
 	Plug 'sonph/onehalf', { 'rtp' : 'vim' }
 	Plug 'itchyny/vim-gitbranch'
 	Plug 'untitled-ai/jupyter_ascending.vim'
@@ -14,10 +11,8 @@ call plug#end()
 lua require('Comment').setup()
 
 
-" let g:airline_theme='onedark'
 let g:pyindent_open_paren=shiftwidth()
 let g:netrw_banner=0
-" set clipboard+=unnamedplus
 
 " indents
 set smartindent
@@ -29,32 +24,24 @@ set relativenumber
 set number
 set scrolloff=999
 set cursorline
-hi CursorLine   cterm=NONE ctermbg=237 ctermfg=NONE
-hi MatchParen ctermbg=241
-hi CursorLineNr cterm=NONE
 set list
 set listchars=lead:·,trail:·,tab:>·
-hi Whitespace ctermfg=024
 " alternatively this is uncommented and we have light theme
 colorscheme onehalflight
 
 
-" statusline stuff
 
+" statusline stuff
 set statusline=
-" set statusline+=%{FugitiveStatusline()}
 set statusline+=\ %{gitbranch#name()}\ 
 set statusline+=%#LineNr#
 set statusline+=%1*\ %<%F\ %m%r%h%w\ 
 set statusline+=%=
 set statusline+=%#CursorColumn#
-" set statusline+=\ %y
 set statusline+=\ \[%{&fileencoding?&fileencoding:&encoding}\]
-" set statusline+=\[%{&fileformat}\]
 set statusline+=\ %p%%
 set statusline+=\ %l:%c
 set statusline+=\ 
-
 " end statusline
 
 " do an operator on every line in the file (daG, yaG, =aG)
@@ -74,11 +61,6 @@ let mapleader=" "
 nnoremap <leader>p "+p
 nnoremap <leader>y "+y
 
-" git stuff
-nnoremap <leader>gc :!git commit -am ""<Left>
-nnoremap <leader>gp :!git push<CR>
-nnoremap <leader>gg :!git pull<CR>
-
 nnoremap <Enter> :noh<CR>
 
 " move mellom tabs
@@ -97,9 +79,6 @@ nnoremap <leader>b :!black %<CR>
 nnoremap <leader>f 0f(af"{<ESC>$i=}"<ESC>
 nnoremap <leader>m :delmarks!<CR>
 nnoremap <leader>z :!zathura %<.pdf & <CR><CR>
-
-" stop command line mode which i never use from appearing
-nnoremap q: <NOP>
 
 " go to the position I was when last editing the file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
