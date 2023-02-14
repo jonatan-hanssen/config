@@ -64,8 +64,6 @@ alias ga="git add"
 alias gp="git push"
 alias gd="git diff"
 alias gr="git restore"
-alias gpl="git pull"
-alias gch="git checkout"
 
 
 # python aliases
@@ -75,7 +73,6 @@ alias py="python3"
 alias act='source env/bin/activate'
 
 # other aliases
-alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
 alias sshuio='ssh -YC jonatahh@login.ifi.uio.no'
 alias uiomount='sshfs jonatahh@login.ifi.uio.no:. ~/ifilokal'
 alias :q='exit'
