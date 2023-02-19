@@ -184,3 +184,8 @@ autocmd FileType java imap <buffer> <C-b> <esc> :w<CR>:!javac *.java && java %<<
 " -------- VHDL ---------
 autocmd FileType vhdl set expandtab
 autocmd FileType vhdl set shiftwidth=2
+
+
+" ------ markdown --------
+autocmd FileType markdown call pencil#init()
+
