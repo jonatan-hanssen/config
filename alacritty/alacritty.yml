@@ -14,7 +14,7 @@ font:
   bold_italic:
     family: JetBrains Mono
     style: Bold Italic
-  size: 13.5
+  size: 12.5
 
 # Colors (One Half Light)
 colors:
