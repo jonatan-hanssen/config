@@ -20,11 +20,10 @@
     "modules-right": [
         "network",
         "memory",
-		"pulseaudio",
         "cpu",
         "temperature",
         "battery",
-        "tray",
+		"pulseaudio",
         "clock#date",
         "clock#time"
     ],
