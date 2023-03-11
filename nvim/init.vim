@@ -188,4 +188,5 @@ autocmd FileType vhdl set shiftwidth=2
 
 " ------ markdown --------
 autocmd FileType markdown call pencil#init()
+autocmd FileType text call pencil#init()
 
