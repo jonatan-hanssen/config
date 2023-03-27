@@ -187,5 +187,7 @@ autocmd FileType vhdl set shiftwidth=2
 
 
 " ------ markdown --------
+let g:pencil#wrapModeDefault = 'soft'
+
 autocmd FileType markdown call pencil#init()
 
