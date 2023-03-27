@@ -66,6 +66,9 @@ alias gd="git diff"
 alias gr="git restore"
 alias dogshit="git commit -m 'do stuff' && git push"
 
+alias m="make"
+alias mc="make clean"
+
 
 # python aliases
 alias python='python3'
