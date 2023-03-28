@@ -1,2 +1,2 @@
 set default-bg "#e0e0e0"
-set guioptions "s"
+set guioptions "hv"
