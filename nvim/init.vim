@@ -18,6 +18,7 @@ let g:netrw_banner=0
 set smartindent
 set expandtab
 set shiftwidth=4
+set tabstop=4
 
 " -------- visuals ----------
 set relativenumber
