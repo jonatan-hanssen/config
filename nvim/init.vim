@@ -191,5 +191,11 @@ autocmd FileType vhdl set shiftwidth=2
 let g:pencil#wrapModeDefault = 'soft'
 
 autocmd FileType markdown call pencil#init()
+autocmd FileType markdown map <buffer> <C-b> :w<CR>:exec '!pandoc % -o %<.pdf'<CR>
+autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pandoc % -o %<.pdf'<CR>
+
+
+
+
 autocmd FileType text call pencil#init()
 
