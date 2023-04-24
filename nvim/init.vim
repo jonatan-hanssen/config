@@ -64,6 +64,13 @@ nnoremap <leader>y "+y
 
 nnoremap <Enter> :noh<CR>
 
+
+" schmoovement
+nnoremap J }
+nnoremap K {
+nnoremap } J
+
+
 " move mellom tabs
 nnoremap H gT
 nnoremap L gt
@@ -136,7 +143,7 @@ endfunction
 nmap <silent> gd <Plug>(coc-definition)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call ShowDocumentation()<CR>
+nnoremap <silent> ? :call ShowDocumentation()<CR>
 
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
