@@ -1,2 +1,3 @@
 set default-bg "#e0e0e0"
 set guioptions "hv"
+set selection-clipboard clipboard
