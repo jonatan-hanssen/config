@@ -57,14 +57,14 @@
         "interval": 1,
         "format": "{:%H:%M}",
         "tooltip-format": "{:%T}",
-        "on-click": "alacritty --hold -e cal -3 -m"
+        "on-click": "alacritty --hold -e cal -3 -wm"
     },
 
     "clock#date": {
       "interval": 10,
       "format": "  {:%e %b %Y}", // Icon: calendar-alt
       "tooltip-format": "{:%e %B %Y, Week %w}",
-        "on-click": "alacritty --hold -e cal -3 -m"
+        "on-click": "alacritty --hold -e cal -3 -wm"
     },
 
     "cpu": {
