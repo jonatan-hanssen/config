@@ -66,8 +66,8 @@ nnoremap <Enter> :noh<CR>
 
 
 " schmoovement
-nnoremap J }
-nnoremap K {
+noremap J }
+noremap K {
 nnoremap } J
 
 
