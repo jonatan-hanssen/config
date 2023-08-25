@@ -18,6 +18,7 @@ let g:netrw_banner=0
 " indents
 set smartindent
 set expandtab
+set breakindent
 set shiftwidth=4
 set tabstop=4
 
