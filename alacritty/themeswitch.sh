@@ -1,9 +1,11 @@
 #!/bin/sh
 
-if cmp -s onehalflight.yml theme.yml; then
-    cp onehalfdark.yml theme.yml
+dir="/home/jona/.config/alacritty/"
+
+if cmp -s $dir/onehalflight.yml $dir/theme.yml; then
+    cp $dir/onehalfdark.yml $dir/theme.yml
 else
-    cp onehalflight.yml theme.yml
+    cp $dir/onehalflight.yml $dir/theme.yml
 fi
 
-touch alacritty.yml
+touch $dir/alacritty.yml
