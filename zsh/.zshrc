@@ -78,7 +78,7 @@ alias act='source env/bin/activate'
 
 # other aliases
 alias sshuio='ssh -YC jonatahh@login.ifi.uio.no'
-alias uiomount='sshfs jonatahh@login.ifi.uio.no:. ~/ifilokal'
+alias uiomount='sshfs -o reconnect,ServerAliveInterval=2 jonatahh@login.ifi.uio.no:. ~/ifilokal'
 alias :q='exit'
 alias c='z' # c is easier to hit
 alias pac='sudo pacman -Syu'
@@ -110,6 +110,11 @@ function ranger-cd {
 
 bindkey -s '^R' 'ranger-cd\n'
 
+
+# pyenv stuff
+# export PYENV_ROOT="$HOME/.pyenv"
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
 
 
 # i dont remember why i did this
