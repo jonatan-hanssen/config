@@ -221,6 +221,10 @@ autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pandoc % -o %<.pdf'<
 
 
 
+" Remote files
+autocmd BufRead scp://* set cmdheight=2 " this is to stop stupid confirmation message
+
+
 
 autocmd FileType text call pencil#init()
 
