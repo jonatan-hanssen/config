@@ -2,10 +2,8 @@ call plug#begin(stdpath('data') . '/plugged')
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'numToStr/Comment.nvim'
 	Plug 'reedes/vim-pencil'
-	Plug 'stevearc/vim-arduino'
 	Plug 'sonph/onehalf', { 'rtp' : 'vim' }
 	Plug 'itchyny/vim-gitbranch'
-	Plug 'untitled-ai/jupyter_ascending.vim'
 	Plug 'kshenoy/vim-signature'
     Plug 'vimwiki/vimwiki'
 call plug#end()
@@ -84,7 +82,6 @@ nnoremap <leader>s :%s///g<Left><Left>
 " bedre shift yank
 map Y y$
 " format python
-nnoremap <leader>b :!black %<CR>
 " make print(x) into print(f"{x=}")
 nnoremap <leader>f 0f(af"{<ESC>$i=}"<ESC>
 nnoremap <leader>m :delmarks!<CR>
@@ -190,6 +187,7 @@ autocmd FileType python map <buffer> <C-b> :w<CR>:exec '!python3' shellescape(@%
 autocmd FileType python imap <buffer> <C-b> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 " pyright sucks at diagnostics
 autocmd FileType python let b:coc_diagnostic_disable=1
+autocmd FileType python nnoremap <leader>b :!black %<CR>
 
 " ------- latex ---------
 autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex %'<CR>
@@ -218,6 +216,7 @@ let g:pencil#wrapModeDefault = 'soft'
 autocmd FileType markdown call pencil#init()
 autocmd FileType markdown map <buffer> <C-b> :w<CR>:exec '!pandoc % -o %<.pdf'<CR>
 autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pandoc % -o %<.pdf'<CR>
+autocmd FileType tex nnoremap <leader>b :!bibtex %<<CR>
 
 
 
