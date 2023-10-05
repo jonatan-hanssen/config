@@ -89,6 +89,8 @@ nnoremap <leader>f 0f(af"{<ESC>$i=}"<ESC>
 nnoremap <leader>m :delmarks!<CR>
 nnoremap <leader>z :!zathura %<.pdf & <CR><CR>
 
+nnoremap <leader>h :call SynStack()<CR>
+
 " go to the position I was when last editing the file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 
