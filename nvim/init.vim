@@ -7,8 +7,40 @@ call plug#begin(stdpath('data') . '/plugged')
 	Plug 'kshenoy/vim-signature'
     Plug 'vimwiki/vimwiki'
     Plug 'ap/vim-buftabline'
+    Plug 'nvim-tree/nvim-tree.lua'
 call plug#end()
 lua require('Comment').setup()
+
+lua << EOF
+  local function my_on_attach(bufnr)
+    local api = require "nvim-tree.api"
+
+    local function opts(desc)
+      return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    end
+
+    -- default mappings
+    -- api.config.mappings.default_on_attach(bufnr)
+
+    -- custom mappings
+    vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
+    vim.keymap.set('n', '<CR>',     api.node.open.edit)
+  end
+
+  -- pass to setup along with your other options
+  require("nvim-tree").setup {
+    ---
+    on_attach = my_on_attach,
+    disable_netrw = False,
+    hijack_netrw = True
+    ---
+  }
+
+EOF
+
+
+
+" lua require('nvim-tree').setup({ disable_netrw = False, hijack_netrw = true })
 
 
 let g:pyindent_open_paren=shiftwidth()
@@ -57,48 +89,7 @@ nnoremap <A-k> :m .-2<CR>
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
-
-" ---- netrw stuff -----
-
-"Uncomment to get Netrw on vimenter
-
-" augroup projectdrawer
-"   autocmd!
-"   autocmd vimenter * :Vexplore | wincmd p
-" augroup end
-
-"close if only remaining buffer
-autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
-"Start with dotfiles hidden
-let ghregex='\(^\|\s\s\)\zs\.\S\+'
-let g:netrw_list_hide=ghregex
-"Usual things
-let g:netrw_special_syntax = 3
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 15
-let g:netrw_keepdir=0
-let g:NetrwIsOpen=0
-
-function! ToggleNetrw()
-    if g:NetrwIsOpen
-        let i = bufnr("$")
-        while (i >= 1)
-            if (getbufvar(i, "&filetype") == "netrw")
-                silent exe "bwipeout " . i
-            endif
-            let i-=1
-        endwhile
-        let g:NetrwIsOpen=0
-    else
-        let g:NetrwIsOpen=1
-        silent Vexplore
-    endif
-endfunction
-
-nnoremap <C-n> :call ToggleNetrw()<CR>
+nnoremap <C-n> :NvimTreeFocus<CR>
 
 " -------- leader kommandoer -----------
 let mapleader=" "
