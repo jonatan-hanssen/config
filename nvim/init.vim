@@ -6,6 +6,7 @@ call plug#begin(stdpath('data') . '/plugged')
 	Plug 'itchyny/vim-gitbranch'
 	Plug 'kshenoy/vim-signature'
     Plug 'vimwiki/vimwiki'
+    Plug 'ap/vim-buftabline'
 call plug#end()
 lua require('Comment').setup()
 
@@ -79,7 +80,25 @@ let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 15
 let g:netrw_keepdir=0
+let g:NetrwIsOpen=0
 
+function! ToggleNetrw()
+    if g:NetrwIsOpen
+        let i = bufnr("$")
+        while (i >= 1)
+            if (getbufvar(i, "&filetype") == "netrw")
+                silent exe "bwipeout " . i
+            endif
+            let i-=1
+        endwhile
+        let g:NetrwIsOpen=0
+    else
+        let g:NetrwIsOpen=1
+        silent Vexplore
+    endif
+endfunction
+
+nnoremap <C-n> :call ToggleNetrw()<CR>
 
 " -------- leader kommandoer -----------
 let mapleader=" "
@@ -99,12 +118,11 @@ nnoremap } J
 
 
 " move mellom tabs
-nnoremap H gT
-nnoremap L gt
+nnoremap H :bprev<CR>
+nnoremap L :bnext<CR>
 " aapne tabs og splits
 nnoremap <leader>t :tabnew 
 nnoremap <leader>v :vsplit 
-nnoremap <leader>n :Vexplore<CR>
 " replace alt som ble soekt paa sist
 nnoremap <leader>s :%s///g<Left><Left>
 " bedre shift yank
@@ -114,6 +132,7 @@ map Y y$
 nnoremap <leader>f 0f(af"{<ESC>$i=}"<ESC>
 nnoremap <leader>m :delmarks!<CR>
 nnoremap <leader>z :!zathura %<.pdf & <CR><CR>
+nnoremap <silent> <leader>d :bp<BAR>bd#<CR>
 
 nnoremap <leader>h :call SynStack()<CR>
 
