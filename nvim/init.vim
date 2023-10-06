@@ -56,6 +56,31 @@ nnoremap <A-k> :m .-2<CR>
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
+
+" ---- netrw stuff -----
+
+"Uncomment to get Netrw on vimenter
+
+" augroup projectdrawer
+"   autocmd!
+"   autocmd vimenter * :Vexplore | wincmd p
+" augroup end
+
+"close if only remaining buffer
+autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
+"Start with dotfiles hidden
+let ghregex='\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_list_hide=ghregex
+"Usual things
+let g:netrw_special_syntax = 3
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 15
+let g:netrw_keepdir=0
+
+
 " -------- leader kommandoer -----------
 let mapleader=" "
 
@@ -79,6 +104,7 @@ nnoremap L gt
 " aapne tabs og splits
 nnoremap <leader>t :tabnew 
 nnoremap <leader>v :vsplit 
+nnoremap <leader>n :Vexplore<CR>
 " replace alt som ble soekt paa sist
 nnoremap <leader>s :%s///g<Left><Left>
 " bedre shift yank
