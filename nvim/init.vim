@@ -1,19 +1,21 @@
 call plug#begin(stdpath('data') . '/plugged')
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	Plug 'numToStr/Comment.nvim'
-	Plug 'reedes/vim-pencil'
-	Plug 'sonph/onehalf', { 'rtp' : 'vim' }
-	Plug 'itchyny/vim-gitbranch'
-	Plug 'kshenoy/vim-signature'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'numToStr/Comment.nvim'
+    Plug 'reedes/vim-pencil'
+    Plug 'sonph/onehalf', { 'rtp' : 'vim' }
+    Plug 'itchyny/vim-gitbranch'
+    Plug 'kshenoy/vim-signature'
     Plug 'vimwiki/vimwiki'
     Plug 'ap/vim-buftabline'
     Plug 'nvim-tree/nvim-tree.lua'
 call plug#end()
 lua require('Comment').setup()
 
+" holds configs for lua only plugins
 luafile $XDG_CONFIG_HOME/nvim/lua.lua
 
 
+let g:buftabline_show=1
 let g:pyindent_open_paren=shiftwidth()
 let g:netrw_banner=0
 
@@ -83,8 +85,8 @@ nnoremap } J
 nnoremap H :bprev<CR>
 nnoremap L :bnext<CR>
 " aapne tabs og splits
-nnoremap <leader>t :tabnew 
-nnoremap <leader>v :vsplit 
+nnoremap <leader>t :tabnew
+nnoremap <leader>v :vsplit
 " replace alt som ble soekt paa sist
 nnoremap <leader>s :%s///g<Left><Left>
 " bedre shift yank
@@ -104,6 +106,7 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 set title
 set titlestring=nvim\ \ %F
 
+" keep undo history even after closing file
 set undodir=$XDG_CONFIG_HOME/nvim/undo_dir
 set undofile
 
@@ -210,7 +213,7 @@ autocmd FileType tex nnoremap <leader>b :!bibtex %<<CR>
 " Remote files
 autocmd BufRead scp://* set cmdheight=2 " this is to stop stupid confirmation message
 
-
+" dont show buffers in vimwiki because there are so many
+autocmd BufRead *.wiki let g:buftabline_show=0
 
 autocmd FileType text call pencil#init()
-
