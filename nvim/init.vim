@@ -8,6 +8,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'vimwiki/vimwiki'
     Plug 'ap/vim-buftabline'
     Plug 'nvim-tree/nvim-tree.lua'
+    Plug 'folke/tokyonight.nvim'
 call plug#end()
 lua require('Comment').setup()
 
@@ -97,6 +98,7 @@ nnoremap <leader>f 0f(af"{<ESC>$i=}"<ESC>
 nnoremap <leader>m :delmarks!<CR>
 nnoremap <leader>z :!zathura %<.pdf & <CR><CR>
 nnoremap <silent> <leader>d :bp<BAR>bd#<CR>
+nnoremap <leader>c :colorscheme 
 
 nnoremap <leader>h :call SynStack()<CR>
 
