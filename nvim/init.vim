@@ -106,7 +106,7 @@ nnoremap <leader>h :call SynStack()<CR>
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 
 set title
-set titlestring=nvim\ \ %F
+set titlestring=nvim\ \ \ %F
 
 " keep undo history even after closing file
 set undodir=$XDG_CONFIG_HOME/nvim/undo_dir
