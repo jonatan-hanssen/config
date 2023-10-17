@@ -206,7 +206,7 @@ autocmd FileType vhdl set shiftwidth=2
 let g:pencil#wrapModeDefault = 'soft'
 
 autocmd FileType markdown call pencil#init()
-autocmd FileType markdown map <buffer> <C-b> :w<CR>:exec '!pandoc % -o %<.pdf'<CR>
+autocmd FileType markdown map <buffer> <C-b> :w<CR>:exec '!pandoc % --standalone --output %<.pdf'<CR>
 autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pandoc % -o %<.pdf'<CR>
 autocmd FileType tex nnoremap <leader>b :!bibtex %<<CR>
 
@@ -216,6 +216,7 @@ autocmd FileType tex nnoremap <leader>b :!bibtex %<<CR>
 autocmd BufRead scp://* set cmdheight=2 " this is to stop stupid confirmation message
 
 " dont show buffers in vimwiki because there are so many
-autocmd BufRead *.wiki let g:buftabline_show=0
+" autocmd FileType vimwiki let g:buftabline_show=0
 
 autocmd FileType text call pencil#init()
+autocmd FileType vimwiki call pencil#init()
