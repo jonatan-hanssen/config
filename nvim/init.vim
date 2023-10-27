@@ -82,6 +82,12 @@ noremap K {
 nnoremap } J
 
 
+" S is cc so pointless. S is for STOP
+nnoremap S :q<CR>
+" M is for middle of screen but who cares. M is upside down W for write
+nnoremap M :w<CR>
+
+
 " move mellom tabs
 nnoremap H :bprev<CR>
 nnoremap L :bnext<CR>
