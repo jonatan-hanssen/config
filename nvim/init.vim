@@ -82,10 +82,10 @@ noremap K {
 nnoremap } J
 
 
-" S is cc so pointless. S is for STOP
-nnoremap S :q<CR>
-" M is for middle of screen but who cares. M is upside down W for write
-nnoremap M :w<CR>
+" S is cc so pointless. S is for save
+nnoremap S :w<CR>
+" M is for middle of screen but who cares. M for Make this damn file close
+nnoremap M :q<CR>
 
 
 " move mellom tabs
