@@ -64,6 +64,7 @@ alias ga="git add"
 alias gp="git push"
 alias gd="git diff"
 alias gr="git restore"
+alias gpl="git pull"
 alias dogshit="git commit -m 'do stuff' && git push"
 alias ultradog="git add -u && git commit -m 'do stuff' && git push"
 
