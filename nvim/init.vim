@@ -212,8 +212,8 @@ autocmd FileType vhdl set shiftwidth=2
 let g:pencil#wrapModeDefault = 'soft'
 
 autocmd FileType markdown call pencil#init()
-autocmd FileType markdown map <buffer> <C-b> :w<CR>:exec '!pandoc % --standalone --output %<.pdf'<CR>
-autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pandoc % -o %<.pdf'<CR>
+autocmd FileType markdown map <buffer> <C-b> :w<CR>:exec '!pandoc % --standalone --output %<.pdf &'<CR><CR>:echo "Building in background..."<CR>
+autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pandoc % -o %<.pdf &'<CR><CR>:echo "Building in background..."<CR>
 autocmd FileType tex nnoremap <leader>b :!bibtex %<<CR>
 
 
