@@ -113,6 +113,32 @@ function ranger-cd {
 bindkey -s '^R' 'ranger-cd\n'
 
 
+# ------- alert if long since last pacman action ---------
+last_update=$(awk 'END{sub(/\[/,""); sub(/\]/,""); print $1}' /var/log/pacman.log)
+
+# get time from last pacman -Syu
+diff=$(datediff --format="%d" $last_update now)
+
+# if there is more than 1 day since last update
+if (( $diff > 0 )); then
+    # compare todays date to previously stored
+    cmp -s $XDG_DATA_HOME/curdate <(date +%D)
+    # we only want to alert once per day
+
+    # check return value of cmp. 0 if they were the same,
+    # so we should not alert
+    if [ $? -ne 0 ]; then
+        # if not, tell how long since last
+        echo -e "Last update: $diff days ago"
+        # write new date, so that this does not happen again today
+        date +%D > $XDG_DATA_HOME/curdate
+    fi
+fi
+# -------------------------------------------------------
+
+
+
+
 # pyenv stuff
 # export PYENV_ROOT="$HOME/.pyenv"
 # command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
@@ -123,4 +149,5 @@ bindkey -s '^R' 'ranger-cd\n'
 gpg-connect-agent updatestartuptty /bye >/dev/null
 
 export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
+
 bindkey -v
