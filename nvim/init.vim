@@ -207,6 +207,10 @@ autocmd FileType java imap <buffer> <C-b> <esc> :w<CR>:!javac *.java && java %<<
 autocmd FileType vhdl set expandtab
 autocmd FileType vhdl set shiftwidth=2
 
+" -------- shell --------
+autocmd FileType sh map <buffer> <C-b> :w<CR>:!sh %<CR>
+autocmd FileType sh imap <buffer> <C-b> <esc> :w<CR>:!sh %<CR>
+
 
 " ------ markdown --------
 let g:pencil#wrapModeDefault = 'soft'
