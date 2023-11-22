@@ -115,7 +115,7 @@ set title
 set titlestring=nvim\ \ \ %F
 
 " keep undo history even after closing file
-set undodir=$XDG_CONFIG_HOME/nvim/undo_dir
+set undodir=$XDG_DATA_HOME/nvim/undo_dir
 set undofile
 
 
