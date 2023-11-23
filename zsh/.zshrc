@@ -119,8 +119,8 @@ last_update=$(awk 'END{sub(/\[/,""); sub(/\]/,""); print $1}' /var/log/pacman.lo
 # get time from last pacman -Syu
 diff=$(datediff --format="%d" $last_update now)
 
-# if there is more than 1 day since last update
-if (( $diff > 0 )); then
+# if there is more than 3 days since last update
+if (( $diff > 3 )); then
     # compare todays date to previously stored
     cmp -s $XDG_DATA_HOME/curdate <(date +%D)
     # we only want to alert once per day
