@@ -38,6 +38,8 @@ set listchars=lead:·,trail:·,tab:>·
 " beautiful light theme
 colorscheme onehalflight
 
+set spelllang=nb,en
+
 
 
 " statusline stuff
