@@ -5,7 +5,7 @@ set $down j
 set $up k
 set $right l
 set $term alacritty
-set $menu wofi --show run
+set $menu wofi -I --show drun
 
 font pango:SourceCodePro Medium 13
 
@@ -27,6 +27,7 @@ exec swayidle -w \
 bindsym $mod+Return exec $term
 bindsym $mod+x kill
 bindsym $mod+d exec $menu
+bindsym $mod+Shift+d exec wofi --show run
 
 # Drag floating windows by holding down $mod and left mouse button.
 floating_modifier $mod normal
@@ -180,4 +181,9 @@ bindsym XF86MonBrightnessUp exec light -A 10
 include /etc/sway/config.d/*
 
 exec ${XDG_CONFIG_HOME}/sway/trans.py
+
+# this applet has shitty icons. They can be changed by copying /usr/share/icons/hicolor/22x22/apps
+# to ~/.local/share/icons/hicolor/22x22/apps and changing the nm-* icons. I dont know how to make it fall back
+# to /usr/local/share/icons/hicolor/scalable, which are also part of the install network-manager-applet
+exec_always nm-applet --indicator
 

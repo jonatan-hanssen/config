@@ -18,6 +18,7 @@
         "sway/window"
     ],
     "modules-right": [
+        "tray",
         "network",
         "memory",
         "cpu",
@@ -89,9 +90,9 @@
 
     "network": {
         "interval": 5,
-        "format-wifi": "<span font=\"Font Awesome 6 Free Solid\"></span>  {essid}", // Icon: wifi
+        "format-wifi": "{essid}", // Icon: wifi
         "format-ethernet": "<span font=\"Font Awesome 6 Free Solid\"></span>  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
-        "format-disconnected": "<span font=\"Font Awesome 6 Free Solid\"></span>   Disconnected",
+        "format-disconnected": "Disconnected",
         "tooltip-format": "Strength: {signalStrength}%",
         "on-click": "alacritty -e nmtui"
     },
