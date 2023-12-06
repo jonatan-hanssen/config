@@ -43,6 +43,7 @@ export SAVEHIST=$HISTSIZE
 setopt HIST_IGNORE_ALL_DUPS
 setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
+alias history="history 0"
 
 # aliases
 alias ls="ls --color=auto"
