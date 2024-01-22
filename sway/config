@@ -10,7 +10,7 @@ set $menu wofi -I --show drun
 font pango:SourceCodePro Medium 13
 
 ### Output configuration
-output * bg $XDG_CONFIG_HOME/sway/backgrounds/union.png fill
+output * bg $XDG_CONFIG_HOME/sway/backgrounds/pattern.png fill
 #
 # Example configuration:
 #
@@ -129,16 +129,6 @@ bar {
 	swaybar_command waybar
 }
 
-default_border pixel 4
-gaps inner 10
-# gaps outer 5
-
-# window colors
-# 				border background text indicator
-client.focused '#00aaee' '#0088cc' '#ffffff' '#dddddd'
-client.unfocused '#222222' '#333333' '#888888' '#292d2e'
-
-
 # input section
 input * {
 	xkb_layout "us"
@@ -187,3 +177,22 @@ exec ${XDG_CONFIG_HOME}/sway/trans.py
 # to /usr/local/share/icons/hicolor/scalable, which are also part of the install network-manager-applet
 exec_always nm-applet --indicator
 
+# ----------  visuals ------------
+
+default_border pixel 4
+gaps inner 10
+# gaps outer 5
+
+# window colors
+# 				border background text indicator
+client.focused '#00aaee' '#0088cc' '#ffffff' '#dddddd'
+client.unfocused '#222222' '#333333' '#888888' '#292d2e'
+
+# sway fx stuff
+blur enable
+blur_xray enable
+blur_passes 3
+blur_radius 2
+corner_radius 6
+blur_xray enable
+blur_passes 4

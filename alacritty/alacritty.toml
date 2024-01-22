@@ -1,5 +1,10 @@
 import = ["/home/jona/.config/alacritty/theme.toml"]
 
+[window]
+blur = true
+opacity = 0.94
+
+
 [font]
 size = 12.5
 
