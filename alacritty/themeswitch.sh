@@ -2,10 +2,10 @@
 
 dir="/home/jona/.config/alacritty/"
 
-if cmp -s $dir/onehalflight.yml $dir/theme.yml; then
-    cp $dir/onehalfdark.yml $dir/theme.yml
+if cmp -s $dir/onehalflight.toml $dir/theme.toml; then
+    cp $dir/onehalfdark.toml $dir/theme.toml
 else
-    cp $dir/onehalflight.yml $dir/theme.yml
+    cp $dir/onehalflight.toml $dir/theme.toml
 fi
 
-touch $dir/alacritty.yml
+touch $dir/alacritty.toml

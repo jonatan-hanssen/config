@@ -1,0 +1,40 @@
+import = ["/home/jona/.config/alacritty/theme.toml"]
+
+[font]
+size = 12.5
+
+[font.bold]
+family = "JetBrains Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "JetBrains Mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "JetBrains Mono"
+style = "Italic"
+
+[font.normal]
+family = "JetBrains Mono"
+style = "Regular"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "Paste"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "Return"
+mods = "Shift"
+
+[[keyboard.bindings]]
+key = "T"
+mods = "Control"
+
+[keyboard.bindings.command]
+program = "/home/jona/.config/alacritty/themeswitch.sh"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "Copy"
