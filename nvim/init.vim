@@ -213,6 +213,10 @@ autocmd FileType vhdl set shiftwidth=2
 autocmd FileType sh map <buffer> <C-b> :w<CR>:!sh %<CR>
 autocmd FileType sh imap <buffer> <C-b> <esc> :w<CR>:!sh %<CR>
 
+" -------- lua --------
+autocmd FileType lua map <buffer> <C-b> :w<CR>:!lua %<CR>
+autocmd FileType lua imap <buffer> <C-b> <esc> :w<CR>:!lua %<CR>
+
 
 " ------ markdown --------
 let g:pencil#wrapModeDefault = 'soft'
