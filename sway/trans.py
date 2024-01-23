@@ -7,7 +7,7 @@
 
 import i3ipc
 
-transparency_val = "0.97"
+transparency_val = "0.94"
 ipc = i3ipc.Connection()
 prev_focused = None
 

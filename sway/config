@@ -192,7 +192,7 @@ client.unfocused '#222222' '#333333' '#888888' '#292d2e'
 blur enable
 blur_xray enable
 blur_passes 3
-blur_radius 2
+blur_radius 4
 corner_radius 6
 blur_xray enable
 blur_passes 4
