@@ -139,6 +139,7 @@ fi
 
 
 
+export R_LIBS_USER=$HOME/.rlibrary/library
 
 # pyenv stuff
 # export PYENV_ROOT="$HOME/.pyenv"

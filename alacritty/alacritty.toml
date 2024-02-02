@@ -60,7 +60,7 @@ mods = "Shift"
 
 [keyboard.bindings.command]
 program = "/home/jona/.config/alacritty/opacity.py"
-args = ["0.1"]
+args = ["0.05"]
 
 [[keyboard.bindings]]
 key = "Left"
@@ -68,7 +68,7 @@ mods = "Shift"
 
 [keyboard.bindings.command]
 program = "/home/jona/.config/alacritty/opacity.py"
-args = ["-0.1"]
+args = ["-0.05"]
 
 [[keyboard.bindings]]
 action = "Copy"
