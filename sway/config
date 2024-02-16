@@ -165,8 +165,8 @@ bindsym XF86Tools exec pavucontrol
 bindsym Print exec grim -g "$($XDG_CONFIG_HOME/sway/wl-select)" - | wl-copy
 
 # brightness
-bindsym XF86MonBrightnessDown exec light -U 10
-bindsym XF86MonBrightnessUp exec light -A 10
+bindsym XF86MonBrightnessDown exec light -U 5
+bindsym XF86MonBrightnessUp exec light -A 5
 
 include /etc/sway/config.d/*
 
