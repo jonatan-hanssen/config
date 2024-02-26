@@ -137,6 +137,20 @@ if (( $diff > 3 )); then
 fi
 # -------------------------------------------------------
 
+# ------- check if there is a sale on lucy and jack ---------
+# compare todays date to previously stored
+cmp -s $XDG_DATA_HOME/curdate2 <(date +%D)
+# we only want to alert once per day
+
+# check return value of cmp. 0 if they were the same,
+# so we should not alert
+if [ $? -ne 0 ]; then
+    /usr/bin/python3 $HOME/scraping/scrape.py
+    # write new date, so that this does not happen again today
+    date +%D > $XDG_DATA_HOME/curdate2
+fi
+# -------------------------------------------------------
+
 
 
 export R_LIBS_USER=$HOME/.rlibrary/library
