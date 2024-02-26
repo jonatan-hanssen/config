@@ -122,7 +122,7 @@ set undofile
 
 
 " ----------- vimwiki -------------
-let g:vimwiki_list = [{ 'path': '~/dnd_wiki/wiki', 'path_html': '~/dnd_wiki/html', 'auto_export': 1, 'auto_toc': 1, 'links_space_char': '_', 'syntax': 'default' }]
+let g:vimwiki_list = [{ 'path': '~/dnd_wiki/wiki', 'path_html': '~/dnd_wiki/html', 'auto_export': 0, 'auto_toc': 1, 'links_space_char': '_', 'syntax': 'default' }]
 hi VimwikiLink ctermfg=blue
 let g:vimwiki_global_ext = 0
 
