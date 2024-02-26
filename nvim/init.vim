@@ -192,6 +192,8 @@ autocmd FileType python nnoremap <leader>b :!black %<CR>
 " ------- latex ---------
 autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex %'<CR>
 autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex %'<CR>
+autocmd FileType tex set spell
+autocmd FileType tex call pencil#init({'wrap': 'soft'})
 
 " --------- C -----------
 autocmd FileType c map <buffer> <C-b> :w<CR>:!gcc -g -Wall -Wextra -std=gnu11 % -o %< && ./%<<CR>
