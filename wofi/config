@@ -1,5 +1,6 @@
 term=alacritty
-key_up=K
-key_down=J
+key_up=Shift-K
+key_down=Shift-J
+key_expand=Shift-L
 insensitive=true
 run-always_parse_args=true
