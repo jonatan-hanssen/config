@@ -26,7 +26,7 @@ exec swayidle -w \
 ### Key bindings
 bindsym $mod+Return exec $term
 bindsym $mod+x kill
-bindsym $mod+d exec $menu
+bindsym $mod+d exec pgrep wofi >/dev/null 2>&1 && killall wofi || wofi -I --show drun
 bindsym $mod+Shift+d exec wofi --show run
 
 # Drag floating windows by holding down $mod and left mouse button.
