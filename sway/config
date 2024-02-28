@@ -185,7 +185,7 @@ gaps inner 10
 
 # window colors
 # 				border background text indicator
-client.focused '#00aaee' '#0088cc' '#ffffff' '#dddddd'
+client.focused '#00aaee' '#00aaee' '#ffffff' '#dddddd'
 client.unfocused '#222222' '#333333' '#888888' '#292d2e'
 
 # sway fx stuff
