@@ -66,8 +66,10 @@ alias gp="git push"
 alias gd="git diff"
 alias gr="git restore"
 alias gpl="git pull"
+
 alias dogshit="git commit -m 'do stuff' && git push"
 alias ultradog="git add -u && git commit -m 'do stuff' && git push"
+alias dogread="git add README.md && git commit -m 'Update readme' && git push"
 
 alias m="make"
 alias mc="make clean"
