@@ -41,6 +41,10 @@ colorscheme onehalflight
 set spelllang=nb,en
 
 
+" folds
+set foldlevelstart=99
+nnoremap <BS> za
+
 
 " statusline stuff
 set statusline=
@@ -188,6 +192,7 @@ autocmd FileType python imap <buffer> <C-b> <esc>:w<CR>:exec '!python3' shellesc
 " pyright sucks at diagnostics
 autocmd FileType python let b:coc_diagnostic_disable=1
 autocmd FileType python nnoremap <leader>b :!black %<CR>
+autocmd FileType python set foldmethod=indent
 
 " ------- latex ---------
 autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex %'<CR>
