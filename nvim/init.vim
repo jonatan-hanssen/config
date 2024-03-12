@@ -42,7 +42,7 @@ set spelllang=nb,en
 
 
 " folds
-set foldlevelstart=99
+set foldlevel=99
 nnoremap <BS> za
 
 
