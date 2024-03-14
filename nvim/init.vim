@@ -1,14 +1,15 @@
 call plug#begin(stdpath('data') . '/plugged')
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'numToStr/Comment.nvim'
-    Plug 'reedes/vim-pencil'
-    Plug 'sonph/onehalf', { 'rtp' : 'vim' }
-    Plug 'itchyny/vim-gitbranch'
-    Plug 'kshenoy/vim-signature'
-    Plug 'vimwiki/vimwiki'
-    Plug 'ap/vim-buftabline'
-    Plug 'nvim-tree/nvim-tree.lua'
-    Plug 'folke/tokyonight.nvim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'} " lsp
+    Plug 'numToStr/Comment.nvim' " gc for comments
+    Plug 'reedes/vim-pencil' " better for long lines
+    Plug 'sonph/onehalf', { 'rtp' : 'vim' } " theme
+    Plug 'itchyny/vim-gitbranch' " git statusline
+    Plug 'kshenoy/vim-signature' " dont remember what this does
+    Plug 'vimwiki/vimwiki' " make wikis
+    Plug 'ap/vim-buftabline' " tabs are stupid make it buffers instead
+    Plug 'nvim-tree/nvim-tree.lua' " filelist with C-n
+    Plug 'folke/tokyonight.nvim' " dark mode theme
+    Plug 'chaoren/vim-wordmotion' " make underscores and camelCase word boundaries
 call plug#end()
 lua require('Comment').setup()
 
@@ -41,6 +42,8 @@ colorscheme onehalflight
 set spelllang=nb,en
 
 
+
+
 " folds
 set foldlevel=99
 nnoremap <BS> za
@@ -62,6 +65,10 @@ set statusline+=\
 " do an operator on every line in the file (daG, yaG, =aG)
 xnoremap aG ggoG
 onoremap aG :normal VaG<cr>
+
+" bogo operator on functions by using folds
+vnoremap af :<C-U>silent! normal! [zkVj]z<CR>
+onoremap af :normal Vaf<CR>
 
 " move lines
 nnoremap <A-j> :m .+1<CR>
