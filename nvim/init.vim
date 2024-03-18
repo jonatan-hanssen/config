@@ -206,6 +206,7 @@ autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex %'<CR>
 autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex %'<CR>
 autocmd FileType tex set spell
 autocmd FileType tex call pencil#init({'wrap': 'soft'})
+autocmd FileType tex nnoremap <leader>b :!bibtex %<<CR>
 
 " --------- C -----------
 autocmd FileType c map <buffer> <C-b> :w<CR>:!gcc -g -Wall -Wextra -std=gnu11 % -o %< && ./%<<CR>
@@ -243,7 +244,6 @@ let g:pencil#wrapModeDefault = 'soft'
 autocmd FileType markdown call pencil#init()
 autocmd FileType markdown map <buffer> <C-b> :w<CR>:exec '!pandoc % --standalone --output %<.pdf'<CR>
 autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pandoc % -o %<.pdf &'<CR><CR>:echo "Building in background..."<CR>
-autocmd FileType tex nnoremap <leader>b :!bibtex %<<CR>
 
 
 

@@ -83,7 +83,7 @@ alias act='source env/bin/activate'
 
 # other aliases
 alias sshuio='ssh -YC jonatahh@login.ifi.uio.no'
-alias uiomount='sshfs -o reconnect,ServerAliveInterval=2 jonatahh@login.ifi.uio.no:. ~/ifilokal'
+alias uiomount='sshfs -o reconnect,ServerAliveInterval=2 jonatahh@login.ifi.uio.no:. ~/ifilokal/ifilokal'
 alias :q='exit'
 alias c='z' # c is easier to hit
 alias pac='sudo pacman -Syu'
