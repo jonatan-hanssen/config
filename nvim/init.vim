@@ -236,6 +236,7 @@ autocmd FileType lua imap <buffer> <C-b> <esc> :w<CR>:!lua %<CR>
 autocmd FileType r map <buffer> <C-b> :w<CR>:!Rscript %<CR>
 autocmd FileType r imap <buffer> <C-b> <esc> :w<CR>:!Rscript %<CR>
 autocmd FileType r set shiftwidth=2
+autocmd FileType r nnoremap <leader>r {opng("temp")<esc>}Odev.off()<CR>system("xdg-open temp")<esc>
 
 
 " ------ markdown --------
