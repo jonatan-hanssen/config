@@ -2,3 +2,6 @@ set default-bg "#e0e0e0"
 set guioptions "hv"
 set selection-clipboard clipboard
 set scroll-step 70
+
+map <Left> scroll full-up
+map <Right> scroll full-down
