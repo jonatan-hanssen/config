@@ -17,6 +17,7 @@ lua require('Comment').setup()
 luafile $XDG_CONFIG_HOME/nvim/lua.lua
 
 
+
 let g:buftabline_show=1
 let g:pyindent_open_paren=shiftwidth()
 let g:netrw_banner=0
@@ -40,6 +41,8 @@ set listchars=lead:·,trail:·,tab:>·
 colorscheme onehalflight
 
 set spelllang=nb,en
+
+
 
 
 
@@ -84,6 +87,34 @@ let mapleader=" "
 " clipboard
 nnoremap <leader>p "+p
 nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+
+" toggle wordmotion
+
+let g:wordmotion_on = 1
+
+nnoremap <buffer> <nowait> <leader>w :call WordMotionToggle()<cr>
+
+
+function! WordMotionToggle()
+    if g:wordmotion_on
+        echo "WordMotion off"
+        let g:wordmotion_on = 0
+        unmap w
+        unmap b
+        unmap e
+        unmap iw
+        unmap aw
+
+    else
+        echo "WordMotion on"
+        let g:wordmotion_on = 1
+
+        call wordmotion#reload()
+
+
+    endif
+endfunction
 
 " remove highlight for last searched
 nnoremap <Enter> :noh<CR>
@@ -207,6 +238,7 @@ autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex %'<CR>
 autocmd FileType tex set spell
 autocmd FileType tex call pencil#init({'wrap': 'soft'})
 autocmd FileType tex nnoremap <leader>b :!bibtex %<<CR>
+autocmd FileType tex nnoremap <leader>v :!biber %<<CR>
 
 " --------- C -----------
 autocmd FileType c map <buffer> <C-b> :w<CR>:!gcc -g -Wall -Wextra -std=gnu11 % -o %< && ./%<<CR>
