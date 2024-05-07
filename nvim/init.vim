@@ -89,9 +89,12 @@ nnoremap <leader>p "+p
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 
+nnoremap gp :put<CR>
+
 " toggle wordmotion
 
-let g:wordmotion_on = 1
+let g:wordmotion_nomap = 1
+let g:wordmotion_on = 0
 
 nnoremap <buffer> <nowait> <leader>w :call WordMotionToggle()<cr>
 
@@ -108,6 +111,7 @@ function! WordMotionToggle()
 
     else
         echo "WordMotion on"
+        let g:wordmotion_nomap = 0
         let g:wordmotion_on = 1
 
         call wordmotion#reload()
@@ -237,6 +241,7 @@ autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex %'<CR>
 autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex %'<CR>
 autocmd FileType tex set spell
 autocmd FileType tex call pencil#init({'wrap': 'soft'})
+autocmd FileType tex set conceallevel=0
 autocmd FileType tex nnoremap <leader>b :!bibtex %<<CR>
 autocmd FileType tex nnoremap <leader>v :!biber %<<CR>
 
@@ -288,3 +293,4 @@ autocmd BufRead scp://* set cmdheight=2 " this is to stop stupid confirmation me
 
 autocmd FileType text call pencil#init()
 autocmd FileType vimwiki call pencil#init()
+
