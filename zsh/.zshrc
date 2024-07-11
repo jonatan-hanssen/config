@@ -153,6 +153,7 @@ if [ $? -ne 0 ]; then
 fi
 # -------------------------------------------------------
 
+export PYTHONSTARTUP=$HOME/.config/python/pythonrc
 
 
 export R_LIBS_USER=$HOME/.rlibrary/library
