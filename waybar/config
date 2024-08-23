@@ -64,7 +64,7 @@
     "clock#date": {
       "interval": 10,
       "format": "<span font=\"Font Awesome 6 Free Solid\"></span>  {:%e %b %Y}", // Icon: calendar-alt
-      "tooltip-format": "{:%e %B %Y, Week %w}",
+      "tooltip-format": "{:%e %B %Y, Week %W}",
         "on-click": "alacritty --hold -e cal -3 -wm"
     },
 

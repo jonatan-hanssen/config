@@ -7,7 +7,7 @@
 
 ;; define keyboard layout (whitespace doesnt matter)
 (defsrc
-  esc bru  brdn           vold volu
+  esc bru  brdn KeyMute   vold volu
   `    1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   caps a    s    d    f    g    h    j    k    l    ;    '    ent
@@ -16,7 +16,7 @@
 )
 
 (defalias
-  raise (layer-toggle raiselayer)
+  raise (tap-next-press (layer-next raiselayer) (layer-toggle raiselayer))
 )
 
 ;; define how keys change in comparison to actual kb layout
@@ -24,9 +24,9 @@
 ;; keycode corresponding to the new character at any position
 
 (deflayer defaultlayer
-  esc bru  brdn           vold volu
+  esc bru  brdn KeyMute   vold volu
   `    1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y    u    i    o    p    ent  ]    \
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   esc  a    s    d    f    g    h    j    k    l    ;    '    ent
   lsft z    x    c    v    b    n    m    ,    .    /    lmet        up
   lctl lmet @raise           spc           ralt  lmet          left down right
@@ -34,10 +34,10 @@
 
 ;; define keyboard layout when raise key is held
 (deflayer raiselayer
-  esc bru  brdn           vold volu
+  esc bru  brdn KeyMute   vold volu
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  `    1    2    3    4    5    6    7    8    9    0    -    =    _
-  ~    !    @    #    $    %    +    =    *   \(   \)   \_    _
-  lsft _    |    \\   [    ]    {    }    ^    &    /    lmet        up
-  lctl lmet lalt           spc            ralt  lmet           left down right
+  `    1    2    3    4    5    6    7    8    9    0    %    =    _
+  ~    [    ]    +    =    #    *   \_    -   \(   \)    $    _
+  lsft _    |    \\   !    @    {    }    ^    &    /    lmet        up
+  lctl lmet lsft             spc           ralt  lmet           left down right
 )

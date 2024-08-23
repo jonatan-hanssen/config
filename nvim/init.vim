@@ -135,6 +135,9 @@ nnoremap S :w<CR>
 " M is for middle of screen but who cares. M for Make this damn file close
 nnoremap M :q<CR>
 
+" U is undo line which is stupid
+nnoremap U <C-r>
+
 
 " move mellom tabs
 nnoremap H :bprev<CR>

@@ -46,11 +46,10 @@ setopt INC_APPEND_HISTORY
 alias history="history 0"
 
 # aliases
-alias ls="ls --color=auto"
+alias ls="exa --icons --time-style=long-iso"
 alias tree="tree -L 3 -C"
 alias mv='mv --interactive'
 alias v='nvim'
-alias ls='ls --color=always'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -78,7 +77,7 @@ alias mc="make clean"
 # python aliases
 alias python='python3'
 alias pip='pip3'
-alias py="python3"
+alias py="python3 -q"
 alias act='source env/bin/activate'
 
 # other aliases
@@ -87,6 +86,8 @@ alias uiomount='sshfs -o reconnect,ServerAliveInterval=2 jonatahh@login.ifi.uio.
 alias :q='exit'
 alias c='z' # c is easier to hit
 alias pac='sudo pacman -Syu'
+
+alias close='disown && exit'
 
 # this is to make latex installer work
 alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
@@ -141,16 +142,16 @@ fi
 
 # ------- check if there is a sale on lucy and jack ---------
 # compare todays date to previously stored
-cmp -s $XDG_DATA_HOME/curdate2 <(date +%D)
+# cmp -s $XDG_DATA_HOME/curdate2 <(date +%D)
 # we only want to alert once per day
 
 # check return value of cmp. 0 if they were the same,
 # so we should not alert
-if [ $? -ne 0 ]; then
-    /usr/bin/python3 $HOME/scraping/scrape.py
+# if [ $? -ne 0 ]; then
+    # /usr/bin/python3 $HOME/scraping/scrape.py
     # write new date, so that this does not happen again today
-    date +%D > $XDG_DATA_HOME/curdate2
-fi
+    # date +%D > $XDG_DATA_HOME/curdate2
+# fi
 # -------------------------------------------------------
 
 export PYTHONSTARTUP=$HOME/.config/python/pythonrc
