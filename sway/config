@@ -26,6 +26,7 @@ exec swayidle -w \
 ### Key bindings
 bindsym $mod+Return exec $term
 bindsym $mod+x kill
+# bindsym button2 exec $term
 bindsym $mod+d exec pgrep wofi >/dev/null 2>&1 && killall wofi || wofi -I --show drun
 bindsym $mod+Shift+d exec wofi --show run
 
@@ -68,7 +69,7 @@ bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
 
-# Move focused container to workspace
+# # Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number 1
 bindsym $mod+Shift+2 move container to workspace number 2
 bindsym $mod+Shift+3 move container to workspace number 3
@@ -79,6 +80,18 @@ bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
+
+# Move focused container to workspace
+bindsym $mod+bracketleft move container to workspace number 1
+bindsym $mod+bracketright move container to workspace number 2
+bindsym $mod+plus move container to workspace number 3
+bindsym $mod+equal move container to workspace number 4
+# bindsym $mod+hash move container to workspace number 5
+bindsym $mod+asterisk move container to workspace number 6
+bindsym $mod+underscore move container to workspace number 7
+bindsym $mod+minus move container to workspace number 8
+# bindsym $mod+parenleft move container to workspace number 9
+# bindsym $mod+parenright move container to workspace number 10
 
 mode "move" {
     bindsym 1 move container to workspace number 1
@@ -201,6 +214,8 @@ bindsym $mod+r mode "resize"
 bindsym $mod+b splith
 bindsym $mod+v splitv
 
+# bindsym $mod+Shift+h move to parent
+
 # Switch the current container between different layout styles
 # bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
@@ -216,7 +231,8 @@ bindsym $mod+space floating toggle
 bindsym $mod+Shift+space focus mode_toggle
 
 # Move focus to the parent container
-bindsym $mod+a focus parent
+bindsym $mod+a exec /home/jona/.config/sway/anti_container.sh
+bindsym $mod+Shift+a focus parent
 
 # Scratchpad:
 
@@ -262,6 +278,10 @@ input type:touchpad {
 	tap enabled
 }
 
+# input 18003:1:foostan_Corne {
+#     bindsym $mod+asterisk move container to workspace 6
+# }
+
 ### media controls
 
 # volume
@@ -275,7 +295,8 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86Tools exec pavucontrol
 
 # printscreen
-bindsym Print exec grim -g "$($XDG_CONFIG_HOME/sway/wl-select)" - | wl-copy
+bindsym $mod+n exec grim -g "$($XDG_CONFIG_HOME/sway/wl-select)" - | wl-copy
+# bindsym Print exec $term
 
 # brightness
 bindsym XF86MonBrightnessDown exec light -U 5
@@ -283,12 +304,12 @@ bindsym XF86MonBrightnessUp exec light -A 5
 
 include /etc/sway/config.d/*
 
-exec ${XDG_CONFIG_HOME}/sway/trans.py
+exec_always ${XDG_CONFIG_HOME}/sway/trans.py
 
 # this applet has shitty icons. They can be changed by copying /usr/share/icons/hicolor/22x22/apps
 # to ~/.local/share/icons/hicolor/22x22/apps and changing the nm-* icons. I dont know how to make it fall back
 # to /usr/local/share/icons/hicolor/scalable, which are also part of the install network-manager-applet
-exec_always nm-applet --indicator
+exec nm-applet --indicator
 
 # ----------  visuals ------------
 
