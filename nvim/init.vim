@@ -10,6 +10,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'nvim-tree/nvim-tree.lua' " filelist with C-n
     Plug 'folke/tokyonight.nvim' " dark mode theme
     Plug 'chaoren/vim-wordmotion' " make underscores and camelCase word boundaries
+    Plug 'benlubas/molten-nvim', { 'do': ':UpdateRemotePlugins' } " jupyter notebook plugin
 call plug#end()
 lua require('Comment').setup()
 
@@ -122,6 +123,7 @@ endfunction
 
 " remove highlight for last searched
 nnoremap <Enter> :noh<CR>
+nnoremap <Tab> :NvimTreeToggle<CR>
 
 
 " schmoovement
@@ -183,6 +185,23 @@ function! SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+
+" ------------- molten ------------------
+
+nnoremap <silent>       <leader>rm :MoltenInit python3<CR>
+
+nnoremap <silent>       <leader>e  :MoltenEvaluateOperator<CR>
+nnoremap <silent>       <leader>rr :MoltenEvaluateLine<CR>
+xnoremap <silent>       <leader>r  :<C-u>MoltenEvaluateVisual<CR>
+nnoremap <silent>       <leader>rc :MoltenReevaluateCell<CR>
+" nnoremap <silent>       <leader>rd :MoltenDelete<CR>
+nnoremap <silent>       <leader>ro :noautocmd MoltenEnterOutput<CR>
+
+nnoremap <silent>       <leader>rs :MoltenSave<CR>
+nnoremap <silent>       <leader>rl :MoltenLoad<CR>
+
+let g:magma_automatically_open_output = v:false
 
 
 
