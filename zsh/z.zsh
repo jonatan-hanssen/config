@@ -773,7 +773,7 @@ zshz() {
 
   if [[ ${@: -1} == /* ]] && (( ! $+opts[-e] && ! $+opts[-l] )); then
     # cd if possible; echo the new path if $ZSHZ_ECHO == 1
-    [[ -d ${@: -1} ]] && builtin cd ${@: -1} && _zshz_echo && return
+    [[ -d ${@: -1} ]] && cd ${@: -1} && _zshz_echo && return
   fi
 
   # With option -c, make sure query string matches beginning of matches;
@@ -830,12 +830,12 @@ zshz() {
       print -- "$cd"
     else
       # cd if possible; echo the new path if $ZSHZ_ECHO == 1
-      [[ -d $cd ]] && builtin cd "$cd" && _zshz_echo
+      [[ -d $cd ]] && cd "$cd" && _zshz_echo
     fi
   else
     # if $req is a valid path, cd to it; echo the new path if $ZSHZ_ECHO == 1
     if ! (( $+opts[-e] || $+opts[-l] )) && [[ -d $req ]]; then
-      builtin cd "$req" && _zshz_echo
+      cd "$req" && _zshz_echo
     else
       return $ret2
     fi
