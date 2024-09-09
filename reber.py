@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
+YOU NEED TO INSTALL PYTHON-DBUS!!!!!!!
  * **************************************************************************
  * Contributions to this work were made on behalf of the GÉANT project,
  * a project that has received funding from the European Union’s Framework
@@ -39,6 +40,7 @@ selected by the user.
 The script runs under python3.
 
 """
+
 import argparse
 import base64
 import getpass
@@ -56,22 +58,39 @@ CRYPTO_AVAILABLE = True
 DEBUG_ON = False
 
 parser = argparse.ArgumentParser(description='eduroam linux installer.')
-parser.add_argument('--debug', '-d', action='store_true', dest='debug',
-                    default=False, help='set debug flag')
-parser.add_argument('--username', '-u', action='store', dest='username',
-                    help='set username')
-parser.add_argument('--password', '-p', action='store', dest='password',
-                    help='set text_mode flag')
-parser.add_argument('--silent', '-s', action='store_true', dest='silent',
-                    help='set silent flag')
-parser.add_argument('--pfxfile', action='store', dest='pfx_file',
-                    help='set path to user certificate file')
-parser.add_argument("--wpa_conf", action='store_true', dest='wpa_conf',
-                    help='generate wpa_supplicant config file without configuring the system')
+parser.add_argument(
+    '--debug',
+    '-d',
+    action='store_true',
+    dest='debug',
+    default=False,
+    help='set debug flag',
+)
+parser.add_argument(
+    '--username', '-u', action='store', dest='username', help='set username'
+)
+parser.add_argument(
+    '--password', '-p', action='store', dest='password', help='set text_mode flag'
+)
+parser.add_argument(
+    '--silent', '-s', action='store_true', dest='silent', help='set silent flag'
+)
+parser.add_argument(
+    '--pfxfile',
+    action='store',
+    dest='pfx_file',
+    help='set path to user certificate file',
+)
+parser.add_argument(
+    '--wpa_conf',
+    action='store_true',
+    dest='wpa_conf',
+    help='generate wpa_supplicant config file without configuring the system',
+)
 ARGS = parser.parse_args()
 if ARGS.debug:
     DEBUG_ON = True
-    print("Running debug mode")
+    print('Running debug mode')
 
 
 def debug(msg) -> None:
@@ -79,12 +98,12 @@ def debug(msg) -> None:
     if not DEBUG_ON:
         return
     else:
-        print("DEBUG:" + str(msg))
+        print('DEBUG:' + str(msg))
 
 
 def byte_to_string(barray: List) -> str:
     """conversion utility"""
-    return "".join([chr(x) for x in barray])
+    return ''.join([chr(x) for x in barray])
 
 
 debug(sys.version_info.major)
@@ -92,7 +111,7 @@ debug(sys.version_info.major)
 try:
     import dbus
 except ImportError:
-    debug("Cannot import the dbus module")
+    debug('Cannot import the dbus module')
     NM_AVAILABLE = False
 
 
@@ -100,7 +119,6 @@ try:
     from OpenSSL import crypto
 except ImportError:
     CRYPTO_AVAILABLE = False
-
 
 
 def detect_desktop_environment() -> str:
@@ -118,10 +136,11 @@ def detect_desktop_environment() -> str:
         desktop_environment = 'gnome'
     else:
         try:
-            shell_command = subprocess.Popen(['xprop', '-root',
-                                              '_DT_SAVE_MODE'],
-                                             stdout=subprocess.PIPE,
-                                             stderr=subprocess.PIPE)
+            shell_command = subprocess.Popen(
+                ['xprop', '-root', '_DT_SAVE_MODE'],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
             out, _ = shell_command.communicate()
             info = out.decode('utf-8').strip()
         except (OSError, RuntimeError):
@@ -139,9 +158,7 @@ def get_system() -> List:
     that can handle this well.
     """
     system = platform.system_alias(
-        platform.system(),
-        platform.release(),
-        platform.version()
+        platform.system(), platform.release(), platform.version()
     )
     return [system, detect_desktop_environment()]
 
@@ -182,10 +199,11 @@ def run_installer() -> None:
     if ARGS.wpa_conf:
         wpa_conf = ARGS.wpa_conf
     debug(get_system())
-    debug("Calling InstallerData")
-    installer_data = InstallerData(silent=silent, username=username,
-                                   password=password, pfx_file=pfx_file)
-    
+    debug('Calling InstallerData')
+    installer_data = InstallerData(
+        silent=silent, username=username, password=password, pfx_file=pfx_file
+    )
+
     if wpa_conf:
         NM_AVAILABLE = False
 
@@ -213,39 +231,47 @@ class Messages(object):
     These are initial definitions of messages, but they will be
     overridden with translated strings.
     """
-    quit = "Really quit?"
-    username_prompt = "enter your userid"
-    enter_password = "enter password"
-    enter_import_password = "enter your import password"
-    incorrect_password = "incorrect password"
-    repeat_password = "repeat your password"
-    passwords_differ = "passwords do not match"
-    installation_finished = "Installation successful"
-    cat_dir_exists = "Directory {} exists; some of its files may be " \
-                     "overwritten."
-    cont = "Continue?"
-    nm_not_supported = "This NetworkManager version is not supported"
-    cert_error = "Certificate file not found, looks like a CAT error"
-    unknown_version = "Unknown version"
-    dbus_error = "DBus connection problem, a sudo might help"
-    yes = "Y"
-    nay = "N"
-    p12_filter = "personal certificate file (p12 or pfx)"
-    all_filter = "All files"
-    p12_title = "personal certificate file (p12 or pfx)"
-    save_wpa_conf = "NetworkManager configuration failed, " \
-                    "but we may generate a wpa_supplicant configuration file " \
-                    "if you wish. Be warned that your connection password will be saved " \
-                    "in this file as clear text."
-    save_wpa_confirm = "Write the file"
-    wrongUsernameFormat = "Error: Your username must be of the form " \
-                          "'xxx@institutionID' e.g. 'john@example.net'!"
-    wrong_realm = "Error: your username must be in the form of 'xxx@{}'. " \
-                  "Please enter the username in the correct format."
-    wrong_realm_suffix = "Error: your username must be in the form of " \
-                         "'xxx@institutionID' and end with '{}'. Please enter the username " \
-                         "in the correct format."
-    user_cert_missing = "personal certificate file not found"
+
+    quit = 'Really quit?'
+    username_prompt = 'enter your userid'
+    enter_password = 'enter password'
+    enter_import_password = 'enter your import password'
+    incorrect_password = 'incorrect password'
+    repeat_password = 'repeat your password'
+    passwords_differ = 'passwords do not match'
+    installation_finished = 'Installation successful'
+    cat_dir_exists = 'Directory {} exists; some of its files may be ' 'overwritten.'
+    cont = 'Continue?'
+    nm_not_supported = 'This NetworkManager version is not supported'
+    cert_error = 'Certificate file not found, looks like a CAT error'
+    unknown_version = 'Unknown version'
+    dbus_error = 'DBus connection problem, a sudo might help'
+    yes = 'Y'
+    nay = 'N'
+    p12_filter = 'personal certificate file (p12 or pfx)'
+    all_filter = 'All files'
+    p12_title = 'personal certificate file (p12 or pfx)'
+    save_wpa_conf = (
+        'NetworkManager configuration failed, '
+        'but we may generate a wpa_supplicant configuration file '
+        'if you wish. Be warned that your connection password will be saved '
+        'in this file as clear text.'
+    )
+    save_wpa_confirm = 'Write the file'
+    wrongUsernameFormat = (
+        'Error: Your username must be of the form '
+        "'xxx@institutionID' e.g. 'john@example.net'!"
+    )
+    wrong_realm = (
+        "Error: your username must be in the form of 'xxx@{}'. "
+        'Please enter the username in the correct format.'
+    )
+    wrong_realm_suffix = (
+        'Error: your username must be in the form of '
+        "'xxx@institutionID' and end with '{}'. Please enter the username "
+        'in the correct format.'
+    )
+    user_cert_missing = 'personal certificate file not found'
     # "File %s exists; it will be overwritten."
     # "Output written to %s"
 
@@ -254,11 +280,12 @@ class Config(object):
     """
     This is used to prepare settings during installer generation.
     """
-    instname = ""
-    profilename = ""
-    url = ""
-    email = ""
-    title = "eduroam CAT"
+
+    instname = ''
+    profilename = ''
+    url = ''
+    email = ''
+    title = 'eduroam CAT'
     servers = []
     ssids = []
     del_ssids = []
@@ -267,13 +294,13 @@ class Config(object):
     use_other_tls_id = False
     server_match = ''
     anonymous_identity = ''
-    CA = ""
-    init_info = ""
-    init_confirmation = ""
-    tou = ""
-    sb_user_file = ""
+    CA = ''
+    init_info = ''
+    init_confirmation = ''
+    tou = ''
+    sb_user_file = ''
     verify_user_realm_input = False
-    user_realm = ""
+    user_realm = ''
     hint_user_input = False
 
 
@@ -283,31 +310,41 @@ class InstallerData(object):
     standard command-line interface
     """
 
-    def __init__(self, silent: bool = False, username: str = '',
-                 password: str = '', pfx_file: str = '') -> None:
+    def __init__(
+        self,
+        silent: bool = False,
+        username: str = '',
+        password: str = '',
+        pfx_file: str = '',
+    ) -> None:
         self.graphics = ''
         self.username = username
         self.password = password
         self.silent = silent
         self.pfx_file = pfx_file
-        debug("starting constructor")
+        debug('starting constructor')
         if silent:
             self.graphics = 'tty'
         else:
             self.__get_graphics_support()
-        self.show_info(Config.init_info.format(Config.instname,
-                                               Config.email, Config.url))
-        if self.ask(Config.init_confirmation.format(Config.instname,
-                                                    Config.profilename),
-                    Messages.cont, 1):
+        self.show_info(
+            Config.init_info.format(Config.instname, Config.email, Config.url)
+        )
+        if self.ask(
+            Config.init_confirmation.format(Config.instname, Config.profilename),
+            Messages.cont,
+            1,
+        ):
             sys.exit(1)
         if Config.tou != '':
             if self.ask(Config.tou, Messages.cont, 1):
                 sys.exit(1)
         if os.path.exists(get_config_path() + '/cat_installer'):
-            if self.ask(Messages.cat_dir_exists.format(
-                    get_config_path() + '/cat_installer'),
-                    Messages.cont, 1):
+            if self.ask(
+                Messages.cat_dir_exists.format(get_config_path() + '/cat_installer'),
+                Messages.cont,
+                1,
+            ):
                 sys.exit(1)
         else:
             os.mkdir(get_config_path() + '/cat_installer', 0o700)
@@ -319,9 +356,9 @@ class InstallerData(object):
         (create directory if needed)
         """
         certfile = get_config_path() + '/cat_installer/ca.pem'
-        debug("saving cert")
+        debug('saving cert')
         with open(certfile, 'w') as cert:
-            cert.write(Config.CA + "\n")
+            cert.write(Config.CA + '\n')
 
     def ask(self, question: str, prompt: str = '', default: bool = None) -> int:
         """
@@ -332,13 +369,13 @@ class InstallerData(object):
         if self.graphics == 'tty':
             yes = Messages.yes[:1].upper()
             nay = Messages.nay[:1].upper()
-            print("\n-------\n" + question + "\n")
+            print('\n-------\n' + question + '\n')
             while True:
-                tmp = prompt + " (" + Messages.yes + "/" + Messages.nay + ") "
+                tmp = prompt + ' (' + Messages.yes + '/' + Messages.nay + ') '
                 if default == 1:
-                    tmp += "[" + yes + "]"
+                    tmp += '[' + yes + ']'
                 elif default == 0:
-                    tmp += "[" + nay + "]"
+                    tmp += '[' + nay + ']'
                 inp = input(tmp)
                 if inp == '':
                     if default == 1:
@@ -351,20 +388,33 @@ class InstallerData(object):
                 if i == nay:
                     return 1
         command = []
-        if self.graphics == "zenity":
-            command = ['zenity', '--title=' + Config.title, '--width=500',
-                       '--question', '--text=' + question + "\n\n" + prompt]
+        if self.graphics == 'zenity':
+            command = [
+                'zenity',
+                '--title=' + Config.title,
+                '--width=500',
+                '--question',
+                '--text=' + question + '\n\n' + prompt,
+            ]
         elif self.graphics == 'kdialog':
-            command = ['kdialog', '--yesno', question + "\n\n" + prompt,
-                       '--title=', Config.title]
+            command = [
+                'kdialog',
+                '--yesno',
+                question + '\n\n' + prompt,
+                '--title=',
+                Config.title,
+            ]
         elif self.graphics == 'yad':
-            command = ['yad', '--image="dialog-question"',
-                       '--button=gtk-yes:0',
-                       '--button=gtk-no:1',
-                       '--width=500',
-                       '--wrap',
-                       '--text=' + question + "\n\n" + prompt,
-                       '--title=' + Config.title]
+            command = [
+                'yad',
+                '--image="dialog-question"',
+                '--button=gtk-yes:0',
+                '--button=gtk-no:1',
+                '--width=500',
+                '--wrap',
+                '--text=' + question + '\n\n' + prompt,
+                '--title=' + Config.title,
+            ]
         returncode = subprocess.call(command, stderr=subprocess.DEVNULL)
         return returncode
 
@@ -377,11 +427,11 @@ class InstallerData(object):
         if self.graphics == 'tty':
             print(data)
             return
-        if self.graphics == "zenity":
+        if self.graphics == 'zenity':
             command = ['zenity', '--info', '--width=500', '--text=' + data]
-        elif self.graphics == "kdialog":
+        elif self.graphics == 'kdialog':
             command = ['kdialog', '--msgbox', data]
-        elif self.graphics == "yad":
+        elif self.graphics == 'yad':
             command = ['yad', '--button=OK', '--width=500', '--text=' + data]
         else:
             sys.exit(1)
@@ -404,9 +454,9 @@ class InstallerData(object):
             return
         if self.graphics == 'zenity':
             command = ['zenity', '--warning', '--text=' + text]
-        elif self.graphics == "kdialog":
+        elif self.graphics == 'kdialog':
             command = ['kdialog', '--sorry', text]
-        elif self.graphics == "yad":
+        elif self.graphics == 'yad':
             command = ['yad', '--text=' + text]
         else:
             sys.exit(1)
@@ -419,12 +469,12 @@ class InstallerData(object):
         if self.graphics == 'tty':
             if show == 0:
                 while True:
-                    inp = str(getpass.getpass(prompt + ": "))
+                    inp = str(getpass.getpass(prompt + ': '))
                     output = inp.strip()
                     if output != '':
                         return output
             while True:
-                inp = input(prompt + ": ")
+                inp = input(prompt + ': ')
                 output = inp.strip()
                 if output != '':
                     return output
@@ -438,8 +488,14 @@ class InstallerData(object):
                 hide_text = '--hide-text'
             else:
                 hide_text = ''
-            command = ['zenity', '--entry', hide_text, default_val,
-                       '--width=500', '--text=' + prompt]
+            command = [
+                'zenity',
+                '--entry',
+                hide_text,
+                default_val,
+                '--width=500',
+                '--text=' + prompt,
+            ]
         elif self.graphics == 'kdialog':
             if show == 0:
                 hide_text = '--password'
@@ -451,13 +507,13 @@ class InstallerData(object):
                 hide_text = ':H'
             else:
                 hide_text = ''
-            command = ['yad', '--form', '--field=' + hide_text,
-                       '--text=' + prompt, val]
+            command = ['yad', '--form', '--field=' + hide_text, '--text=' + prompt, val]
 
         output = ''
         while not output:
-            shell_command = subprocess.Popen(command, stdout=subprocess.PIPE,
-                                             stderr=subprocess.PIPE)
+            shell_command = subprocess.Popen(
+                command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+            )
             out, _ = shell_command.communicate()
             output = out.decode('utf-8')
             if self.graphics == 'yad':
@@ -482,8 +538,8 @@ class InstallerData(object):
         read user password and set the password property
         do nothing if silent mode is set
         """
-        password = "a"
-        password1 = "b"
+        password = 'a'
+        password1 = 'b'
         if self.silent:
             return
         if self.username:
@@ -494,22 +550,21 @@ class InstallerData(object):
             user_prompt = ''
         while True:
             self.username = self.prompt_nonempty_string(
-                1, Messages.username_prompt, user_prompt)
+                1, Messages.username_prompt, user_prompt
+            )
             if self.__validate_user_name():
                 break
         while password != password1:
-            password = self.prompt_nonempty_string(
-                0, Messages.enter_password)
-            password1 = self.prompt_nonempty_string(
-                0, Messages.repeat_password)
+            password = self.prompt_nonempty_string(0, Messages.enter_password)
+            password1 = self.prompt_nonempty_string(0, Messages.repeat_password)
             if password != password1:
                 self.alert(Messages.passwords_differ)
         self.password = password
 
     def __check_graphics(self, command) -> bool:
-        shell_command = subprocess.Popen(['which', command],
-                                         stdout=subprocess.PIPE,
-                                         stderr=subprocess.PIPE)
+        shell_command = subprocess.Popen(
+            ['which', command], stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
         shell_command.wait()
         if shell_command.returncode == 0:
             self.graphics = command
@@ -528,36 +583,52 @@ class InstallerData(object):
         debug('process_p12')
         pfx_file = get_config_path() + '/cat_installer/user.p12'
         if CRYPTO_AVAILABLE:
-            debug("using crypto")
+            debug('using crypto')
             try:
-                p12 = crypto.load_pkcs12(open(pfx_file, 'rb').read(),
-                                         self.password)
+                p12 = crypto.load_pkcs12(open(pfx_file, 'rb').read(), self.password)
             except crypto.Error as error:
-                debug("Incorrect password ({}).".format(error))
+                debug('Incorrect password ({}).'.format(error))
                 return False
             else:
                 if Config.use_other_tls_id:
                     return True
                 try:
-                    self.username = p12.get_certificate(). \
-                        get_subject().commonName
+                    self.username = p12.get_certificate().get_subject().commonName
                 except crypto.Error:
-                    self.username = p12.get_certificate().\
-                        get_subject().emailAddress
+                    self.username = p12.get_certificate().get_subject().emailAddress
                 return True
         else:
-            debug("using openssl")
-            command = ['openssl', 'pkcs12', '-in', pfx_file, '-passin',
-                       'pass:' + self.password, '-nokeys', '-clcerts']
-            shell_command = subprocess.Popen(command, stdout=subprocess.PIPE,
-                                             stderr=subprocess.PIPE)
+            debug('using openssl')
+            command = [
+                'openssl',
+                'pkcs12',
+                '-in',
+                pfx_file,
+                '-passin',
+                'pass:' + self.password,
+                '-nokeys',
+                '-clcerts',
+            ]
+            shell_command = subprocess.Popen(
+                command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+            )
             out, _ = shell_command.communicate()
             if shell_command.returncode != 0:
-                debug("first password run failed")
-                command1 = ['openssl', 'pkcs12', '-legacy', '-in', pfx_file, '-passin',
-                       'pass:' + self.password, '-nokeys', '-clcerts']
-                shell_command1 = subprocess.Popen(command1, stdout=subprocess.PIPE,
-                                             stderr=subprocess.PIPE)
+                debug('first password run failed')
+                command1 = [
+                    'openssl',
+                    'pkcs12',
+                    '-legacy',
+                    '-in',
+                    pfx_file,
+                    '-passin',
+                    'pass:' + self.password,
+                    '-nokeys',
+                    '-clcerts',
+                ]
+                shell_command1 = subprocess.Popen(
+                    command1, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+                )
                 out, err = shell_command1.communicate()
                 if shell_command1.returncode != 0:
                     return False
@@ -565,9 +636,10 @@ class InstallerData(object):
                 return True
             out_str = out.decode('utf-8').strip()
             # split only on commas that are not inside double quotes
-            subject = re.split(r'\s*[/,]\s*(?=([^"]*"[^"]*")*[^"]*$)',
-                               re.findall(r'subject=/?(.*)$',
-                                          out_str, re.MULTILINE)[0])
+            subject = re.split(
+                r'\s*[/,]\s*(?=([^"]*"[^"]*")*[^"]*$)',
+                re.findall(r'subject=/?(.*)$', out_str, re.MULTILINE)[0],
+            )
             cert_prop = {}
             for field in subject:
                 if field:
@@ -576,14 +648,14 @@ class InstallerData(object):
             if cert_prop['cn'] and re.search(r'@', cert_prop['cn']):
                 debug('Using cn: ' + cert_prop['cn'])
                 self.username = cert_prop['cn']
-            elif cert_prop['emailaddress'] and \
-                    re.search(r'@', cert_prop['emailaddress']):
+            elif cert_prop['emailaddress'] and re.search(
+                r'@', cert_prop['emailaddress']
+            ):
                 debug('Using email: ' + cert_prop['emailaddress'])
                 self.username = cert_prop['emailaddress']
             else:
                 self.username = ''
-                self.alert("Unable to extract username "
-                           "from the certificate")
+                self.alert('Unable to extract username ' 'from the certificate')
             return True
 
     def __select_p12_file(self) -> str:
@@ -593,21 +665,25 @@ class InstallerData(object):
         therefore there is no code for this case
         """
         if self.graphics == 'tty':
-            my_dir = os.listdir(".")
+            my_dir = os.listdir('.')
             p_count = 0
             pfx_file = ''
             for my_file in my_dir:
-                if my_file.endswith('.p12') or my_file.endswith('*.pfx') or \
-                        my_file.endswith('.P12') or my_file.endswith('*.PFX'):
+                if (
+                    my_file.endswith('.p12')
+                    or my_file.endswith('*.pfx')
+                    or my_file.endswith('.P12')
+                    or my_file.endswith('*.PFX')
+                ):
                     p_count += 1
                     pfx_file = my_file
-            prompt = "personal certificate file (p12 or pfx)"
+            prompt = 'personal certificate file (p12 or pfx)'
             default = ''
             if p_count == 1:
                 default = '[' + pfx_file + ']'
 
             while True:
-                inp = input(prompt + default + ": ")
+                inp = input(prompt + default + ': ')
                 output = inp.strip()
 
                 if default != '' and output == '':
@@ -615,31 +691,45 @@ class InstallerData(object):
                 default = ''
                 if os.path.isfile(output):
                     return output
-                print("file not found")
+                print('file not found')
 
-        cert = ""
+        cert = ''
         if self.graphics == 'zenity':
-            command = ['zenity', '--file-selection',
-                       '--file-filter=' + Messages.p12_filter +
-                       ' | *.p12 *.P12 *.pfx *.PFX', '--file-filter=' +
-                       Messages.all_filter + ' | *',
-                       '--title=' + Messages.p12_title]
-            shell_command = subprocess.Popen(command, stdout=subprocess.PIPE,
-                                             stderr=subprocess.PIPE)
+            command = [
+                'zenity',
+                '--file-selection',
+                '--file-filter=' + Messages.p12_filter + ' | *.p12 *.P12 *.pfx *.PFX',
+                '--file-filter=' + Messages.all_filter + ' | *',
+                '--title=' + Messages.p12_title,
+            ]
+            shell_command = subprocess.Popen(
+                command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+            )
             cert, _ = shell_command.communicate()
         if self.graphics == 'kdialog':
-            command = ['kdialog', '--getopenfilename',
-                       '.', '*.p12 *.P12 *.pfx *.PFX | ' +
-                       Messages.p12_filter, '--title', Messages.p12_title]
-            shell_command = subprocess.Popen(command, stdout=subprocess.PIPE,
-                                             stderr=subprocess.DEVNULL)
+            command = [
+                'kdialog',
+                '--getopenfilename',
+                '.',
+                '*.p12 *.P12 *.pfx *.PFX | ' + Messages.p12_filter,
+                '--title',
+                Messages.p12_title,
+            ]
+            shell_command = subprocess.Popen(
+                command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL
+            )
             cert, _ = shell_command.communicate()
         if self.graphics == 'yad':
-            command = ['yad', '--file',
-                       '--file-filter=*.p12 *.P12 *.pfx *.PFX',
-                       '-file-filter=*', '--title=' + Messages.p12_title]
-            shell_command = subprocess.Popen(command, stdout=subprocess.PIPE,
-                                             stderr=subprocess.DEVNULL)
+            command = [
+                'yad',
+                '--file',
+                '--file-filter=*.p12 *.P12 *.pfx *.PFX',
+                '-file-filter=*',
+                '--title=' + Messages.p12_title,
+            ]
+            shell_command = subprocess.Popen(
+                command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL
+            )
             cert, _ = shell_command.communicate()
         return cert.decode('utf-8').strip()
 
@@ -658,8 +748,7 @@ class InstallerData(object):
             if not self.silent:
                 self.pfx_file = self.__select_p12_file()
             try:
-                copyfile(self.pfx_file, get_config_path() +
-                         '/cat_installer/user.p12')
+                copyfile(self.pfx_file, get_config_path() + '/cat_installer/user.p12')
             except (OSError, RuntimeError):
                 print(Messages.user_cert_missing)
                 sys.exit(1)
@@ -672,63 +761,62 @@ class InstallerData(object):
         else:
             while not self.password:
                 self.password = self.prompt_nonempty_string(
-                    0, Messages.enter_import_password)
+                    0, Messages.enter_import_password
+                )
                 if not self.__process_p12():
                     self.alert(Messages.incorrect_password)
                     self.password = ''
             if not self.username:
-                self.username = self.prompt_nonempty_string(
-                    1, Messages.username_prompt)
+                self.username = self.prompt_nonempty_string(1, Messages.username_prompt)
 
     def __validate_user_name(self) -> bool:
         # locate the @ character in username
         pos = self.username.find('@')
-        debug("@ position: " + str(pos))
+        debug('@ position: ' + str(pos))
         # trailing @
         if pos == len(self.username) - 1:
-            debug("username ending with @")
+            debug('username ending with @')
             self.alert(Messages.wrongUsernameFormat)
             return False
         # no @ at all
         if pos == -1:
             if Config.verify_user_realm_input:
-                debug("missing realm")
+                debug('missing realm')
                 self.alert(Messages.wrongUsernameFormat)
                 return False
-            debug("No realm, but possibly correct")
+            debug('No realm, but possibly correct')
             return True
         # @ at the beginning
         if pos == 0:
-            debug("missing user part")
+            debug('missing user part')
             self.alert(Messages.wrongUsernameFormat)
             return False
         pos += 1
         if Config.verify_user_realm_input:
             if Config.hint_user_input:
                 if self.username.endswith('@' + Config.user_realm, pos - 1):
-                    debug("realm equal to the expected value")
+                    debug('realm equal to the expected value')
                     return True
-                debug("incorrect realm; expected:" + Config.user_realm)
+                debug('incorrect realm; expected:' + Config.user_realm)
                 self.alert(Messages.wrong_realm.format(Config.user_realm))
                 return False
             if self.username.endswith(Config.user_realm, pos):
-                debug("realm ends with expected suffix")
+                debug('realm ends with expected suffix')
                 return True
-            debug("realm suffix error; expected: " + Config.user_realm)
-            self.alert(Messages.wrong_realm_suffix.format(
-                Config.user_realm))
+            debug('realm suffix error; expected: ' + Config.user_realm)
+            self.alert(Messages.wrong_realm_suffix.format(Config.user_realm))
             return False
         pos1 = self.username.find('@', pos)
         if pos1 > -1:
-            debug("second @ character found")
+            debug('second @ character found')
             self.alert(Messages.wrongUsernameFormat)
             return False
         pos1 = self.username.find('.', pos)
         if pos1 == pos:
-            debug("a dot immediately after the @ character")
+            debug('a dot immediately after the @ character')
             self.alert(Messages.wrongUsernameFormat)
             return False
-        debug("all passed")
+        debug('all passed')
         return True
 
 
@@ -739,34 +827,49 @@ class WpaConf(object):
 
     @staticmethod
     def __prepare_network_block(ssid: str, user_data: Type[InstallerData]) -> str:
-        interface = """network={
-        ssid=\"""" + ssid + """\"
+        interface = (
+            """network={
+        ssid=\""""
+            + ssid
+            + """\"
         key_mgmt=WPA-EAP
         pairwise=CCMP
         group=CCMP TKIP
-        eap=""" + Config.eap_outer + """
-        ca_cert=\"""" + get_config_path() + """/cat_installer/ca.pem\"""""""
-        identity=\"""" + user_data.username + """\"""""""
-        altsubject_match=\"""" + ";".join(Config.servers) + """\"
+        eap="""
+            + Config.eap_outer
+            + """
+        ca_cert=\""""
+            + get_config_path()
+            + """/cat_installer/ca.pem\""""
+            """
+        identity=\"""" + user_data.username + """\""""
+            """
+        altsubject_match=\""""
+            + ';'.join(Config.servers)
+            + """\"
         """
+        )
 
         if Config.eap_outer == 'PEAP' or Config.eap_outer == 'TTLS':
-            interface += f"phase2=\"auth={Config.eap_inner}\"\n" \
-                         f"\tpassword=\"{user_data.password}\"\n"
+            interface += (
+                f'phase2="auth={Config.eap_inner}"\n'
+                f'\tpassword="{user_data.password}"\n'
+            )
             if Config.anonymous_identity != '':
-                interface += f"\tanonymous_identity=\"{Config.anonymous_identity}\"\n"
+                interface += f'\tanonymous_identity="{Config.anonymous_identity}"\n'
 
         if Config.eap_outer == 'TLS':
-            interface += f"\tprivate_key_passwd=\"{user_data.password}\"\n" \
-                         f"\tprivate_key=\"{os.environ.get('HOME')}/.cat_installer/user.p12"
+            interface += (
+                f"\tprivate_key_passwd=\"{user_data.password}\"\n"
+                f"\tprivate_key=\"{os.environ.get('HOME')}/.cat_installer/user.p12"
+            )
 
-        interface += "\n}"
+        interface += '\n}'
         return interface
 
     def create_wpa_conf(self, ssids, user_data: Type[InstallerData]) -> None:
         """Create and save the wpa_supplicant config file"""
-        wpa_conf = get_config_path() + \
-                   '/cat_installer/cat_installer.conf'
+        wpa_conf = get_config_path() + '/cat_installer/cat_installer.conf'
         with open(wpa_conf, 'w') as conf:
             for ssid in ssids:
                 net = self.__prepare_network_block(ssid, user_data)
@@ -774,9 +877,10 @@ class WpaConf(object):
 
 
 class IwdConfiguration:
-    """ support the iNet wireless daemon by Intel """
+    """support the iNet wireless daemon by Intel"""
+
     def __init__(self):
-        self.config = ""
+        self.config = ''
 
     def write_config(self) -> None:
         for ssid in Config.ssids:
@@ -784,7 +888,7 @@ class IwdConfiguration:
                 config_file.write(self.config)
 
     def _create_eap_pwd_config(self, ssid: str, user_data: Type[InstallerData]) -> None:
-        """ create EAP-PWD configuration """
+        """create EAP-PWD configuration"""
         self.conf = """
         [Security]
         EAP-Method=PWD
@@ -793,11 +897,12 @@ class IwdConfiguration:
 
         [Settings]
         AutoConnect=True
-        """.format(username=user_data.username,
-                   password=user_data.password)
+        """.format(username=user_data.username, password=user_data.password)
 
-    def _create_eap_peap_config(self, ssid: str, user_data: Type[InstallerData]) -> None:
-        """ create EAP-PEAP configuration """
+    def _create_eap_peap_config(
+        self, ssid: str, user_data: Type[InstallerData]
+    ) -> None:
+        """create EAP-PEAP configuration"""
         self.conf = """
         [Security]
         EAP-Method=PEAP
@@ -810,14 +915,19 @@ class IwdConfiguration:
         
         [Settings]
         AutoConnect=true
-        """.format(anonymous_identity=Config.anonymous_identity,
-                   ca_cert=Config.CA, servers=Config.servers,
-                   username=user_data.username,
-                   realm=Config.user_realm,
-                   password=user_data.password)
+        """.format(
+            anonymous_identity=Config.anonymous_identity,
+            ca_cert=Config.CA,
+            servers=Config.servers,
+            username=user_data.username,
+            realm=Config.user_realm,
+            password=user_data.password,
+        )
 
-    def _create_ttls_pap_config(self, ssid: str, user_data: Type[InstallerData]) -> None:
-        """ create TTLS-PAP configuration"""
+    def _create_ttls_pap_config(
+        self, ssid: str, user_data: Type[InstallerData]
+    ) -> None:
+        """create TTLS-PAP configuration"""
         self.conf = """
         [Security]
         EAP-Method=TTLS
@@ -830,11 +940,14 @@ class IwdConfiguration:
         
         [Settings]
         AutoConnect=true
-        """.format(anonymous_identity=Config.anonymous_identity,
-                   ca_cert=Config.CA, servers=Config.servers,
-                   username=user_data.username,
-                   realm=Config.user_realm,
-                   password=user_data.password)
+        """.format(
+            anonymous_identity=Config.anonymous_identity,
+            ca_cert=Config.CA,
+            servers=Config.servers,
+            username=user_data.username,
+            realm=Config.user_realm,
+            password=user_data.password,
+        )
 
 
 class CatNMConfigTool(object):
@@ -846,7 +959,7 @@ class CatNMConfigTool(object):
         self.cacert_file = None
         self.settings_service_name = None
         self.connection_interface_name = None
-        self.system_service_name = "org.freedesktop.NetworkManager"
+        self.system_service_name = 'org.freedesktop.NetworkManager'
         self.nm_version = None
         self.pfx_file = None
         self.settings = None
@@ -862,40 +975,44 @@ class CatNMConfigTool(object):
         except AttributeError:
             # since dbus existed but is empty we have an empty package
             # this gets shipped by pyqt5
-            print("DBus not properly installed")
+            print('DBus not properly installed')
             return None
         except dbus.exceptions.DBusException:
             print("Can't connect to DBus")
             return None
         # check NM version
         self.__check_nm_version()
-        debug("NM version: " + self.nm_version)
-        if self.nm_version == "0.9" or self.nm_version == "1.0":
+        debug('NM version: ' + self.nm_version)
+        if self.nm_version == '0.9' or self.nm_version == '1.0':
             self.settings_service_name = self.system_service_name
-            self.connection_interface_name = \
-                "org.freedesktop.NetworkManager.Settings.Connection"
+            self.connection_interface_name = (
+                'org.freedesktop.NetworkManager.Settings.Connection'
+            )
             # settings proxy
             sysproxy = self.bus.get_object(
-                self.settings_service_name,
-                "/org/freedesktop/NetworkManager/Settings")
-            # settings interface
-            self.settings = dbus.Interface(sysproxy, "org.freedesktop."
-                                                     "NetworkManager.Settings")
-        elif self.nm_version == "0.8":
-            self.settings_service_name = "org.freedesktop.NetworkManager"
-            self.connection_interface_name = "org.freedesktop.NetworkMana" \
-                                             "gerSettings.Connection"
-            # settings proxy
-            sysproxy = self.bus.get_object(
-                self.settings_service_name,
-                "/org/freedesktop/NetworkManagerSettings")
+                self.settings_service_name, '/org/freedesktop/NetworkManager/Settings'
+            )
             # settings interface
             self.settings = dbus.Interface(
-                sysproxy, "org.freedesktop.NetworkManagerSettings")
+                sysproxy, 'org.freedesktop.' 'NetworkManager.Settings'
+            )
+        elif self.nm_version == '0.8':
+            self.settings_service_name = 'org.freedesktop.NetworkManager'
+            self.connection_interface_name = (
+                'org.freedesktop.NetworkMana' 'gerSettings.Connection'
+            )
+            # settings proxy
+            sysproxy = self.bus.get_object(
+                self.settings_service_name, '/org/freedesktop/NetworkManagerSettings'
+            )
+            # settings interface
+            self.settings = dbus.Interface(
+                sysproxy, 'org.freedesktop.NetworkManagerSettings'
+            )
         else:
             print(Messages.nm_not_supported)
             return None
-        debug("NM connection worked")
+        debug('NM connection worked')
         return True
 
     def __check_opts(self) -> None:
@@ -914,19 +1031,20 @@ class CatNMConfigTool(object):
         """
         try:
             proxy = self.bus.get_object(
-                self.system_service_name, "/org/freedesktop/NetworkManager")
-            props = dbus.Interface(proxy, "org.freedesktop.DBus.Properties")
-            version = props.Get("org.freedesktop.NetworkManager", "Version")
+                self.system_service_name, '/org/freedesktop/NetworkManager'
+            )
+            props = dbus.Interface(proxy, 'org.freedesktop.DBus.Properties')
+            version = props.Get('org.freedesktop.NetworkManager', 'Version')
         except dbus.exceptions.DBusException:
-            version = ""
+            version = ''
         if re.match(r'^1\.', version):
-            self.nm_version = "1.0"
+            self.nm_version = '1.0'
             return
         if re.match(r'^0\.9', version):
-            self.nm_version = "0.9"
+            self.nm_version = '0.9'
             return
         if re.match(r'^0\.8', version):
-            self.nm_version = "0.8"
+            self.nm_version = '0.8'
             return
         self.nm_version = Messages.unknown_version
 
@@ -942,25 +1060,25 @@ class CatNMConfigTool(object):
         for each in conns:
             con_proxy = self.bus.get_object(self.system_service_name, each)
             connection = dbus.Interface(
-                con_proxy,
-                "org.freedesktop.NetworkManager.Settings.Connection")
+                con_proxy, 'org.freedesktop.NetworkManager.Settings.Connection'
+            )
             try:
                 connection_settings = connection.GetSettings()
-                if connection_settings['connection']['type'] == '802-11-' \
-                                                                'wireless':
+                if connection_settings['connection']['type'] == '802-11-' 'wireless':
                     conn_ssid = byte_to_string(
-                        connection_settings['802-11-wireless']['ssid'])
+                        connection_settings['802-11-wireless']['ssid']
+                    )
                     if conn_ssid == ssid:
-                        debug("deleting connection: " + conn_ssid)
+                        debug('deleting connection: ' + conn_ssid)
                         connection.Delete()
             except dbus.exceptions.DBusException:
                 pass
 
     def __add_connection(self, ssid: str) -> None:
-        debug("Adding connection: " + ssid)
+        debug('Adding connection: ' + ssid)
         server_alt_subject_name_list = dbus.Array(Config.servers)
         server_name = Config.server_match
-        if self.nm_version == "0.9" or self.nm_version == "1.0":
+        if self.nm_version == '0.9' or self.nm_version == '1.0':
             match_key = 'altsubject-matches'
             match_value = server_alt_subject_name_list
         else:
@@ -970,8 +1088,10 @@ class CatNMConfigTool(object):
             'eap': [Config.eap_outer.lower()],
             'identity': self.user_data.username,
             'ca-cert': dbus.ByteArray(
-                "file://{0}\0".format(self.cacert_file).encode('utf8')),
-            match_key: match_value}
+                'file://{0}\0'.format(self.cacert_file).encode('utf8')
+            ),
+            match_key: match_value,
+        }
         if Config.eap_outer == 'PEAP' or Config.eap_outer == 'TTLS':
             s_8021x_data['password'] = self.user_data.password
             s_8021x_data['phase2-auth'] = Config.eap_inner.lower()
@@ -980,38 +1100,48 @@ class CatNMConfigTool(object):
             s_8021x_data['password-flags'] = 0
         if Config.eap_outer == 'TLS':
             s_8021x_data['client-cert'] = dbus.ByteArray(
-                "file://{0}\0".format(self.pfx_file).encode('utf8'))
+                'file://{0}\0'.format(self.pfx_file).encode('utf8')
+            )
             s_8021x_data['private-key'] = dbus.ByteArray(
-                "file://{0}\0".format(self.pfx_file).encode('utf8'))
+                'file://{0}\0'.format(self.pfx_file).encode('utf8')
+            )
             s_8021x_data['private-key-password'] = self.user_data.password
             s_8021x_data['private-key-password-flags'] = 0
-        s_con = dbus.Dictionary({
-            'type': '802-11-wireless',
-            'uuid': str(uuid.uuid4()),
-            'permissions': ['user:' + os.environ.get('USER')],
-            'id': ssid
-        })
-        s_wifi = dbus.Dictionary({
-            'ssid': dbus.ByteArray(ssid.encode('utf8')),
-            'security': '802-11-wireless-security'
-        })
-        s_wsec = dbus.Dictionary({
-            'key-mgmt': 'wpa-eap',
-            'proto': ['rsn'],
-            'pairwise': ['ccmp'],
-            'group': ['ccmp', 'tkip']
-        })
+        s_con = dbus.Dictionary(
+            {
+                'type': '802-11-wireless',
+                'uuid': str(uuid.uuid4()),
+                'permissions': ['user:' + os.environ.get('USER')],
+                'id': ssid,
+            }
+        )
+        s_wifi = dbus.Dictionary(
+            {
+                'ssid': dbus.ByteArray(ssid.encode('utf8')),
+                'security': '802-11-wireless-security',
+            }
+        )
+        s_wsec = dbus.Dictionary(
+            {
+                'key-mgmt': 'wpa-eap',
+                'proto': ['rsn'],
+                'pairwise': ['ccmp'],
+                'group': ['ccmp', 'tkip'],
+            }
+        )
         s_8021x = dbus.Dictionary(s_8021x_data)
         s_ip4 = dbus.Dictionary({'method': 'auto'})
         s_ip6 = dbus.Dictionary({'method': 'auto'})
-        con = dbus.Dictionary({
-            'connection': s_con,
-            '802-11-wireless': s_wifi,
-            '802-11-wireless-security': s_wsec,
-            '802-1x': s_8021x,
-            'ipv4': s_ip4,
-            'ipv6': s_ip6
-        })
+        con = dbus.Dictionary(
+            {
+                'connection': s_con,
+                '802-11-wireless': s_wifi,
+                '802-11-wireless-security': s_wsec,
+                '802-1x': s_8021x,
+                'ipv4': s_ip4,
+                'ipv6': s_ip6,
+            }
+        )
         self.settings.AddConnection(con)
 
     def add_connections(self, user_data: Type[InstallerData]):
@@ -1025,63 +1155,78 @@ class CatNMConfigTool(object):
             self.__delete_existing_connection(ssid)
 
 
-Messages.quit = "Really quit?"
-Messages.username_prompt = "enter your userid"
-Messages.enter_password = "enter password"
-Messages.enter_import_password = "enter your import password"
-Messages.incorrect_password = "incorrect password"
-Messages.repeat_password = "repeat your password"
-Messages.passwords_differ = "passwords do not match"
-Messages.installation_finished = "Installation successful"
-Messages.cat_dir_exisits = "Directory {} exists; some of its files may " \
-    "be overwritten."
-Messages.cont = "Continue?"
-Messages.nm_not_supported = "This NetworkManager version is not " \
-    "supported"
-Messages.cert_error = "Certificate file not found, looks like a CAT " \
-    "error"
-Messages.unknown_version = "Unknown version"
-Messages.dbus_error = "DBus connection problem, a sudo might help"
-Messages.yes = "Y"
-Messages.no = "N"
-Messages.p12_filter = "personal certificate file (p12 or pfx)"
-Messages.all_filter = "All files"
-Messages.p12_title = "personal certificate file (p12 or pfx)"
-Messages.save_wpa_conf = "NetworkManager configuration failed, but we " \
-    "may generate a wpa_supplicant configuration file if you wish. Be " \
-    "warned that your connection password will be saved in this file as " \
-    "clear text."
-Messages.save_wpa_confirm = "Write the file"
-Messages.wrongUsernameFormat = "Error: Your username must be of the " \
+Messages.quit = 'Really quit?'
+Messages.username_prompt = 'enter your userid'
+Messages.enter_password = 'enter password'
+Messages.enter_import_password = 'enter your import password'
+Messages.incorrect_password = 'incorrect password'
+Messages.repeat_password = 'repeat your password'
+Messages.passwords_differ = 'passwords do not match'
+Messages.installation_finished = 'Installation successful'
+Messages.cat_dir_exisits = (
+    'Directory {} exists; some of its files may ' 'be overwritten.'
+)
+Messages.cont = 'Continue?'
+Messages.nm_not_supported = 'This NetworkManager version is not ' 'supported'
+Messages.cert_error = 'Certificate file not found, looks like a CAT ' 'error'
+Messages.unknown_version = 'Unknown version'
+Messages.dbus_error = 'DBus connection problem, a sudo might help'
+Messages.yes = 'Y'
+Messages.no = 'N'
+Messages.p12_filter = 'personal certificate file (p12 or pfx)'
+Messages.all_filter = 'All files'
+Messages.p12_title = 'personal certificate file (p12 or pfx)'
+Messages.save_wpa_conf = (
+    'NetworkManager configuration failed, but we '
+    'may generate a wpa_supplicant configuration file if you wish. Be '
+    'warned that your connection password will be saved in this file as '
+    'clear text.'
+)
+Messages.save_wpa_confirm = 'Write the file'
+Messages.wrongUsernameFormat = (
+    'Error: Your username must be of the '
     "form 'xxx@institutionID' e.g. 'john@example.net'!"
-Messages.wrong_realm = "Error: your username must be in the form of " \
+)
+Messages.wrong_realm = (
+    'Error: your username must be in the form of '
     "'xxx@{}'. Please enter the username in the correct format."
-Messages.wrong_realm_suffix = "Error: your username must be in the " \
-    "form of 'xxx@institutionID' and end with '{}'. Please enter the " \
-    "username in the correct format."
-Messages.user_cert_missing = "personal certificate file not found"
-Config.instname = "Universitetet i Oslo - UiO"
-Config.profilename = "uio-brukernavn@uio.no"
-Config.url = "http://www.uio.no/tjenester/it/nett/tradlost/"
-Config.email = "it-support@uio.no"
-Config.title = "eduroam CAT"
-Config.server_match = "uio.no"
-Config.eap_outer = "PEAP"
-Config.eap_inner = "MSCHAPV2"
-Config.init_info = "This installer has been prepared for {0}\n\nMore " \
-    "information and comments:\n\nEMAIL: {1}\nWWW: {2}\n\nInstaller created " \
-    "with software from the GEANT project."
-Config.init_confirmation = "This installer will only work properly if " \
-    "you are a member of {0}."
-Config.user_realm = "uio.no"
+)
+Messages.wrong_realm_suffix = (
+    'Error: your username must be in the '
+    "form of 'xxx@institutionID' and end with '{}'. Please enter the "
+    'username in the correct format.'
+)
+Messages.user_cert_missing = 'personal certificate file not found'
+Config.instname = 'Universitetet i Oslo - UiO'
+Config.profilename = 'uio-brukernavn@uio.no'
+Config.url = 'http://www.uio.no/tjenester/it/nett/tradlost/'
+Config.email = 'it-support@uio.no'
+Config.title = 'eduroam CAT'
+Config.server_match = 'uio.no'
+Config.eap_outer = 'PEAP'
+Config.eap_inner = 'MSCHAPV2'
+Config.init_info = (
+    'This installer has been prepared for {0}\n\nMore '
+    'information and comments:\n\nEMAIL: {1}\nWWW: {2}\n\nInstaller created '
+    'with software from the GEANT project.'
+)
+Config.init_confirmation = (
+    'This installer will only work properly if ' 'you are a member of {0}.'
+)
+Config.user_realm = 'uio.no'
 Config.ssids = ['eduroam']
 Config.del_ssids = ['conferences', 'uioguest']
-Config.servers = ['DNS:radius-edu01.uio.no', 'DNS:radius-edu02.uio.no', 'DNS:radius1.uio.no', 'DNS:radius2.uio.no']
+Config.servers = [
+    'DNS:radius-edu01.uio.no',
+    'DNS:radius-edu02.uio.no',
+    'DNS:radius1.uio.no',
+    'DNS:radius2.uio.no',
+]
 Config.use_other_tls_id = False
-Config.anonymous_identity = "anonymous@uio.no"
+Config.anonymous_identity = 'anonymous@uio.no'
 Config.hint_user_input = True
 Config.verify_user_realm_input = True
-Config.tou = ""
+Config.tou = ''
 Config.CA = """-----BEGIN CERTIFICATE-----
 MIICjzCCAhWgAwIBAgIQXIuZxVqUxdJxVt7NiYDMJjAKBggqhkjOPQQDAzCBiDEL
 MAkGA1UEBhMCVVMxEzARBgNVBAgTCk5ldyBKZXJzZXkxFDASBgNVBAcTC0plcnNl
