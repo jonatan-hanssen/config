@@ -1,1 +1,28 @@
-/home/jona/.ssh/config
+# Host github
+#     HostName github.com
+#     User git
+# Host *.uio.no
+#     User jonatahh
+
+Host uio
+    User jonatahh
+    HostName login.ifi.uio.no
+    ForwardX11 yes
+
+Host dancer dunder rudolph dasher
+    User jonatahh
+    HostName %h.ifi.uio.no
+    RequestTTY yes
+    RemoteCommand sh -c 'zsh'
+    ForwardX11 yes
+
+Host ml9
+    User jonatahh
+    ForwardX11 yes
+    ProxyJump jonatahh@login.ifi.uio.no
+    HostName ml9.hpc.uio.no
+
+Host fox
+    Hostname fox.educloud.no
+    ProxyJump jonatahh@login.uio.no
+    User ec-jonatahh
