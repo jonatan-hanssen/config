@@ -8,3 +8,5 @@ swaymsg '[con_mark="a"]' floating toggle
 swaymsg '[con_mark="b"]' move container to workspace current
 swaymsg '[con_mark="b"]' floating toggle
 swaymsg '[con_mark="a"]' focus
+swaymsg unmark a
+swaymsg unmark b
