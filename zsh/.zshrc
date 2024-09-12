@@ -66,10 +66,6 @@ alias gd="git diff"
 alias gr="git restore"
 alias gpl="git pull"
 
-alias dogshit="git commit -m 'do stuff' && git push"
-alias ultradog="git add -u && git commit -m 'do stuff' && git push"
-alias dogread="git add README.md && git commit -m 'Update readme' && git push"
-
 alias m="make"
 alias mc="make clean"
 
@@ -99,6 +95,24 @@ function cd() {
         new_directory=${HOME};
     fi;
     builtin cd -- "${new_directory}" && ls
+}
+
+function ultradog() {
+    if [ $# -eq 0 ]; then
+        git add -u && git commit -m "do stuff" && git push
+        return 0
+    fi
+
+    git add -u && git commit -m "$*" && git push
+}
+
+function dogshit() {
+    if [ $# -eq 0 ]; then
+        git commit -m "do stuff" && git push
+        return 0
+    fi
+
+    git commit -m "$*" && git push
 }
 
 
