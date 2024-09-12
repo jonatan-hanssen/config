@@ -93,6 +93,8 @@ bindsym $mod+minus move container to workspace number 8
 # bindsym $mod+parenleft move container to workspace number 9
 # bindsym $mod+parenright move container to workspace number 10
 
+bindsym $mod+Tab workspace back_and_forth
+
 mode "move" {
     bindsym 1 move container to workspace number 1
     bindsym 2 move container to workspace number 2
