@@ -11,6 +11,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'folke/tokyonight.nvim' " dark mode theme
     Plug 'chaoren/vim-wordmotion' " make underscores and camelCase word boundaries
     Plug 'benlubas/molten-nvim', { 'do': ':UpdateRemotePlugins' } " jupyter notebook plugin
+    Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 call plug#end()
 lua require('Comment').setup()
 
@@ -255,7 +256,7 @@ autocmd FileType python map <buffer> <C-b> :w<CR>:exec '!python3' shellescape(@%
 autocmd FileType python imap <buffer> <C-b> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 " pyright sucks at diagnostics
 autocmd FileType python let b:coc_diagnostic_disable=1
-autocmd FileType python nnoremap <leader>b :!black %<CR>
+autocmd FileType python nnoremap <leader>b :!ruff format %<CR>
 autocmd FileType python set foldmethod=indent
 
 " ------- latex ---------
