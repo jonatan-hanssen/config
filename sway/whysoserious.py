@@ -51,11 +51,12 @@ home = environ['HOME']
 ipc = Connection()
 
 
-def on_window_close(ipc, event):
+def society(ipc, event):
     # i want to play a game...
     if randint(1, 6) == 6:
         subprocess.Popen(['mpv', f'{home}/.config/sway/backgrounds/thejonkler.mp4'])
 
 
-ipc.on(Event.WINDOW_CLOSE, on_window_close)
+ipc.on(Event.WINDOW_CLOSE, society)
+ipc.on(Event.WINDOW_NEW, society)
 ipc.main()
