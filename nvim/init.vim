@@ -51,7 +51,7 @@ set spelllang=nb,en
 
 " folds
 set foldlevel=99
-nnoremap <BS> za
+" nnoremap <BS> za
 
 
 " statusline stuff
@@ -124,7 +124,7 @@ endfunction
 
 " remove highlight for last searched
 nnoremap <Enter> :noh<CR>
-nnoremap <Tab> :NvimTreeToggle<CR>
+nnoremap <BS> :NvimTreeToggle<CR>
 
 
 " schmoovement
