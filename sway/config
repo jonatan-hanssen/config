@@ -297,8 +297,9 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86Tools exec pavucontrol
 
 # printscreen
-bindsym $mod+n exec grim -g "$($XDG_CONFIG_HOME/sway/wl-select)" - | wl-copy
+# bindsym $mod+n exec grim -g "$($XDG_CONFIG_HOME/sway/wl-select)" - | wl-copy
 # bindsym Print exec $term
+bindsym Print exec grim -g "$($XDG_CONFIG_HOME/sway/wl-select)" - | wl-copy
 
 # brightness
 bindsym XF86MonBrightnessDown exec light -U 5
@@ -311,7 +312,7 @@ exec_always ${XDG_CONFIG_HOME}/sway/trans.py
 # this applet has shitty icons. They can be changed by copying /usr/share/icons/hicolor/22x22/apps
 # to ~/.local/share/icons/hicolor/22x22/apps and changing the nm-* icons. I dont know how to make it fall back
 # to /usr/local/share/icons/hicolor/scalable, which are also part of the install network-manager-applet
-exec nm-applet --indicator
+exec_always nm-applet --indicator
 
 # ----------  visuals ------------
 
