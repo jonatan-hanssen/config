@@ -288,8 +288,10 @@ input type:touchpad {
 
 # volume
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioRaiseVolume exec [ $(pactl -- get-sink-volume @DEFAULT_SINK@ | awk -F'/' '{print $2}' | sed 's/[^0-9]*//g') -lt 100 ] && pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym --whole-window $mod+Shift+button4 exec [ $(pactl -- get-sink-volume @DEFAULT_SINK@ | awk -F'/' '{print $2}' | sed 's/[^0-9]*//g') -lt 100 ] && pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym --whole-window $mod+Shift+button5 exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 
 
 # bindsym XF86Tools exec imv ${XDG_CONFIG_HOME}/sway/backgrounds/cat.png -s crop
@@ -304,6 +306,8 @@ bindsym Print exec grim -g "$($XDG_CONFIG_HOME/sway/wl-select)" - | wl-copy
 # brightness
 bindsym XF86MonBrightnessDown exec light -U 5
 bindsym XF86MonBrightnessUp exec light -A 5
+bindsym --whole-window $mod+button5 exec light -U 5
+bindsym --whole-window $mod+button4 exec light -A 5
 
 include /etc/sway/config.d/*
 
