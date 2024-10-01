@@ -89,6 +89,7 @@ let mapleader=" "
 " clipboard
 nnoremap <leader>p "+p
 nnoremap <leader>y "+y
+nnoremap <leader>Y "+y$
 vnoremap <leader>y "+y
 
 nnoremap gp :put<CR>
