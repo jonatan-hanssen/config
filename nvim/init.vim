@@ -124,8 +124,9 @@ function! WordMotionToggle()
 endfunction
 
 " remove highlight for last searched
-nnoremap <Enter> :noh<CR>
 nnoremap <BS> :NvimTreeToggle<CR>
+nnoremap <leader><BS> :noh<CR>
+nnoremap <CR> :w<CR>:!touch /tmp/tmp.pw.socket<CR><CR>
 
 
 " schmoovement
@@ -190,10 +191,10 @@ function! SynStack()
 endfunc
 
 
+
 " ------------- molten ------------------
 
 nnoremap <silent>       <leader>rm :MoltenInit python3<CR>
-
 nnoremap <silent>       <leader>e  :MoltenEvaluateOperator<CR>
 nnoremap <silent>       <leader>rr :MoltenEvaluateLine<CR>
 xnoremap <silent>       <leader>r  :<C-u>MoltenEvaluateVisual<CR>
