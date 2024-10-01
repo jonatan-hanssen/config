@@ -15,11 +15,12 @@ end
 
 -- pass to setup along with your other options
 require("nvim-tree").setup {
----
-on_attach = my_on_attach,
-disable_netrw = False,
-hijack_netrw = True
----
+    on_attach = my_on_attach,
+    disable_netrw = False,
+    hijack_netrw = True,
+    git = {
+        enable = false
+    }
 }
 
 vim.api.nvim_create_autocmd("QuitPre", {
