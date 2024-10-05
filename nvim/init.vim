@@ -45,6 +45,8 @@ colorscheme onehalflight
 set spelllang=nb,en
 
 
+set ignorecase
+set smartcase
 
 
 
@@ -177,9 +179,7 @@ set undofile
 
 
 " ----------- vimwiki -------------
-let g:vimwiki_list = [{ 'path': '~/dnd_wiki/wiki', 'path_html': '~/dnd_wiki/html', 'auto_export': 0, 'auto_toc': 1, 'links_space_char': '_', 'syntax': 'default' }]
-hi VimwikiLink ctermfg=blue
-let g:vimwiki_global_ext = 0
+let g:vimwiki_ext2syntax = {}
 
 
 " get highlight group of cursor
