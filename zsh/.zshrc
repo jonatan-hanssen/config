@@ -6,8 +6,8 @@ setopt dotglob
 export PATH="/home/jona/.local/bin:$PATH"
 export EDITOR="nvim"
 
-export ZDOTDIR=${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}
 export XDG_CONFIG_HOME="$HOME/.config"
+export ZDOTDIR=${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_PICTURES_DIR="$HOME/pictures"
@@ -97,6 +97,7 @@ alias uiomount='sshfs -o reconnect,ServerAliveInterval=2 jonatahh@login.ifi.uio.
 alias :q='exit'
 alias c='z' # c is easier to hit
 alias pac='sudo pacman -Syu'
+alias ra='ranger'
 
 alias close='disown && exit'
 
