@@ -12,12 +12,14 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'chaoren/vim-wordmotion' " make underscores and camelCase word boundaries
     Plug 'benlubas/molten-nvim', { 'do': ':UpdateRemotePlugins' } " jupyter notebook plugin
     Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+    Plug 'xiyaowong/transparent.nvim'
 call plug#end()
 lua require('Comment').setup()
 
 " holds configs for lua only plugins
 luafile $XDG_CONFIG_HOME/nvim/lua.lua
 
+let g:transparent_enabled=1
 
 
 let g:buftabline_show=1
