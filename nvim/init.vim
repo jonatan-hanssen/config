@@ -182,6 +182,7 @@ set undofile
 
 " ----------- vimwiki -------------
 let g:vimwiki_ext2syntax = {}
+let g:vimwiki_key_mappings = {'global': 0}
 
 
 " get highlight group of cursor
