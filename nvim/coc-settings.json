@@ -8,7 +8,7 @@
 		"godot": {
 			"host": "127.0.0.1",
 			"filetypes": ["gdscript"],
-			"port": 6008
+			"port": 6005
 		}
     },
     "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.6/clangd_15.0.6/bin/clangd"
