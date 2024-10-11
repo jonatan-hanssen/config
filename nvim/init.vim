@@ -282,6 +282,11 @@ autocmd FileType c command! Main execute "normal! i#include <stdlib.h><CR><CR>vo
 
 " build stuff
 
+
+" ------ text files universal -------
+autocmd FileType text,markdown,vimwiki,tex call ProseStart()
+autocmd FileType text,markdown,vimwiki,tex set spell
+
 " ------- python --------
 autocmd FileType python map <buffer> <C-b> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <C-b> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
@@ -293,8 +298,6 @@ autocmd FileType python set foldmethod=indent
 " ------- latex ---------
 autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex %'<CR>
 autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex %'<CR>
-autocmd FileType tex set spell
-autocmd FileType tex call ProseStart()
 autocmd FileType tex set conceallevel=0
 autocmd FileType tex nnoremap <leader>b :!bibtex %<<CR>
 autocmd FileType tex nnoremap <leader>v :!biber %<<CR>
@@ -331,19 +334,7 @@ autocmd FileType r nnoremap <leader>r {opng("temp")<esc>}Odev.off()<CR>system("x
 
 
 " ------ markdown --------
-let g:pencil#wrapModeDefault = 'soft'
-
-autocmd FileType markdown call ProseStart()
 autocmd FileType markdown map <buffer> <C-b> :w<CR>:exec '!pandoc % --standalone --output %<.pdf'<CR>
-
-
 
 " Remote files
 autocmd BufRead scp://* set cmdheight=2 " this is to stop stupid confirmation message
-
-" dont show buffers in vimwiki because there are so many
-" autocmd FileType vimwiki let g:buftabline_show=0
-
-autocmd FileType text call ProseStart()
-autocmd FileType vimwiki call ProseStart()
-
