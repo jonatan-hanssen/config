@@ -45,7 +45,7 @@ zstyle ':vcs_info:git:*' actionformats '(%b|%a)'
 export NEWLINE=$'\n'
 rightarrow=$(echo -en '\u25aa')
 export PROMPT2=" ${rightarrow} "
-export PROMPT='[%?] %F{027}%~% %f ${vcs_info_msg_0_} %f${NEWLINE}${PROMPT2}'
+export PROMPT='[%?] %F{blue}%~% %f ${vcs_info_msg_0_} %f${NEWLINE}${PROMPT2}'
 
 # this is to make pip not halt looking for some keyring
 export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring

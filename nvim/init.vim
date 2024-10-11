@@ -43,6 +43,19 @@ set listchars=lead:·,trail:·,tab:>·
 
 " beautiful light theme
 colorscheme onehalflight
+let g:onehalflight=1
+
+function! ColorschemeToggle()
+    if g:onehalflight
+        colorscheme onehalfdark
+        let g:onehalflight = 0
+
+    else
+        colorscheme onehalflight
+        let g:onehalflight = 1
+    endif
+endfunction
+
 
 set spelllang=nb,en
 
@@ -90,6 +103,7 @@ nnoremap <C-n> :NvimTreeToggle<CR>
 " -------- leader kommandoer -----------
 let mapleader=" "
 
+nnoremap <leader>t :call ColorschemeToggle()<cr>
 " clipboard
 nnoremap <leader>p "+p
 nnoremap <leader>y "+y
@@ -152,7 +166,6 @@ nnoremap U <C-r>
 nnoremap H :bprev<CR>
 nnoremap L :bnext<CR>
 " aapne tabs og splits
-nnoremap <leader>t :tabnew
 nnoremap <leader>v :vsplit
 " replace alt som ble soekt paa sist
 nnoremap <leader>s :%s///g<Left><Left>
