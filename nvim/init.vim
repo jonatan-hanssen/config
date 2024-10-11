@@ -1,7 +1,6 @@
 call plug#begin(stdpath('data') . '/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'} " lsp
     Plug 'numToStr/Comment.nvim' " gc for comments
-    Plug 'reedes/vim-pencil' " better for long lines
     Plug 'sonph/onehalf', { 'rtp' : 'vim' } " theme
     Plug 'itchyny/vim-gitbranch' " git statusline
     Plug 'kshenoy/vim-signature' " dont remember what this does
@@ -62,6 +61,19 @@ set spelllang=nb,en
 
 set ignorecase
 set smartcase
+
+
+function! ProseStart()
+  setlocal linebreak
+  nnoremap <buffer> j gj
+  nnoremap <buffer> k gk
+endfunction
+
+function! ProseStop()
+  setlocal nolinebreak
+  unmap <buffer> j
+  unmap <buffer> k
+endfunction
 
 
 
@@ -282,7 +294,7 @@ autocmd FileType python set foldmethod=indent
 autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex %'<CR>
 autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex %'<CR>
 autocmd FileType tex set spell
-autocmd FileType tex call pencil#init({'wrap': 'soft'})
+autocmd FileType tex call ProseStart()
 autocmd FileType tex set conceallevel=0
 autocmd FileType tex nnoremap <leader>b :!bibtex %<<CR>
 autocmd FileType tex nnoremap <leader>v :!biber %<<CR>
@@ -321,7 +333,7 @@ autocmd FileType r nnoremap <leader>r {opng("temp")<esc>}Odev.off()<CR>system("x
 " ------ markdown --------
 let g:pencil#wrapModeDefault = 'soft'
 
-autocmd FileType markdown call pencil#init()
+autocmd FileType markdown call ProseStart()
 autocmd FileType markdown map <buffer> <C-b> :w<CR>:exec '!pandoc % --standalone --output %<.pdf'<CR>
 
 
@@ -332,6 +344,6 @@ autocmd BufRead scp://* set cmdheight=2 " this is to stop stupid confirmation me
 " dont show buffers in vimwiki because there are so many
 " autocmd FileType vimwiki let g:buftabline_show=0
 
-autocmd FileType text call pencil#init()
-autocmd FileType vimwiki call pencil#init()
+autocmd FileType text call ProseStart()
+autocmd FileType vimwiki call ProseStart()
 
