@@ -1,4 +1,4 @@
-set $mod Mod4
+set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -8,9 +8,6 @@ font pango:SourceCodePro Medium 13
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
 
-# Start XDG autostart .desktop files using dex. See also
-# https://wiki.archlinux.org/index.php/XDG_Autostart
-exec --no-startup-id dex --autostart --environment i3
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -21,8 +18,6 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 exec --no-startup-id feh --bg-max ~/.config/sway/backgrounds/pattern.png
 
-exec --no-startup-id ../sway/trans.py
-
 exec --no-startup-id ~/.config/polybar/bar
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
@@ -31,10 +26,14 @@ exec --no-startup-id ~/.config/polybar/bar
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -50,7 +49,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+x kill
 
 # dmenu
-bindsym $mod+d exec "rofi -modi drun,run -show drun"
+bindsym $mod+d exec "rofi -show drun -show-icons"
 
 # change focus
 bindsym $mod+h focus left
@@ -142,25 +141,6 @@ bindsym $mod+s move scratchpad
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+g scratchpad show
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-# bar {
-#         status_command i3status --config ~/.config/i3status/config
-# 		position top
-# 		font "Arial 13"
-# 		height 35
-#
-# 	workspace_min_width 35
-#
-# 	colors {
-#         statusline #dddddd
-#         background #222222
-#         # Outline, Background, Foreground
-#         inactive_workspace #222222 #333333 #888888
-#         focused_workspace #00aaee #0088cc #ffffff
-#     }
-# }
 
 # border background text indicator child_border
 client.focused #00aaee #0088cc #ffffff #dddddd
