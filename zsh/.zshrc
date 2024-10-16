@@ -104,6 +104,14 @@ alias close='disown && exit'
 # this is to make latex installer work
 alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
 
+
+# god tier single char aliases
+alias d='cd'
+alias f='z'
+alias l='ls'
+alias h='history'
+alias s='ssh'
+
 # cd also runs ls
 function cd() {
     new_directory="$*";
