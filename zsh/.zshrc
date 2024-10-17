@@ -111,6 +111,7 @@ alias f='z'
 alias l='ls'
 alias h='history'
 alias s='ssh'
+alias a='source a'
 
 # cd also runs ls
 function cd() {
