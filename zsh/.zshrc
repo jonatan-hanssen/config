@@ -64,12 +64,12 @@ alias history="history 0"
 alias ls="exa --icons --time-style=long-iso"
 alias tree="tree -L 3 -C"
 alias mv='mv --interactive'
-alias v='nvim'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias cal='cal -m'
 alias jup='jupyter notebook'
+alias mosh='mosh --no-init'
 
 
 # git aliases
@@ -81,7 +81,6 @@ alias gd="git diff"
 alias gr="git restore"
 alias gpl="git pull"
 
-alias m="make"
 alias mc="make clean"
 
 
@@ -112,6 +111,8 @@ alias l='ls'
 alias h='history'
 alias s='ssh'
 alias a='source a'
+alias v='nvim'
+alias m="make"
 
 # cd also runs ls
 function cd() {
