@@ -3,7 +3,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'numToStr/Comment.nvim' " gc for comments
     Plug 'sonph/onehalf', { 'rtp' : 'vim' } " theme
     Plug 'itchyny/vim-gitbranch' " git statusline
-    Plug 'kshenoy/vim-signature' " dont remember what this does
+    Plug 'kshenoy/vim-signature' " visualize marks
     Plug 'vimwiki/vimwiki' " make wikis
     Plug 'ap/vim-buftabline' " tabs are stupid make it buffers instead
     Plug 'nvim-tree/nvim-tree.lua' " filelist with C-n
@@ -285,7 +285,7 @@ autocmd FileType c command! Main execute "normal! i#include <stdlib.h><CR><CR>vo
 
 " ------ text files universal -------
 autocmd FileType text,markdown,vimwiki,tex call ProseStart()
-autocmd FileType text,markdown,vimwiki,tex set spell
+autocmd FileType text,tex set spell
 
 " ------- python --------
 autocmd FileType python map <buffer> <C-b> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
