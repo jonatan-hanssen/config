@@ -12,6 +12,8 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'benlubas/molten-nvim', { 'do': ':UpdateRemotePlugins' } " jupyter notebook plugin
     Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
     Plug 'xiyaowong/transparent.nvim'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-repeat'
 call plug#end()
 lua require('Comment').setup()
 
@@ -186,7 +188,7 @@ vnoremap <leader>s :s///g<Left><Left>
 map Y y$
 " format python
 " make print(x) into print(f"{x=}")
-nnoremap <leader>f 0f(af"{<ESC>$i=}"<ESC>
+nnoremap <leader>f 0f(af'{<ESC>$i=}'<ESC>
 nnoremap <leader>m :delmarks!<CR>
 nnoremap <leader>z :!zathura %<.pdf & <CR><CR>
 nnoremap <silent> <leader>d :bp<BAR>bd#<CR>
@@ -331,6 +333,12 @@ autocmd FileType r map <buffer> <C-b> :w<CR>:!Rscript %<CR>
 autocmd FileType r imap <buffer> <C-b> <esc> :w<CR>:!Rscript %<CR>
 autocmd FileType r set shiftwidth=2
 autocmd FileType r nnoremap <leader>r {opng("temp")<esc>}Odev.off()<CR>system("xdg-open temp")<esc>
+
+
+" ------- gdscript --------
+autocmd FileType gdscript map <buffer> <C-b> :w<CR>:exec '!godot --path $(pwd)'<CR><CR>
+autocmd FileType gdscript set noexpandtab
+
 
 
 " ------ markdown --------
