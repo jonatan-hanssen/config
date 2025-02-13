@@ -39,3 +39,26 @@ vim.api.nvim_create_autocmd("QuitPre", {
     end
   end
 })
+
+vim.api.nvim_create_user_command('CompileLatex', function()
+    vim.fn.jobstart({'pdflatex', vim.fn.expand('%')}, {
+        on_stdout = function(_, data)
+            if data then
+                print(table.concat(data, '\n'))
+            end
+        end,
+        on_stderr = function(_, data)
+            if data then
+                print(table.concat(data, '\n'))
+            end
+        end,
+        on_exit = function(_, code)
+            if code == 0 then
+                print("Compile successful!")
+            else
+                print("Compile failed!")
+            end
+        end,
+    })
+end, {})
+

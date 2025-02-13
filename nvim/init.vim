@@ -162,8 +162,8 @@ nnoremap <CR> :w<CR>:!touch /tmp/tmp.pw.socket<CR><CR>
 
 
 " schmoovement
-noremap J }
-noremap K {
+noremap J :keepjumps normal! }<CR>
+noremap K :keepjumps normal! {<CR>
 nnoremap } J
 
 
@@ -279,6 +279,9 @@ endfunction
 
 
 autocmd FileType python command! Main execute "normal! idef main():<CR><CR><BS>if __name__ == '__main__':<CR>main()<ESC>gg$"
+
+autocmd FileType python command! Plt execute "normal! oplt.rcParams.update({'font.size': 22})<ESC>"
+
 autocmd FileType c command! Main execute "normal! i#include <stdlib.h><CR><CR>void main() {<CR>}<ESC>k$"
 """"""""""""" Her maa de legges til conditional execution --------------
 
@@ -298,11 +301,13 @@ autocmd FileType python nnoremap <leader>b :!ruff format %<CR>
 autocmd FileType python set foldmethod=indent
 
 " ------- latex ---------
-autocmd FileType tex map <buffer> <C-b> :w<CR>:exec '!pdflatex %'<CR>
-autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:exec '!pdflatex %'<CR>
+autocmd FileType tex map <buffer> <C-b> :w<CR>:CompileLatex<CR>
+autocmd FileType tex imap <buffer> <C-b> <esc>:w<CR>:CompileLatex<CR>
 autocmd FileType tex set conceallevel=0
 autocmd FileType tex nnoremap <leader>b :!bibtex %<<CR>
 autocmd FileType tex nnoremap <leader>v :!biber %<<CR>
+
+autocmd FileType tex map <buffer> <leader>l :w<CR>:exec '!pdflatex %'<CR>
 
 " --------- C -----------
 autocmd FileType c map <buffer> <C-b> :w<CR>:!gcc -g -Wall -Wextra -std=gnu11 % -o %< && ./%<<CR>
