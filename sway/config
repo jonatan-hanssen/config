@@ -182,7 +182,7 @@ mode "normal" {
     bindsym $mod+Escape mode "default"
 
 }
-bindsym $mod+Escape mode "normal"
+# bindsym $mod+Escape mode "normal"
 
 
 
@@ -225,6 +225,9 @@ bindsym $mod+e layout toggle split
 
 # Make the current focus fullscreen
 bindsym $mod+f fullscreen
+
+
+bindsym $mod+z exec $term -e nvim ~/dog.py
 
 # Toggle the current focus between tiling and floating mode
 bindsym $mod+space floating toggle
