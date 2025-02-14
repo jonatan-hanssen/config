@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd("QuitPre", {
 })
 
 vim.api.nvim_create_user_command('CompileLatex', function()
-    vim.fn.jobstart({'pdflatex', vim.fn.expand('%')}, {
+    vim.fn.jobstart({'make'}, {
         on_stdout = function(_, data)
             if data then
                 print(table.concat(data, '\n'))
