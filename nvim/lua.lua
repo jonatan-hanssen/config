@@ -41,24 +41,50 @@ vim.api.nvim_create_autocmd("QuitPre", {
 })
 
 vim.api.nvim_create_user_command('CompileLatex', function()
-    vim.fn.jobstart({'make'}, {
-        on_stdout = function(_, data)
-            if data then
-                print(table.concat(data, '\n'))
-            end
-        end,
-        on_stderr = function(_, data)
-            if data then
-                print(table.concat(data, '\n'))
-            end
-        end,
-        on_exit = function(_, code)
-            if code == 0 then
-                print("Compile successful!")
-            else
-                print("Compile failed!")
-            end
-        end,
-    })
+    -- Check if Makefile exists in the current directory
+    local makefile = vim.fn.getcwd() .. '/Makefile'
+    if vim.fn.filereadable(makefile) == 1 then
+        -- Run make if Makefile exists
+        vim.fn.jobstart({'make'}, {
+            on_stdout = function(_, data)
+                if data then
+                    print(table.concat(data, '\n'))
+                end
+            end,
+            on_stderr = function(_, data)
+                if data then
+                    print(table.concat(data, '\n'))
+                end
+            end,
+            on_exit = function(_, code)
+                if code == 0 then
+                    print("Compile successful!")
+                else
+                    print("Compile failed!")
+                end
+            end,
+        })
+    else
+        -- Run pdflatex on the current file if no Makefile exists
+        local current_file = vim.fn.expand('%')
+        vim.fn.jobstart({'pdflatex', current_file}, {
+            on_stdout = function(_, data)
+                if data then
+                    print(table.concat(data, '\n'))
+                end
+            end,
+            on_stderr = function(_, data)
+                if data then
+                    print(table.concat(data, '\n'))
+                end
+            end,
+            on_exit = function(_, code)
+                if code == 0 then
+                    print("Compile successful!")
+                else
+                    print("Compile failed!")
+                end
+            end,
+        })
+    end
 end, {})
-
