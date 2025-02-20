@@ -17,11 +17,11 @@ let colors_name="onequarterlight"
 
 
 let s:black       = { "gui": "#383a42", "cterm": "237" }
-let s:red         = { "gui": "#d91254", "cterm": "167" }
-let s:green       = { "gui": "#0ebd0b", "cterm": "71" }
-let s:lightgreen  = { "gui": "#00ae8b", "cterm": "136" } " yellow originally
-let s:blue        = { "gui": "#0795d2", "cterm": "31" }
-let s:pink        = { "gui": "#f906bf", "cterm": "127" } " purple originally
+let s:red         = { "gui": "#d91254", "cterm": "161" }
+let s:green       = { "gui": "#0ebd0b", "cterm": "34" }
+let s:lightgreen  = { "gui": "#00ae8b", "cterm": "36" } " yellow originally
+let s:blue        = { "gui": "#0795d2", "cterm": "32" }
+let s:pink        = { "gui": "#f906bf", "cterm": "199" } " purple originally
 let s:cyan        = { "gui": "#0997b3", "cterm": "31" }
 let s:white       = { "gui": "#fafafa", "cterm": "231" }
 
