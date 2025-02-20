@@ -14,8 +14,11 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
     Plug 'lervag/vimtex'
+    Plug 'CodeGradox/onehalf-lush'
 call plug#end()
 lua require('Comment').setup()
+
+
 
 " holds configs for lua only plugins
 luafile $XDG_CONFIG_HOME/nvim/lua.lua
@@ -42,13 +45,14 @@ set cursorline
 set list
 set listchars=lead:·,trail:·,tab:>·
 
-" beautiful light theme
-colorscheme onehalflight
-let g:onehalflight=1
+
+" beautiful bespoke light theme
+colorscheme onequarterlight
+let g:onehalflight=0
 
 function! ColorschemeToggle()
     if g:onehalflight
-        colorscheme onehalfdark
+        colorscheme onequarterlight
         let g:onehalflight = 0
 
     else
@@ -165,6 +169,11 @@ nnoremap <leader><BS> :noh<CR>
 " schmoovement
 noremap J :keepjumps normal! }<CR>
 noremap K :keepjumps normal! {<CR>
+
+xnoremap J :<C-u>keepjumps normal! gv}<CR>
+xnoremap K :<C-u>keepjumps normal! gv{<CR>
+
+
 nnoremap } J
 
 
@@ -208,6 +217,9 @@ set undodir=$XDG_DATA_HOME/nvim/undo_dir
 set undofile
 
 
+" highlight SpellBad guifg=#ff5fff
+
+
 " ----------- vimwiki -------------
 let g:vimwiki_ext2syntax = {}
 let g:vimwiki_key_mappings = {'global': 0}
@@ -230,6 +242,13 @@ let g:vimtex_toc_config = {
     \ 'split_pos' : 'full',
     \}
 
+let g:vimtex_compiler_enabled=0
+let g:vimtex_complete_enabled=0
+let g:vimtex_doc_enabled=0
+let g:vimtex_imaps_enabled=0
+let g:vimtex_delim_list={}
+let g:vimtex_mappings_enabled=0
+
 
 " ------------ COC ---------------- "
 " random things that need to be set for coc to work maybe
@@ -240,6 +259,7 @@ set updatetime=300
 set shortmess+=c
 set signcolumn=number
 set signcolumn=yes
+
 
 " tab completion
 inoremap <silent><expr> <TAB>
