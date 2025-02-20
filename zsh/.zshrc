@@ -60,6 +60,7 @@ setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
 alias history="history 0"
 
+export EXA_COLORS="*.part=34"
 # aliases
 alias ls="exa --icons --time-style=long-iso"
 alias tree="tree -L 3 -C"
@@ -113,6 +114,9 @@ alias s='ssh'
 alias a='source a'
 alias v='nvim'
 alias m="make"
+
+
+alias master='datediff --format="%m %d" now 2025-5-15'
 
 # cd also runs ls
 function cd() {
