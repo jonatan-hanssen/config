@@ -114,6 +114,7 @@ alias s='ssh'
 alias a='source a'
 alias v='nvim'
 alias m="make"
+alias b="bat"
 
 
 alias master='datediff --format="%m %d" now 2025-5-15'
