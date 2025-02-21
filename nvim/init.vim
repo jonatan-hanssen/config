@@ -10,11 +10,9 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'folke/tokyonight.nvim' " dark mode theme
     Plug 'chaoren/vim-wordmotion' " make underscores and camelCase word boundaries
     Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
-    " Plug 'xiyaowong/transparent.nvim'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
     Plug 'lervag/vimtex'
-    Plug 'CodeGradox/onehalf-lush'
     Plug 'ap/vim-css-color'
 call plug#end()
 lua require('Comment').setup()
@@ -216,9 +214,6 @@ set titlestring=nvim\ \ \ %F
 " keep undo history even after closing file
 set undodir=$XDG_DATA_HOME/nvim/undo_dir
 set undofile
-
-
-" highlight SpellBad guifg=#ff5fff
 
 
 " ----------- vimwiki -------------

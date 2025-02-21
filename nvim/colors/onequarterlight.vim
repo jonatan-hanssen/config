@@ -39,6 +39,7 @@ let s:color_col   = { "gui": "#f0f0f0", "cterm": "255" }
 let s:selection   = { "gui": "#bfceff", "cterm": "153" }
 let s:vertsplit   = { "gui": "#f0f0f0", "cterm": "255" }
 
+let s:cursor_line_lighter = { "gui": "#f3f3f3", "cterm": "255" }
 
 function! s:h(group, fg, bg, attr)
   if type(a:fg) == type({})
@@ -63,8 +64,8 @@ endfun
 call s:h("Normal", s:fg, s:bg, "")
 
 call s:h("Cursor", s:bg, s:blue, "")
-call s:h("CursorColumn", "", s:cursor_line, "")
-call s:h("CursorLine", "", s:cursor_line, "")
+call s:h("CursorColumn", "", s:cursor_line_lighter, "")
+call s:h("CursorLine", "", s:cursor_line_lighter, "")
 
 call s:h("LineNr", s:gutter_fg, s:gutter_bg, "")
 call s:h("CursorLineNr", s:fg, s:gutter_bg, "")

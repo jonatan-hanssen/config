@@ -88,3 +88,19 @@ vim.api.nvim_create_user_command('CompileLatex', function()
         })
     end
 end, {})
+
+
+-- Check if SSH_TTY is set
+if vim.fn.getenv('SSH_TTY') ~= vim.NIL then
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+      ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+      ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+    },
+    paste = {
+      ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+      ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+    },
+  }
+end
