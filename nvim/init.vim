@@ -10,11 +10,12 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'folke/tokyonight.nvim' " dark mode theme
     Plug 'chaoren/vim-wordmotion' " make underscores and camelCase word boundaries
     Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
-    Plug 'xiyaowong/transparent.nvim'
+    " Plug 'xiyaowong/transparent.nvim'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
     Plug 'lervag/vimtex'
     Plug 'CodeGradox/onehalf-lush'
+    Plug 'ap/vim-css-color'
 call plug#end()
 lua require('Comment').setup()
 
@@ -23,7 +24,7 @@ lua require('Comment').setup()
 " holds configs for lua only plugins
 luafile $XDG_CONFIG_HOME/nvim/lua.lua
 
-let g:transparent_enabled=1
+" let g:transparent_enabled=1
 
 
 let g:buftabline_show=1
@@ -95,7 +96,7 @@ set statusline+=\ %{gitbranch#name()}\
 set statusline+=%#LineNr#
 set statusline+=%1*\ %<%F\ %m%r%h%w\ 
 set statusline+=%=
-set statusline+=%#CursorColumn#
+ set statusline+=%#CursorColumn#
 set statusline+=\ \[%{&fileencoding?&fileencoding:&encoding}\]
 set statusline+=\ %p%%
 set statusline+=\ %l:%c
@@ -298,6 +299,17 @@ autocmd FileType c command! Main execute "normal! i#include <stdlib.h><CR><CR>vo
 """"""""""""" Her maa de legges til conditional execution --------------
 
 " build stuff
+
+
+
+" make sure that command line mode works with enter
+augroup CommandLineWindow
+  autocmd!
+  " When the Command Line window is opened, restore the default behavior of <CR>
+  autocmd CmdwinEnter * nnoremap <buffer> <CR> <CR>
+  " When leaving the Command Line window, restore the original mapping
+  autocmd CmdwinLeave * nunmap <buffer> <CR>
+augroup END
 
 
 " ------ text files universal -------

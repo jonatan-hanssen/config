@@ -29,7 +29,7 @@ let s:fg          = s:black
 let s:bg          = s:white
 
 let s:comment_fg  = { "gui": "#a0a1a7", "cterm": "247" }
-let s:gutter_bg   = { "gui": "#fafafa", "cterm": "231" }
+let s:gutter_bg   = { "gui": "#f8f8f8", "cterm": "231" }
 let s:gutter_fg   = { "gui": "#d4d4d4", "cterm": "252" }
 let s:non_text    = { "gui": "#e5e5e5", "cterm": "252" }
 
@@ -67,7 +67,7 @@ call s:h("CursorColumn", "", s:cursor_line, "")
 call s:h("CursorLine", "", s:cursor_line, "")
 
 call s:h("LineNr", s:gutter_fg, s:gutter_bg, "")
-call s:h("CursorLineNr", s:fg, "", "")
+call s:h("CursorLineNr", s:fg, s:gutter_bg, "")
 
 call s:h("DiffAdd", s:green, "", "")
 call s:h("DiffChange", s:lightgreen, "", "")
@@ -100,6 +100,8 @@ call s:h("TabLine", s:comment_fg, s:cursor_line, "")
 call s:h("TabLineFill", s:comment_fg, s:cursor_line, "")
 call s:h("TabLineSel", s:fg, s:bg, "")
 
+call s:h("User1", s:comment_fg, s:gutter_bg, "")
+
 call s:h("Visual", "", s:selection, "")
 call s:h("VisualNOS", "", s:selection, "")
 
@@ -109,7 +111,7 @@ call s:h("Directory", s:blue, "", "")
 call s:h("VertSplit", s:vertsplit, s:vertsplit, "")
 call s:h("Folded", s:fg, "", "")
 call s:h("FoldColumn", s:fg, "", "")
-call s:h("SignColumn", s:fg, "", "")
+call s:h("SignColumn", s:fg, s:gutter_bg, "")
 
 call s:h("MatchParen", s:blue, "", "underline")
 call s:h("SpecialKey", s:fg, "", "")
