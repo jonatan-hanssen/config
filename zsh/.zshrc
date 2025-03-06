@@ -60,7 +60,6 @@ setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
 alias history="history 0"
 
-export EXA_COLORS="*.part=34"
 # aliases
 alias ls="exa --icons --time-style=long-iso"
 alias tree="tree -L 3 -C"
@@ -89,11 +88,12 @@ alias mc="make clean"
 alias python='python3'
 alias pip='pip3'
 alias py="python3 -q"
+alias pdb="python3 -m pdb"
 alias act='source env/bin/activate'
 
 # other aliases
 alias sshuio='ssh -YC jonatahh@login.ifi.uio.no'
-alias uiomount='sshfs -o reconnect,ServerAliveInterval=2 jonatahh@login.ifi.uio.no:. ~/ifilokal/ifilokal'
+alias uiomount='sshfs -o reconnect,ServerAliveInterval=2 uio:. ~/ifilokal/ifilokal'
 alias :q='exit'
 alias c='z' # c is easier to hit
 alias pac='sudo pacman -Syu'
@@ -217,5 +217,5 @@ export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
 
 bindkey -v
 
-catimg -w 100 $HOME/cat.jpg
+catimg -w 100 $XDG_CONFIG_HOME/zsh/cat.jpg
 echo "                Erm, what the flip?"
