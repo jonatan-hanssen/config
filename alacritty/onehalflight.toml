@@ -21,3 +21,5 @@ white = "0xfafafa"
 [colors.primary]
 background = "0xfefefe"
 foreground = "0x383a42"
+
+dim_foreground = "0xaaaaaa"
