@@ -200,6 +200,9 @@ fi
 # -------------------------------------------------------
 
 export PYTHONSTARTUP=$HOME/.config/python/pythonrc
+# https://github.com/python/cpython/issues/118840
+# dumbasses dont want to implement vi mode >:(
+export PYTHON_BASIC_REPL=1
 
 
 export R_LIBS_USER=$HOME/.rlibrary/library
