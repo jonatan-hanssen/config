@@ -219,6 +219,8 @@ gpg-connect-agent updatestartuptty /bye >/dev/null
 export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
 
 bindkey -v
+bindkey "^H" backward-delete-char
+bindkey "^?" backward-delete-char
 
 catimg -w 100 $XDG_CONFIG_HOME/zsh/cat.jpg
 echo "                Erm, what the flip?"
