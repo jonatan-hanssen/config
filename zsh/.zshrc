@@ -117,7 +117,7 @@ alias m="make"
 alias b="bat"
 
 
-alias master='datediff --format="%m %d" now 2025-5-15'
+alias master='datediff --format="%d" now 2025-5-15'
 
 # cd also runs ls
 function cd() {
