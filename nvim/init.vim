@@ -12,10 +12,14 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
+    Plug 'ggandor/leap.nvim'
     Plug 'lervag/vimtex'
     Plug 'ap/vim-css-color'
+    Plug 'stevearc/vim-arduino'
+    " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 lua require('Comment').setup()
+lua require('options')
 
 
 
@@ -28,22 +32,6 @@ luafile $XDG_CONFIG_HOME/nvim/lua.lua
 let g:buftabline_show=1
 let g:pyindent_open_paren=shiftwidth()
 let g:netrw_banner=0
-
-" indents
-set smartindent
-set expandtab
-set breakindent
-set shiftwidth=4
-set tabstop=4
-
-" -------- visuals ----------
-set relativenumber
-set number
-set scrolloff=999
-set cursorline
-set list
-set listchars=lead:·,trail:·,tab:>·
-
 
 " beautiful bespoke light theme
 colorscheme onequarterlight
@@ -94,7 +82,7 @@ set statusline+=\ %{gitbranch#name()}\
 set statusline+=%#LineNr#
 set statusline+=%1*\ %<%F\ %m%r%h%w\ 
 set statusline+=%=
- set statusline+=%#CursorColumn#
+set statusline+=%#CursorColumn#
 set statusline+=\ \[%{&fileencoding?&fileencoding:&encoding}\]
 set statusline+=\ %p%%
 set statusline+=\ %l:%c
@@ -115,10 +103,9 @@ nnoremap <A-k> :m .-2<CR>
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
-nnoremap <C-n> :NvimTreeToggle<CR>
+" nnoremap <C-n> :NvimTreeToggle<CR>
 
 " -------- leader kommandoer -----------
-let mapleader=" "
 
 nnoremap <leader>t :call ColorschemeToggle()<cr>
 " clipboard
@@ -174,6 +161,7 @@ xnoremap K :<C-u>keepjumps normal! gv{<CR>
 
 
 nnoremap } J
+nnoremap { ?
 
 
 " S is cc so pointless. S is for save
@@ -244,6 +232,8 @@ let g:vimtex_doc_enabled=0
 let g:vimtex_imaps_enabled=0
 let g:vimtex_delim_list={}
 let g:vimtex_mappings_enabled=0
+let g:vimtex_matchparen_enabled=0
+let g:vimtex_fold_enabled=0
 
 
 " ------------ COC ---------------- "
@@ -275,6 +265,9 @@ nmap <silent> gd <Plug>(coc-definition)
 
 " Use ? to show documentation in preview window.
 nnoremap <silent> ? :call ShowDocumentation()<CR>
+
+
+nnoremap \ <c-w>w
 
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
@@ -364,6 +357,8 @@ autocmd FileType r nnoremap <leader>r {opng("temp")<esc>}Odev.off()<CR>system("x
 autocmd FileType gdscript map <buffer> <C-b> :w<CR>:exec '!godot --path $(pwd)'<CR><CR>
 autocmd FileType gdscript set noexpandtab
 
+autocmd FileType arduino map <buffer> <C-b> :w<CR>:ArduinoUpload<CR>
+autocmd FileType arduino imap <buffer> <C-b> <esc> :w<CR>:ArduinoUpload<CR>
 
 
 " ------ markdown --------
