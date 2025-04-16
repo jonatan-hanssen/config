@@ -1,0 +1,5 @@
+require('options')
+require('keymaps')
+require('functions')
+require('autocommands')
+require('lazy_init')

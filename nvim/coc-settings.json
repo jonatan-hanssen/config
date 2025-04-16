@@ -1,15 +1,22 @@
 {
-	"suggest.noselect": true,
-	"inlayHint.enable": false,
+    "suggest.noselect": true,
+    "inlayHint.enable": false,
     "r.lsp.diagnostics": false,
-	"python.formatting.provider": "ruff",
-	"coc.preferences.formatOnSaveFiletypes": ["python"],
+    "python.formatting.provider": "ruff",
+    "coc.preferences.formatOnSaveFiletypes": ["python"],
     "languageserver": {
-		"godot": {
-			"host": "127.0.0.1",
-			"filetypes": ["gdscript"],
-			"port": 6005
-		}
+        "godot": {
+            "host": "127.0.0.1",
+            "filetypes": ["gdscript"],
+            "port": 6005
+        },
+        "arduino":{
+            "command":"/home/jona/go/bin/arduino-language-server",
+            "rootPatterns":["*.ino"],
+            "filetypes":["arduino"],
+            "args":["-cli", "/usr/bin/arduino-cli", "-clangd", "/usr/bin/clangd", "-cli-config", "/home/jona/.arduino15/arduino-cli.yaml", "-fqbn", "arduino:avr:uno"],
+            "disabledFeatures":["semanticTokens"]
+        }
     },
     "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.6/clangd_15.0.6/bin/clangd"
 }
