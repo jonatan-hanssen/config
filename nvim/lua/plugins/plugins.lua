@@ -1,6 +1,5 @@
 return {
     { 'numToStr/Comment.nvim' }, -- gc to comment
-    { 'sonph/onehalf', rtp = 'vim' }, -- colorscheme
     { 'itchyny/vim-gitbranch' }, -- git branch in statusline
     { 'kshenoy/vim-signature' }, -- see marks
     { 'folke/tokyonight.nvim' }, -- other colorscheme
@@ -117,11 +116,59 @@ return {
             vim.g.vimtex_compiler_enabled = 0
             vim.g.vimtex_complete_enabled = 0
             vim.g.vimtex_doc_enabled = 0
+            vim.g.vimtex_syntax_enabled = 0
             vim.g.vimtex_imaps_enabled = 0
-            -- vim.g.vimtex_delim_list = {}
             vim.g.vimtex_mappings_enabled = 0
             vim.g.vimtex_matchparen_enabled = 0
             vim.g.vimtex_fold_enabled = 0
         end,
     },
+    {
+        'nvim-treesitter/nvim-treesitter', -- better highlights
+        build = ':TSUpdate',
+        main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+        -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
+        opts = {
+            ensure_installed = { 'bash', 'c', 'diff', 'html', 'latex', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'python' },
+            -- Autoinstall languages that are not installed
+            auto_install = true,
+            highlight = {
+                enable = true,
+                -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
+                --  If you are experiencing weird indenting issues, add the language to
+                --  the list of additional_vim_regex_highlighting and disabled languages for indent.
+                additional_vim_regex_highlighting = false,
+            },
+            indent = { enable = true },
+        },
+    },
+    {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5 && cmake --build build --config Release'
+    },
+    {
+        'nvim-telescope/telescope.nvim', tag = '0.1.8',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        config = function()
+            require('telescope').setup{
+                defaults = {
+                    mappings = {
+                        i = {
+                            ["<C-e>"] = "close",
+                            ["<C-n>"] = "close",
+                        },
+                        n = {
+                            ["<C-e>"] = "close",
+                            ["<C-n>"] = "close",
+                        },
+                    }
+                }
+            }
+
+            local builtin = require('telescope.builtin')
+            vim.keymap.set('n', '<C-n>', builtin.find_files, { desc = 'Telescope find files' })
+            vim.keymap.set('n', '<C-e>', builtin.live_grep, { desc = 'Telescope live grep' })
+        end
+    }
+
 }
