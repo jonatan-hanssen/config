@@ -155,18 +155,18 @@ return {
                     mappings = {
                         i = {
                             ["<C-e>"] = "close",
-                            ["<C-n>"] = "close",
+                            ["<C-i>"] = "close",
                         },
                         n = {
                             ["<C-e>"] = "close",
-                            ["<C-n>"] = "close",
+                            ["<C-i>"] = "close",
                         },
                     }
                 }
             }
 
             local builtin = require('telescope.builtin')
-            vim.keymap.set('n', '<C-n>', builtin.find_files, { desc = 'Telescope find files' })
+            vim.keymap.set('n', '<C-i>', builtin.find_files, { desc = 'Telescope find files' })
             vim.keymap.set('n', '<C-e>', builtin.live_grep, { desc = 'Telescope live grep' })
         end
     }
