@@ -149,11 +149,11 @@ return {
                     python = {"treesitter"},
                     rust   = {"lsp"},
                 },
-                on_attach = function(bufnr)
-                    -- Jump forwards/backwards with '{' and '}'
-                    vim.keymap.set("n", "q", ":AerialClose<CR>", { buffer = bufnr })
-                    vim.keymap.set("n", "<Esc>", ":AerialClose<CR>", { buffer = bufnr })
-                end,
+                keymaps = {
+                    ["<esc>"] = "actions.close",
+                },
+
+                post_jump_cmd = false,
 
                 close_on_select = true,
                 layout = {
