@@ -12,15 +12,16 @@ return {
         'neoclide/coc.nvim', -- lsp
         branch = release,
         config = function()
-            -- Tab completion mapping
-            vim.api.nvim_set_keymap('i', '<TAB>', [[coc#pum#visible() ? coc#pum#next(1) : CheckBackspace() ? "\<Tab>" : coc#refresh()]], {expr = true, silent = true})
-            vim.api.nvim_set_keymap('i', '<S-TAB>', [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], {expr = true, silent = true})
-
             -- Function to check backspace
-            function CheckBackspace()
+            function _G.CheckBackspace()
               local col = vim.fn.col('.') - 1
               return col == 0 or string.match(vim.fn.getline('.'):sub(col, col), '%s') ~= nil
             end
+
+            -- Tab completion mapping
+            vim.api.nvim_set_keymap('i', '<TAB>', [[coc#pum#visible() ? coc#pum#next(1) : v:lua.CheckBackspace() ? "\<Tab>" : coc#refresh()]], {expr = true, silent = true})
+            vim.api.nvim_set_keymap('i', '<S-TAB>', [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], {expr = true, silent = true})
+
 
 
             -- Function to show documentation
@@ -150,25 +151,16 @@ return {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
         dependencies = { 'nvim-lua/plenary.nvim' },
         config = function()
-            require('telescope').setup{
-                defaults = {
-                    mappings = {
-                        i = {
-                            ["<C-e>"] = "close",
-                            ["<C-i>"] = "close",
-                        },
-                        n = {
-                            ["<C-e>"] = "close",
-                            ["<C-i>"] = "close",
-                        },
-                    }
-                }
-            }
-
             local builtin = require('telescope.builtin')
-            vim.keymap.set('n', '<C-i>', builtin.find_files, { desc = 'Telescope find files' })
-            vim.keymap.set('n', '<C-e>', builtin.live_grep, { desc = 'Telescope live grep' })
+            vim.keymap.set('n', '<leader>tf', builtin.find_files, { desc = 'Telescope find files' })
+            vim.keymap.set('n', '<leader>tp', builtin.live_grep, { desc = 'Telescope grep pattern' })
+            vim.keymap.set('n', '<leader>tg', builtin.git_files, { desc = 'Telescope git files' })
+            vim.keymap.set('n', '<leader>ts', builtin.grep_string, { desc = 'Telescope grep string' })
+            vim.keymap.set('n', '<leader>tc', function()
+                builtin.find_files {
+                    cwd = vim.fn.expand('~/.config')
+                }
+            end)
         end
     }
-
 }

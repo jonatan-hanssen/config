@@ -11,7 +11,7 @@ map("n", "<A-k>", ":m .-2<CR>")
 map("v", "<A-j>", ":m '>+1<CR>gv=gv")
 map("v", "<A-k>", ":m '<-2<CR>gv=gv")
 
-map("n", "<leader>t", ":ColorschemeToggle<cr>")
+map("n", "<leader>tt", ":ColorschemeToggle<cr>")
 map("n", "<leader>p", "\"+p")
 map("n", "<leader>y", "\"+y")
 map("n", "<leader>Y", "\"+y$")
