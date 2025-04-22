@@ -69,18 +69,19 @@ end, {})
 
 vim.api.nvim_create_user_command('CompileLatex', function()
     -- Check if Makefile exists in the current directory
+    print('Compiling...')
     local makefile = vim.fn.getcwd() .. '/Makefile'
     if vim.fn.filereadable(makefile) == 1 then
         -- Run make if Makefile exists
         vim.fn.jobstart({'make'}, {
             on_stdout = function(_, data)
                 if data then
-                    print(table.concat(data, '\n'))
+                    -- print(table.concat(data, '\n'))
                 end
             end,
             on_stderr = function(_, data)
                 if data then
-                    print(table.concat(data, '\n'))
+                    -- print(table.concat(data, '\n'))
                 end
             end,
             on_exit = function(_, code)
@@ -97,12 +98,12 @@ vim.api.nvim_create_user_command('CompileLatex', function()
         vim.fn.jobstart({'pdflatex', current_file}, {
             on_stdout = function(_, data)
                 if data then
-                    print(table.concat(data, '\n'))
+                    -- print(table.concat(data, '\n'))
                 end
             end,
             on_stderr = function(_, data)
                 if data then
-                    print(table.concat(data, '\n'))
+                    -- print(table.concat(data, '\n'))
                 end
             end,
             on_exit = function(_, code)
