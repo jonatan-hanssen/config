@@ -60,7 +60,6 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.conceallevel = 0
         vim.api.nvim_buf_set_keymap(0, 'n', '<leader>b', ":!bibtex %<CR>", { noremap = true, silent = true })
         vim.api.nvim_buf_set_keymap(0, 'n', '<leader>v', ":!biber %<CR>", { noremap = true, silent = true })
-        vim.api.nvim_buf_set_keymap(0, 'n', '<CR>', ":VimtexTocToggle<CR>", { noremap = true })
         vim.api.nvim_buf_set_keymap(0, 'n', '<leader>l', ":w<CR>:exec '!pdflatex %'<CR>", { noremap = true, silent = true })
     end,
 })

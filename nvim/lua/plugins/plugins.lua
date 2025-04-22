@@ -102,29 +102,6 @@ return {
         end,
     },
     {
-        'lervag/vimtex', -- latex, only using this for ToC
-        ft = "tex",
-        config = function()
-            vim.g.vimtex_toc_config = {
-                layers = { 'content' },
-                mode = 1,
-                show_help = 0,
-                tocdepth = 2,
-                indent_levels = 1,
-                split_pos = 'full',
-            }
-
-            vim.g.vimtex_compiler_enabled = 0
-            vim.g.vimtex_complete_enabled = 0
-            vim.g.vimtex_doc_enabled = 0
-            vim.g.vimtex_syntax_enabled = 0
-            vim.g.vimtex_imaps_enabled = 0
-            vim.g.vimtex_mappings_enabled = 0
-            vim.g.vimtex_matchparen_enabled = 0
-            vim.g.vimtex_fold_enabled = 0
-        end,
-    },
-    {
         'nvim-treesitter/nvim-treesitter', -- better highlights
         build = ':TSUpdate',
         main = 'nvim-treesitter.configs', -- Sets main module to use for opts
@@ -162,5 +139,31 @@ return {
                 }
             end)
         end
-    }
+    },
+    {
+        'stevearc/aerial.nvim',
+        config = function()
+            require('aerial').setup({
+                backends = {
+                    ['_']  = {"lsp", "treesitter"},
+                    python = {"treesitter"},
+                    rust   = {"lsp"},
+                },
+                on_attach = function(bufnr)
+                    -- Jump forwards/backwards with '{' and '}'
+                    vim.keymap.set("n", "q", ":AerialClose<CR>", { buffer = bufnr })
+                    vim.keymap.set("n", "<Esc>", ":AerialClose<CR>", { buffer = bufnr })
+                end,
+
+                close_on_select = true,
+                layout = {
+                    default_direction = 'prefer_left',
+                    min_width = {50, 0.3},
+                },
+            })
+            -- You probably also want to set a keymap to toggle aerial
+            vim.keymap.set("n", "<CR>", "<cmd>AerialToggle<CR>")
+            opts = {} 
+        end
+    }, -- navigate
 }
