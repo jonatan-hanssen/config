@@ -151,6 +151,8 @@ return {
                 },
                 keymaps = {
                     ["<esc>"] = "actions.close",
+                    ["H"] = "actions.tree_decrease_fold_level",
+                    ["L"] = "actions.tree_increase_fold_level",
                 },
 
                 post_jump_cmd = false,
