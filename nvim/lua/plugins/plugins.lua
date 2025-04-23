@@ -14,8 +14,8 @@ return {
         config = function()
             -- Function to check backspace
             function _G.CheckBackspace()
-              local col = vim.fn.col('.') - 1
-              return col == 0 or string.match(vim.fn.getline('.'):sub(col, col), '%s') ~= nil
+                local col = vim.fn.col('.') - 1
+                return col == 0 or string.match(vim.fn.getline('.'):sub(col, col), '%s') ~= nil
             end
 
             -- Tab completion mapping
@@ -26,11 +26,11 @@ return {
 
             -- Function to show documentation
             function ShowDocumentation()
-              if vim.fn.CocAction('hasProvider', 'hover') then
-                vim.fn.CocActionAsync('doHover')
-              else
-                vim.api.nvim_feedkeys('K', 'in', false)
-              end
+                if vim.fn.CocAction('hasProvider', 'hover') then
+                    vim.fn.CocActionAsync('doHover')
+                else
+                    vim.api.nvim_feedkeys('K', 'in', false)
+                end
             end
 
             -- GoTo code navigation
@@ -61,7 +61,7 @@ return {
                 local api = require "nvim-tree.api"
 
                 local function opts(desc)
-                  return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+                    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
                 end
 
                 -- default mappings
@@ -118,6 +118,13 @@ return {
                 additional_vim_regex_highlighting = false,
             },
             indent = { enable = true },
+            incremental_selection = {
+                enable = true,
+                keymaps = {
+                    node_incremental = "<cr>",
+                    node_decremental = "<backspace>",
+                },
+            },
         },
     },
     {
