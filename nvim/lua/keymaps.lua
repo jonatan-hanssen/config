@@ -29,6 +29,8 @@ map("n", "<leader><BS>", ":noh<CR>")
 -- schmoovement
 vim.keymap.set("n", "J", ":keepjumps normal! }<CR>", { remap = true, silent = true })
 vim.keymap.set("n", "K", ":keepjumps normal! {<CR>", { remap = true, silent = true })
+vim.keymap.set("o", "J", ":keepjumps normal! }<CR>", { remap = true, silent = true })
+vim.keymap.set("o", "K", ":keepjumps normal! {<CR>", { remap = true, silent = true })
 
 map("x", "J", ":<C-u>keepjumps normal! gv}<CR>")
 map("x", "K", ":<C-u>keepjumps normal! gv{<CR>")
