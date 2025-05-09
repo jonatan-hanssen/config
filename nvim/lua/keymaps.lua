@@ -17,6 +17,8 @@ map("n", "<leader>y", "\"+y")
 map("n", "<leader>Y", "\"+y$")
 map("v", "<leader>y", "\"+y")
 
+
+
 map("n", "gp", ":put<CR>")
 vim.keymap.set("n", "<leader>w", ":WordMotionToggle<cr>", { nowait = true})
 map("n", "<BS>", ":NvimTreeToggle<CR>")
