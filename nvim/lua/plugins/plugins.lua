@@ -13,17 +13,8 @@ return {
         config = function()
             vim.keymap.set('n',        's', '<Plug>(leap-anywhere)')
             vim.keymap.set({'x', 'o'}, 's', '<Plug>(leap)')
+            -- require('leap').opts.safe_labels = {}
         end,
-    },
-    {
-        'takac/vim-hardtime', -- force myself to use leap
-        config = function()
-            vim.cmd('HardTimeOn')
-            vim.g.hardtime_maxcount = 2
-            vim.g.hardtime_timeout = 500
-            vim.g.hardtime_motion_with_count_resets = 1
-        end
-
     },
     {
         'neoclide/coc.nvim', -- lsp, still faster than native sadly

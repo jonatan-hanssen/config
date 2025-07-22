@@ -36,6 +36,8 @@ vim.api.nvim_create_user_command('ProseStart', function()
     local opts = { noremap = true, silent = true }
     vim.api.nvim_buf_set_keymap(0, 'n', 'j', 'gj', opts)
     vim.api.nvim_buf_set_keymap(0, 'n', 'k', 'gk', opts)
+    vim.api.nvim_buf_set_keymap(0, 'v', 'j', 'gj', opts)
+    vim.api.nvim_buf_set_keymap(0, 'v', 'k', 'gk', opts)
 end, {})
 
 vim.api.nvim_create_user_command('ProseStop', function()
@@ -43,6 +45,8 @@ vim.api.nvim_create_user_command('ProseStop', function()
     local opts = { noremap = true, silent = true }
     vim.api.nvim_buf_del_keymap(0, 'n', 'j')
     vim.api.nvim_buf_del_keymap(0, 'n', 'k')
+    vim.api.nvim_buf_set_keymap(0, 'v', 'j')
+    vim.api.nvim_buf_set_keymap(0, 'v', 'k')
 end, {})
 
 vim.api.nvim_create_user_command('SynStack', function()
