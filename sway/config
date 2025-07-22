@@ -25,9 +25,14 @@ exec swayidle -w \
          before-sleep 'swaylock'
 ### Key bindings
 bindsym $mod+Return exec $term
-bindsym $mod+x kill
+bindsym $mod+o exec $term
+# bindsym $mod+x kill
+# i is for incinerate
+bindsym $mod+i kill
 # bindsym button2 exec $term
-bindsym $mod+d exec pgrep wofi >/dev/null 2>&1 && killall wofi || wofi -I --show drun
+# bindsym $mod+d exec pgrep wofi >/dev/null 2>&1 && killall wofi || wofi -I --show drun
+# n is for meNu
+bindsym $mod+n exec pgrep wofi >/dev/null 2>&1 && killall wofi || wofi -I --show drun
 bindsym $mod+Shift+d exec wofi --show run
 
 # Drag floating windows by holding down $mod and left mouse button.
@@ -227,7 +232,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+f fullscreen
 
 
-bindsym $mod+z exec $term -e nvim ~/dog.py
+bindsym $mod+z exec imv ~/Documents/keymap.png
 
 # Toggle the current focus between tiling and floating mode
 bindsym $mod+space floating toggle
@@ -256,6 +261,7 @@ bindsym $mod+right exec playerctl next
 bindsym $mod+left exec playerctl previous
 
 
+bindsym $mod+BackSpace input "type:keyboard" xkb_switch_layout next
 # Status Bar:
 
 bar {
@@ -263,10 +269,9 @@ bar {
 }
 
 # input section
-input * {
-	xkb_layout "us"
-	xkb_variant "altgr-intl"
-	pointer_accel 0.5
+input type:keyboard {
+	xkb_layout "colemak_jk_iso,colemak_jk,us"
+	xkb_variant ",,altgr-intl"
 	repeat_delay 300
 	repeat_rate 27
 	xkb_options caps:escape
