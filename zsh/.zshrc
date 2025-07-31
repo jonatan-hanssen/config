@@ -110,14 +110,16 @@ alias d='cd'
 alias f='z'
 alias l='ls'
 alias h='history'
-alias s='ssh'
 alias a='source a'
 alias v='nvim'
 alias m="make"
 alias b="bat"
 
-
-alias master='datediff --format="%d" now 2025-5-15'
+# god tier single char aliases but for colemak homerow
+alias s='z' # s is for search
+alias e='nvim' # e is for edit
+alias t='cd' # t is for to
+alias i='ls' # i is for info
 
 # cd also runs ls
 function cd() {

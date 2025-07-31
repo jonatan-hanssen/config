@@ -7,15 +7,9 @@
 
 ;; define keyboard layout (whitespace doesnt matter)
 (defsrc
-  `    1    2    3    4    5    6    7    8    9    0    -    =    0
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  esc  a    s    d    f    g    h    j    k    l    ;    '    ent
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft        up
-  lctl lmet lalt        bspc       spc            ralt   rctl  left down right
-)
-
-(defalias
-  raise (layer-toggle raiselayer)
+  q    w    e    r    t        y    u    i    o    p
+  a    s    d    f    g        h    j    k    l    ;
+  z    x    c    v    b        n    m
 )
 
 ;; define how keys change in comparison to actual kb layout
@@ -23,18 +17,7 @@
 ;; keycode corresponding to the new character at any position
 
 (deflayer defaultlayer
-  `    1    2    3    4    5    6    7    8    9    0    -    =    0
-  tab  q    w    e    r    t    y    u    i    o    p    ent  ]    \
-  esc  a    s    d    f    g    h    j    k    l    ;    '    ent
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft        up
-  lctl lmet lalt        @raise     spc            ralt   rctl  left down right
-)
-
-;; define keyboard layout when raise key is held
-(deflayer raiselayer
-  _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  `    1    2    3    4    5    6    7    8    9    0    -    =    _
-  ~    !    @    #    $    %    +    =    *   \(   \)   \_    _
-  lsft _    |    \\   [    ]    {    }    ^    &    /    rsft        up
-  lctl lmet lalt       bspc      bspc            ralt    rctl  left down right
+  q    w    f    p    g        b    l    u    y    ;
+  a    r    s    t    d        h    n    e    i    o
+  z    x    c    j    v        m    k
 )

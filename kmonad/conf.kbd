@@ -11,7 +11,7 @@
   `    1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   caps a    s    d    f    g    h    j    k    l    ;    '    ent
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft        up
+  lsft nubs z    x  c  v  b    n    m    ,    .    /    rsft        up
   lctl lmet lalt           spc            ralt   rctl          left down right
 )
 
@@ -26,10 +26,10 @@
 (deflayer defaultlayer
   esc bru  brdn KeyMute   vold volu
   `    1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  esc  a    s    d    f    g    h    j    k    l    ;    '    ent
-  lsft z    x    c    v    b    n    m    ,    .    /    lmet        up
-  lctl lmet @raise           spc           ralt  lmet          left down right
+  tab  q    w    f    p    g    b    l    u    y    ;    [    ]    \
+  esc  a    r    s    t    d    h    n    e    i    o    '    ent
+  lsft z    x    c    j  v @raise  m    k    ,    .    /    rsft        up
+  lctl lmet lalt           spc           ralt  lmet          left down right
 )
 
 ;; define keyboard layout when raise key is held
@@ -38,6 +38,6 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   `    1    2    3    4    5    6    7    8    9    0    %    =    _
   ~    [    ]    +    =    #    *   \_    -   \(   \)    $    _
-  lsft _    |    \\   !    @    {    }    ^    &    /    lmet        up
+  lsft _    |    \\   !    @  _ {    }    ^    &    /    lmet        up
   lctl lmet lsft             spc           ralt  lmet           left down right
 )

@@ -270,8 +270,9 @@ bar {
 
 # input section
 input type:keyboard {
-	xkb_layout "colemak_jk_iso,colemak_jk,us"
-	xkb_variant ",,altgr-intl"
+	# xkb_layout "colemak_jk_iso,colemak_jk,us,no"
+	xkb_layout "colemak_jk_iso,no"
+	# xkb_variant ",altgr-intl,"
 	repeat_delay 300
 	repeat_rate 27
 	xkb_options caps:escape

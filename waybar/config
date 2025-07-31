@@ -24,6 +24,7 @@
         "cpu",
         "temperature",
         "battery",
+        "sway/language",
 		"pulseaudio",
         "clock#date",
         "clock#time"
@@ -33,6 +34,11 @@
     // -------------------------------------------------------------------------
     // Modules
     // -------------------------------------------------------------------------
+
+    "sway/language": {
+        "format": "{}",
+        "on-click": "swaymsg input type:keyboard xkb_switch_layout next",
+    },
 
     "battery": {
         "interval": 10,
