@@ -57,7 +57,7 @@ map("n", "U", "<C-r>")
 map("n", "H", ":bprev<CR>")
 map("n", "L", ":bnext<CR>")
 -- replace alt som ble soekt paa sist
-map("n", "<leader>s", ":%s///g<Left><Left>", "Replace last searched")
+vim.keymap.set("n", "<leader>s", ":%s///g<Left><Left>", { desc = "Replace last searched" })
 -- bedre shift yank
 vim.keymap.set("n", "Y", "y$", { remap = true})
 
