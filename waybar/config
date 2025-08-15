@@ -47,15 +47,15 @@
             "critical": 10
         },
         // Connected to AC
-        "format": "<span font=\"Font Awesome 6 Free Solid\"></span>  {icon}  {capacity}%", // Icon: bolt
+        "format": "<span font=\"Font Awesome 7 Free Solid\"></span>  {icon}  {capacity}%", // Icon: bolt
         // Not connected to AC
         "format-discharging": "{icon}  {capacity}%",
         "format-icons": [
-            "<span font=\"Font Awesome 6 Free Solid\"></span>", // Icon: battery-full
-            "<span font=\"Font Awesome 6 Free Solid\"></span>", // Icon: battery-three-quarters
-            "<span font=\"Font Awesome 6 Free Solid\"></span>", // Icon: battery-half
-            "<span font=\"Font Awesome 6 Free Solid\"></span>", // Icon: battery-quarter
-            "<span font=\"Font Awesome 6 Free Solid\"></span>"  // Icon: battery-empty
+            "<span font=\"Font Awesome 7 Free Solid\"></span>", // Icon: battery-full
+            "<span font=\"Font Awesome 7 Free Solid\"></span>", // Icon: battery-three-quarters
+            "<span font=\"Font Awesome 7 Free Solid\"></span>", // Icon: battery-half
+            "<span font=\"Font Awesome 7 Free Solid\"></span>", // Icon: battery-quarter
+            "<span font=\"Font Awesome 7 Free Solid\"></span>"  // Icon: battery-empty
         ],
         "tooltip": true
     },
@@ -69,14 +69,14 @@
 
     "clock#date": {
       "interval": 10,
-      "format": "<span font=\"Font Awesome 6 Free Solid\"></span>  {:%e %b %Y}", // Icon: calendar-alt
+      "format": "<span font=\"Font Awesome 7 Free Solid\"></span>  {:%e %b %Y}", // Icon: calendar-alt
       "tooltip-format": "{:%e %B %Y, Week %W}",
         "on-click": "alacritty --hold -e cal -3 -wm"
     },
 
     "cpu": {
         "interval": 5,
-        "format": "<span font=\"Font Awesome 6 Free Solid\"></span>  {usage}%", // Icon: microchip
+        "format": "<span font=\"Font Awesome 7 Free Solid\"></span>  {usage}%", // Icon: microchip
         "states": {
           "warning": 70,
           "critical": 90
@@ -86,7 +86,7 @@
 
     "memory": {
         "interval": 5,
-        "format": "<span font=\"Font Awesome 6 Free Solid\"></span>  {}%", // Icon: memory
+        "format": "<span font=\"Font Awesome 7 Free Solid\"></span>  {}%", // Icon: memory
         "states": {
             "warning": 70,
             "critical": 90
@@ -97,7 +97,7 @@
     "network": {
         "interval": 5,
         "format-wifi": "{essid}", // Icon: wifi
-        "format-ethernet": "<span font=\"Font Awesome 6 Free Solid\"></span>  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
+        "format-ethernet": "<span font=\"Font Awesome 7 Free Solid\"></span>  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
         "format-disconnected": "Disconnected",
         "tooltip-format": "Strength: {signalStrength}%",
         "on-click": "alacritty -e nmtui"
@@ -116,30 +116,30 @@
         "disable-scroll": true,
         "format": "{name}",
         "format-icons": {
-            "1:www": "<span font=\"Font Awesome 6 Free Solid\">龜</span>", // Icon: firefox-browser
-            "2:mail": "<span font=\"Font Awesome 6 Free Solid\"></span>", // Icon: mail
-            "3:editor": "<span font=\"Font Awesome 6 Free Solid\"></span>", // Icon: code
-            "4:terminals": "<span font=\"Font Awesome 6 Free Solid\"></span>", // Icon: terminal
-            "5:portal": "<span font=\"Font Awesome 6 Free Solid\"></span>", // Icon: terminal
-            "urgent": "<span font=\"Font Awesome 6 Free Solid\"></span>",
-            "focused": "<span font=\"Font Awesome 6 Free Solid\"></span>",
-            "default": "<span font=\"Font Awesome 6 Free Solid\"></span>"
+            "1:www": "<span font=\"Font Awesome 7 Free Solid\">龜</span>", // Icon: firefox-browser
+            "2:mail": "<span font=\"Font Awesome 7 Free Solid\"></span>", // Icon: mail
+            "3:editor": "<span font=\"Font Awesome 7 Free Solid\"></span>", // Icon: code
+            "4:terminals": "<span font=\"Font Awesome 7 Free Solid\"></span>", // Icon: terminal
+            "5:portal": "<span font=\"Font Awesome 7 Free Solid\"></span>", // Icon: terminal
+            "urgent": "<span font=\"Font Awesome 7 Free Solid\"></span>",
+            "focused": "<span font=\"Font Awesome 7 Free Solid\"></span>",
+            "default": "<span font=\"Font Awesome 7 Free Solid\"></span>"
         }
     },
 
     "pulseaudio": {
         "scroll-step": 1,
         "format": "{icon}  {volume}%",
-        "format-bluetooth": "{icon}  {volume}%<span font=\"Font Awesome 6 Free Solid\"></span>",
-        "format-muted": "<span font=\"Font Awesome 6 Free Solid\"></span>",
+        "format-bluetooth": "{icon}  {volume}%<span font=\"Font Awesome 7 Free Solid\"></span>",
+        "format-muted": "<span font=\"Font Awesome 7 Free Solid\"></span>",
         "format-icons": {
-            "headphones": "<span font=\"Font Awesome 6 Free Solid\"></span>",
-            "handsfree": "<span font=\"Font Awesome 6 Free Solid\"></span>",
-            "headset": "<span font=\"Font Awesome 6 Free Solid\"></span>",
-            "phone": "<span font=\"Font Awesome 6 Free Solid\"></span>",
-            "portable": "<span font=\"Font Awesome 6 Free Solid\"></span>",
-            "car": "<span font=\"Font Awesome 6 Free Solid\"></span>",
-            "default": ["<span font=\"Font Awesome 6 Free Solid\"></span>", "<span font=\"Font Awesome 6 Free Solid\"></span>"]
+            "headphones": "<span font=\"Font Awesome 7 Free Solid\"></span>",
+            "handsfree": "<span font=\"Font Awesome 7 Free Solid\"></span>",
+            "headset": "<span font=\"Font Awesome 7 Free Solid\"></span>",
+            "phone": "<span font=\"Font Awesome 7 Free Solid\"></span>",
+            "portable": "<span font=\"Font Awesome 7 Free Solid\"></span>",
+            "car": "<span font=\"Font Awesome 7 Free Solid\"></span>",
+            "default": ["<span font=\"Font Awesome 7 Free Solid\"></span>", "<span font=\"Font Awesome 7 Free Solid\"></span>"]
         },
         "on-click": "pavucontrol"
     },
@@ -149,11 +149,11 @@
       "interval": 5,
       "format": "{icon}  {temperatureC}°C",
       "format-icons": [
-          "<span font=\"Font Awesome 6 Free Solid\"></span>", // Icon: temperature-empty
-          "<span font=\"Font Awesome 6 Free Solid\"></span>", // Icon: temperature-quarter
-          "<span font=\"Font Awesome 6 Free Solid\"></span>", // Icon: temperature-half
-          "<span font=\"Font Awesome 6 Free Solid\"></span>", // Icon: temperature-three-quarters
-          "<span font=\"Font Awesome 6 Free Solid\"></span>"  // Icon: temperature-full
+          "<span font=\"Font Awesome 7 Free Solid\"></span>", // Icon: temperature-empty
+          "<span font=\"Font Awesome 7 Free Solid\"></span>", // Icon: temperature-quarter
+          "<span font=\"Font Awesome 7 Free Solid\"></span>", // Icon: temperature-half
+          "<span font=\"Font Awesome 7 Free Solid\"></span>", // Icon: temperature-three-quarters
+          "<span font=\"Font Awesome 7 Free Solid\"></span>"  // Icon: temperature-full
       ],
       "tooltip": true
     },
