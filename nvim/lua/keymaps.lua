@@ -1,5 +1,9 @@
-local function map(m, k, v)
-	vim.keymap.set(m, k, v, { silent = true })
+local function map(m, k, v, desc)
+    local opts = { silent = true }
+    if desc then
+        opts.desc = desc
+    end
+    vim.keymap.set(m, k, v, opts)
 end
 
 -- Do an operator on every line in the file (dag, yag, =ag)
@@ -11,20 +15,20 @@ map("n", "<A-k>", ":m .-2<CR>")
 map("v", "<A-j>", ":m '>+1<CR>gv=gv")
 map("v", "<A-k>", ":m '<-2<CR>gv=gv")
 
-map("n", "<leader>tt", ":ColorschemeToggle<cr>")
-map("n", "<leader>p", "\"+p")
-map("n", "<leader>y", "\"+y")
-map("n", "<leader>Y", "\"+y$")
+map("n", "<leader>k", ":ColorschemeToggle<cr>", "Toggle to darK colorscheme")
+map("n", "<leader>p", "\"+p", "Paste from clipboard")
+map("n", "<leader>y", "\"+y", "Yank to clipboard")
+map("n", "<leader>Y", "\"+y$", "Yank to end of line to clipboard")
 map("v", "<leader>y", "\"+y")
+
+map("n", "E", "b")
 
 
 
 map("n", "gp", ":put<CR>")
-vim.keymap.set("n", "<leader>w", ":WordMotionToggle<cr>", { nowait = true})
-map("n", "<BS>", ":NvimTreeToggle<CR>")
 
 -- remove ighlight for last searched
-map("n", "<leader><BS>", ":noh<CR>")
+map("n", "<leader><BS>", ":noh<CR>", "Remove highlights")
 
 -- schmoovement
 vim.keymap.set("n", "J", ":keepjumps normal! }<CR>", { remap = true, silent = true })
@@ -52,20 +56,17 @@ map("n", "U", "<C-r>")
 -- move mellom tabs
 map("n", "H", ":bprev<CR>")
 map("n", "L", ":bnext<CR>")
--- aapne tabs og splits
-map("n", "<leader>v", ":vsplit")
 -- replace alt som ble soekt paa sist
-vim.keymap.set("n", "<leader>s", ":%s///g<Left><Left>")
-vim.keymap.set("v", "<leader>s", ":s///g<Left><Left>")
+map("n", "<leader>s", ":%s///g<Left><Left>", "Replace last searched")
 -- bedre shift yank
 vim.keymap.set("n", "Y", "y$", { remap = true})
 
 -- format python
 -- make print(x) into print(f"{x=}")
-map("n", "<leader>f", "0f(af'{<ESC>$i=}'<ESC>")
-map("n", "<leader>m", ":delmarks!<CR>")
-map("n", "<leader>z", ":!zathura %<.pdf & <CR><CR>")
-map("n", "<leader>d", ":bp<BAR>bd#<CR>")
-vim.keymap.set("n", "<leader>c", ":colorscheme ")
+map("n", "<leader>f", "0f(af'{<ESC>$i=}'<ESC>", "Make f-string")
+map("n", "<leader>m", ":delmarks!<CR>", "Delete marks")
+map("n", "<leader>z", ":!zathura %<.pdf & <CR><CR>", "Open associated pdf")
+map("n", "<leader>d", ":bp<BAR>bd#<CR>", "Delete current buffer")
+-- vim.keymap.set("n", "<leader>c", ":colorscheme ")
 
-map("n", "<leader>h", ":SynStack<CR>")
+map("n", "<leader>h", ":SynStack<CR>", "Show regex highlight group")

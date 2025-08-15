@@ -3,13 +3,40 @@ return {
     { 'itchyny/vim-gitbranch' }, -- git branch in statusline
     { 'kshenoy/vim-signature' }, -- see marks
     { 'folke/tokyonight.nvim' }, -- other colorscheme
-    { 'chaoren/vim-wordmotion' }, -- CamelCase and snake_case word boundaries
     { 'tpope/vim-surround' }, -- surround motions
     { 'tpope/vim-repeat' }, -- repeat vim-surround
     { 'ap/vim-css-color' }, -- see colors in the editor
     { 'stevearc/vim-arduino', ft = { 'arduino' } }, -- arduino builds
     {
-        'ggandor/leap.nvim',
+        'chaoren/vim-wordmotion', -- CamelCase and snake_case word boundaries
+        config = function()
+            vim.g.wordmotion_nomap = 1
+            vim.g.wordmotion_on = 0
+
+            vim.api.nvim_create_user_command('WordMotionToggle', function()
+                if vim.g.wordmotion_on == 1 then
+                    print("WordMotion off")
+                    vim.g.wordmotion_on = 0
+                    vim.api.nvim_del_keymap('n', 'w')
+                    vim.api.nvim_del_keymap('n', 'b')
+                    vim.api.nvim_del_keymap('n', 'e')
+                    -- vim.api.nvim_del_keymap('n', 'iw')
+                    -- vim.api.nvim_del_keymap('n', 'aw')
+                else
+                    print("WordMotion on")
+                    vim.g.wordmotion_nomap = 0
+                    vim.g.wordmotion_on = 1
+
+                    -- Assuming you have the wordmotion functionality available
+                    vim.cmd([[call wordmotion#reload()]])
+                end
+            end, {})
+
+            vim.keymap.set("n", "<leader>w", ":WordMotionToggle<cr>", { nowait = true, desc = "Toggle WordMotion" })
+        end,
+    },
+    {
+        'ggandor/leap.nvim', -- go to anywhere with 's'
         config = function()
             vim.keymap.set('n',        's', '<Plug>(leap-anywhere)')
             vim.keymap.set({'x', 'o'}, 's', '<Plug>(leap)')
@@ -42,10 +69,10 @@ return {
             end
 
             -- GoTo code navigation
-            vim.api.nvim_set_keymap('n', 'gd', '<Plug>(coc-definition)', {silent = true})
+            vim.api.nvim_set_keymap('n', 'gd', '<Plug>(coc-definition)', {silent = true, desc = "Go to definition"})
 
             -- Toggle documentation preview
-            vim.api.nvim_set_keymap('n', '?', ':lua ShowDocumentation()<CR>', {silent = true})
+            vim.api.nvim_set_keymap('n', '?', ':lua ShowDocumentation()<CR>', {silent = true, desc = "Open documentation"})
         end,
     },
     {
@@ -78,7 +105,9 @@ return {
                 -- custom mappings
                 vim.keymap.set('n', '?', api.tree.toggle_help, opts("Help"))
                 vim.keymap.set('n', '<CR>', api.node.open.edit, opts("Open"))
+                vim.keymap.set('n', '<ESC>', api.tree.close, opts("Close"))
             end
+            vim.keymap.set("n", "<BS>", ":NvimTreeToggle<CR>", { silent = true, desc = "Open nvim-tree" })
 
             vim.api.nvim_create_autocmd("QuitPre", {
                 callback = function()
@@ -110,12 +139,146 @@ return {
         end,
     },
     {
-        'nvim-treesitter/nvim-treesitter', -- better highlights
+        'github/copilot.vim', -- LLM suggestions
+        config = function()
+            vim.keymap.set('i', '<C-N>', 'copilot#Accept("\\<CR>")', {
+                expr = true,
+                replace_keycodes = false
+            })
+            vim.g.copilot_no_tab_map = true
+
+
+            vim.cmd([[Copilot disable]])
+            vim.g.copilot_is_disabled = 1
+
+            vim.api.nvim_create_user_command('CopilotToggle', function()
+                if vim.g.copilot_is_disabled == 1 then
+                    vim.g.copilot_is_disabled = 0
+                    vim.cmd([[Copilot enable]])
+                    print("Copilot on")
+                else
+                    vim.g.copilot_is_disabled = 1
+                    vim.cmd([[Copilot disable]])
+                    print("Copilot off")
+                end
+            end, {})
+
+            vim.keymap.set("n", "<leader>c", ":CopilotToggle<cr>", { silent = true, noremap = true, desc = "Toggle Copilot" })
+        end,
+    },
+    {
+        'michaelb/sniprun', -- run parts of code, replaces notebooks
+        build = 'sh install.sh',
+        config = function()
+            require('sniprun').setup({
+                display = { "Api" },
+                selected_interpreters = { 'Python3_fifo' },
+                repl_enable = {'Python3_fifo'},
+                interpreter_options = {
+                    Python3_fifo = {
+                        venv = {".venv", "../.venv"},
+                    }
+                },
+            })
+
+
+            function SelectCommandBlock()
+                local api = vim.api
+                local cmd_pattern = "^# COMMAND +%-%-+%s*$"  -- Adjust if your pattern is slightly different
+
+                local cur_line = api.nvim_win_get_cursor(0)[1] -- Current line (1-indexed)
+                local lines = api.nvim_buf_get_lines(0, 0, -1, false)
+                local total_lines = #lines
+
+                local start_line = 1
+                local end_line = total_lines
+
+                -- Search upward for previous '# COMMAND ----------'
+                for i = cur_line - 1, 1, -1 do
+                    if lines[i]:match(cmd_pattern) then
+                        start_line = i + 1 -- Start after the command line
+                        break
+                    end
+                end
+
+                -- Search downward for next '# COMMAND ----------'
+                for i = cur_line, total_lines do
+                    if lines[i]:match(cmd_pattern) then
+                        end_line = i - 1 -- End before the command line
+                        break
+                    end
+                end
+
+                -- If cursor is on a '# COMMAND ----------' line, start from the next line
+                if lines[cur_line]:match(cmd_pattern) then
+                    start_line = cur_line + 1
+                    -- Optionally, adjust end_line to match new range
+                    for i = cur_line + 1, total_lines do
+                        if lines[i]:match(cmd_pattern) then
+                            end_line = i - 1
+                            break
+                        end
+                    end
+                end
+
+                -- Clamp values
+                if start_line > total_lines then start_line = total_lines end
+                if end_line > total_lines then end_line = total_lines end
+                if start_line < 1 then start_line = 1 end
+                if end_line < start_line then end_line = start_line end
+
+                require'sniprun.api'.run_range(start_line, end_line)
+
+            end
+
+            vim.keymap.set('v', '<leader>r', '<Plug>SnipRun', {silent = true})
+            vim.keymap.set('n', '<leader>r', '<Plug>SnipRun', {silent = true})
+            vim.keymap.set('n', '<leader>a', function() SelectCommandBlock() end, {silent = true, desc = "Run command block"})
+
+
+            local sa = require('sniprun.api')
+
+            -- Listener that writes output to a file
+            local file_writer_listener = function(d)
+                local home = os.getenv("HOME") or "~"
+                local filepath = home .. "/.local/share/nvim/sniprun_output"
+                local file = io.open(filepath, "a")  -- append mode
+
+                if file then
+                    file:write("Status: " .. (d.status or "unknown") .. "\n")
+                    file:write("Message:\n" .. (d.message or "") .. "\n")
+                    file:write("----------\n")
+                    file:close()
+                else
+                    print("Failed to open file for writing SnipRun output.")
+                end
+            end
+
+            -- Register the listener
+            sa.register_listener(file_writer_listener)
+
+        end
+    },
+    {
+        "folke/which-key.nvim", -- show keymap hints
+        event = "VeryLazy",
+        opts = {
+            triggers = {
+                { "<leader>", mode = { "n" } },
+                { "g", mode = { "n" } },
+            },
+            layout = {
+                width = { min = 20, max = 60 }, -- min and max width of the columns
+            },
+        },
+    },
+    {
+        'nvim-treesitter/nvim-treesitter', -- treesitter configuration
         build = ':TSUpdate',
         main = 'nvim-treesitter.configs', -- Sets main module to use for opts
         -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
         opts = {
-            ensure_installed = { 'bash', 'c', 'diff', 'html', 'latex', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'python' },
+            ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'python' },
             -- Autoinstall languages that are not installed
             auto_install = true,
             highlight = {
@@ -137,14 +300,14 @@ return {
     },
     {
         'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5 && cmake --build build --config Release'
+        build = 'make'
     },
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
         dependencies = { 'nvim-lua/plenary.nvim' },
         config = function()
             local builtin = require('telescope.builtin')
-            vim.keymap.set('n', '<leader>tf', builtin.find_files, { desc = 'Telescope find files' })
+            vim.keymap.set('n', '<leader>tt', builtin.find_files, { desc = 'Telescope find files' })
             vim.keymap.set('n', '<leader>tp', builtin.live_grep, { desc = 'Telescope grep pattern' })
             vim.keymap.set('n', '<leader>tg', builtin.git_files, { desc = 'Telescope git files' })
             vim.keymap.set('n', '<leader>ts', builtin.grep_string, { desc = 'Telescope grep string' })
@@ -182,14 +345,7 @@ return {
             vim.keymap.set("n", "<CR>", "<cmd>AerialToggle<CR>")
             opts = {} 
         end
-    }, -- navigate
-    {
-        'mbbill/undotree',
-        config = function()
-            vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
-        end
-    }, -- see colors in the editor
-
+    },
     -- {
     --     'neovim/nvim-lspconfig',
     --     config = function()

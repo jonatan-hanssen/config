@@ -1,25 +1,3 @@
-vim.g.wordmotion_nomap = 1
-vim.g.wordmotion_on = 0
-
-vim.api.nvim_create_user_command('WordMotionToggle', function()
-    if vim.g.wordmotion_on == 1 then
-        print("WordMotion off")
-        vim.g.wordmotion_on = 0
-        vim.api.nvim_del_keymap('n', 'w')
-        vim.api.nvim_del_keymap('n', 'b')
-        vim.api.nvim_del_keymap('n', 'e')
-        -- vim.api.nvim_del_keymap('n', 'iw')
-        -- vim.api.nvim_del_keymap('n', 'aw')
-    else
-        print("WordMotion on")
-        vim.g.wordmotion_nomap = 0
-        vim.g.wordmotion_on = 1
-
-        -- Assuming you have the wordmotion functionality available
-        vim.cmd([[call wordmotion#reload()]])
-    end
-end, {})
-
 vim.g.darkmode = 0
 vim.api.nvim_create_user_command('ColorschemeToggle', function()
     if vim.g.darkmode == 1 then
