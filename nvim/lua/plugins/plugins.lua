@@ -2,13 +2,14 @@ return {
     { 'numToStr/Comment.nvim' }, -- gc to comment
     { 'itchyny/vim-gitbranch' }, -- git branch in statusline
     { 'kshenoy/vim-signature' }, -- see marks
-    { 'folke/tokyonight.nvim' }, -- other colorscheme
     { 'tpope/vim-surround' }, -- surround motions
     { 'tpope/vim-repeat' }, -- repeat vim-surround
     { 'ap/vim-css-color' }, -- see colors in the editor
-    { 'stevearc/vim-arduino', ft = { 'arduino' } }, -- arduino builds
+    { 'stevearc/vim-arduino', ft = 'arduino' }, -- arduino builds
+    { 'folke/tokyonight.nvim', lazy = true }, -- other colorscheme
     {
         'chaoren/vim-wordmotion', -- CamelCase and snake_case word boundaries
+        keys = "<leader>w",
         config = function()
             vim.g.wordmotion_nomap = 1
             vim.g.wordmotion_on = 0
@@ -91,6 +92,7 @@ return {
     },
     {
         'nvim-tree/nvim-tree.lua', -- file view
+        keys = "<BS>",
         config = function()
             local function my_on_attach(bufnr)
                 local api = require "nvim-tree.api"
@@ -140,11 +142,8 @@ return {
     },
     {
         'github/copilot.vim', -- LLM suggestions
+        keys = "<leader>c",
         config = function()
-            vim.keymap.set('i', '<C-N>', 'copilot#Accept("\\<CR>")', {
-                expr = true,
-                replace_keycodes = false
-            })
             vim.g.copilot_no_tab_map = true
 
 
@@ -155,6 +154,10 @@ return {
                 if vim.g.copilot_is_disabled == 1 then
                     vim.g.copilot_is_disabled = 0
                     vim.cmd([[Copilot enable]])
+                    vim.keymap.set('i', '<C-N>', 'copilot#Accept("\\<CR>")', {
+                        expr = true,
+                        replace_keycodes = false
+                    })
                     print("Copilot on")
                 else
                     vim.g.copilot_is_disabled = 1
@@ -169,6 +172,11 @@ return {
     {
         'michaelb/sniprun', -- run parts of code, replaces notebooks
         build = 'sh install.sh',
+        keys = {
+            {"<leader>r"},
+            {"<leader>r", mode = "v"},
+            {"<CR>"},
+        },
         config = function()
             require('sniprun').setup({
                 display = { "Api" },
@@ -233,7 +241,7 @@ return {
 
             vim.keymap.set('v', '<leader>r', '<Plug>SnipRun', {silent = true})
             vim.keymap.set('n', '<leader>r', '<Plug>SnipRun', {silent = true})
-            vim.keymap.set('n', '<leader>a', function() SelectCommandBlock() end, {silent = true, desc = "Run command block"})
+            vim.keymap.set('n', '<CR>', function() SelectCommandBlock() end, {silent = true, desc = "Run command block"})
 
 
             local sa = require('sniprun.api')
@@ -261,7 +269,6 @@ return {
     },
     {
         "folke/which-key.nvim", -- show keymap hints
-        event = "VeryLazy",
         opts = {
             triggers = {
                 { "<leader>", mode = { "n" } },
@@ -299,13 +306,18 @@ return {
         },
     },
     {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'make'
-    },
-    {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
-        dependencies = { 'nvim-lua/plenary.nvim' },
+        keys = "<leader>t",
+        dependencies = {
+            { 'nvim-lua/plenary.nvim' },
+            {
+                'nvim-telescope/telescope-fzf-native.nvim',
+                build = 'make'
+            },
+        },
         config = function()
+            require('telescope').load_extension('fzf')
+
             local builtin = require('telescope.builtin')
             vim.keymap.set('n', '<leader>tt', builtin.find_files, { desc = 'Telescope find files' })
             vim.keymap.set('n', '<leader>tp', builtin.live_grep, { desc = 'Telescope grep pattern' })
@@ -320,6 +332,7 @@ return {
     },
     {
         'stevearc/aerial.nvim',
+        keys = "<leader>a",
         config = function()
             require('aerial').setup({
                 backends = {
@@ -342,7 +355,7 @@ return {
                 },
             })
             -- You probably also want to set a keymap to toggle aerial
-            vim.keymap.set("n", "<CR>", "<cmd>AerialToggle<CR>")
+            vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle<CR>")
             opts = {} 
         end
     },
@@ -380,5 +393,4 @@ return {
     --         })
     --     end
     -- }, -- lsp defaults
-
 }
