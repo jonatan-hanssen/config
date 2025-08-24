@@ -9,14 +9,14 @@ return {
     { 'folke/tokyonight.nvim', lazy = true }, -- other colorscheme
     {
         'chaoren/vim-wordmotion', -- CamelCase and snake_case word boundaries
-        keys = "<leader>w",
+        keys = '<leader>w',
         config = function()
             vim.g.wordmotion_nomap = 1
             vim.g.wordmotion_on = 0
 
             vim.api.nvim_create_user_command('WordMotionToggle', function()
                 if vim.g.wordmotion_on == 1 then
-                    print("WordMotion off")
+                    print('WordMotion off')
                     vim.g.wordmotion_on = 0
                     vim.api.nvim_del_keymap('n', 'w')
                     vim.api.nvim_del_keymap('n', 'b')
@@ -24,7 +24,7 @@ return {
                     -- vim.api.nvim_del_keymap('n', 'iw')
                     -- vim.api.nvim_del_keymap('n', 'aw')
                 else
-                    print("WordMotion on")
+                    print('WordMotion on')
                     vim.g.wordmotion_nomap = 0
                     vim.g.wordmotion_on = 1
 
@@ -33,7 +33,7 @@ return {
                 end
             end, {})
 
-            vim.keymap.set("n", "<leader>w", ":WordMotionToggle<cr>", { nowait = true, desc = "Toggle WordMotion" })
+            vim.keymap.set('n', '<leader>w', ':WordMotionToggle<cr>', { nowait = true, desc = 'Toggle WordMotion' })
         end,
     },
     {
@@ -55,8 +55,8 @@ return {
             end
 
             -- Tab completion mapping
-            vim.api.nvim_set_keymap('i', '<TAB>', [[coc#pum#visible() ? coc#pum#next(1) : v:lua.CheckBackspace() ? "\<Tab>" : coc#refresh()]], {expr = true, silent = true})
-            vim.api.nvim_set_keymap('i', '<S-TAB>', [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], {expr = true, silent = true})
+            vim.api.nvim_set_keymap('i', '<TAB>', [[coc#pum#visible() ? coc#pum#next(1) : v:lua.CheckBackspace() ? '\<Tab>' : coc#refresh()]], {expr = true, silent = true})
+            vim.api.nvim_set_keymap('i', '<S-TAB>', [[coc#pum#visible() ? coc#pum#prev(1) : '\<C-h>']], {expr = true, silent = true})
 
 
 
@@ -70,15 +70,15 @@ return {
             end
 
             -- GoTo code navigation
-            vim.api.nvim_set_keymap('n', 'gd', '<Plug>(coc-definition)', {silent = true, desc = "Go to definition"})
+            vim.api.nvim_set_keymap('n', 'gd', '<Plug>(coc-definition)', {silent = true, desc = 'Go to definition'})
 
             -- Toggle documentation preview
-            vim.api.nvim_set_keymap('n', '?', ':lua ShowDocumentation()<CR>', {silent = true, desc = "Open documentation"})
+            vim.api.nvim_set_keymap('n', '?', ':lua ShowDocumentation()<CR>', {silent = true, desc = 'Open documentation'})
         end,
     },
     {
         'vimwiki/vimwiki', -- wikis
-        event = { "BufEnter *.wiki", "BufRead *.wiki" },
+        event = { 'BufEnter *.wiki', 'BufRead *.wiki' },
         config = function()
             vim.g.vimwiki_ext2syntax = {}
             vim.g.vimwiki_key_mappings = { global = 0 }
@@ -92,32 +92,32 @@ return {
     },
     {
         'nvim-tree/nvim-tree.lua', -- file view
-        keys = "<BS>",
+        keys = '<BS>',
         config = function()
             local function my_on_attach(bufnr)
-                local api = require "nvim-tree.api"
+                local api = require 'nvim-tree.api'
 
                 local function opts(desc)
-                    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+                    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
                 end
 
                 -- default mappings
                 -- api.config.mappings.default_on_attach(bufnr)
 
                 -- custom mappings
-                vim.keymap.set('n', '?', api.tree.toggle_help, opts("Help"))
-                vim.keymap.set('n', '<CR>', api.node.open.edit, opts("Open"))
-                vim.keymap.set('n', '<ESC>', api.tree.close, opts("Close"))
+                vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
+                vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))
+                vim.keymap.set('n', '<ESC>', api.tree.close, opts('Close'))
             end
-            vim.keymap.set("n", "<BS>", ":NvimTreeToggle<CR>", { silent = true, desc = "Open nvim-tree" })
+            vim.keymap.set('n', '<BS>', ':NvimTreeToggle<CR>', { silent = true, desc = 'Open nvim-tree' })
 
-            vim.api.nvim_create_autocmd("QuitPre", {
+            vim.api.nvim_create_autocmd('QuitPre', {
                 callback = function()
                     local invalid_win = {}
                     local wins = vim.api.nvim_list_wins()
                     for _, w in ipairs(wins) do
                         local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(w))
-                        if bufname:match("NvimTree_") ~= nil then
+                        if bufname:match('NvimTree_') ~= nil then
                             table.insert(invalid_win, w)
                         end
                     end
@@ -130,7 +130,7 @@ return {
 
 
             -- pass to setup along with your other options
-            require("nvim-tree").setup {
+            require('nvim-tree').setup {
                 on_attach = my_on_attach,
                 disable_netrw = False,
                 hijack_netrw = True,
@@ -142,7 +142,7 @@ return {
     },
     {
         'github/copilot.vim', -- LLM suggestions
-        keys = "<leader>c",
+        keys = '<leader>c',
         config = function()
             vim.g.copilot_no_tab_map = true
 
@@ -158,33 +158,33 @@ return {
                         expr = true,
                         replace_keycodes = false
                     })
-                    print("Copilot on")
+                    print('Copilot on')
                 else
                     vim.g.copilot_is_disabled = 1
                     vim.cmd([[Copilot disable]])
-                    print("Copilot off")
+                    print('Copilot off')
                 end
             end, {})
 
-            vim.keymap.set("n", "<leader>c", ":CopilotToggle<cr>", { silent = true, noremap = true, desc = "Toggle Copilot" })
+            vim.keymap.set('n', '<leader>c', ':CopilotToggle<cr>', { silent = true, noremap = true, desc = 'Toggle Copilot' })
         end,
     },
     {
         'michaelb/sniprun', -- run parts of code, replaces notebooks
         build = 'sh install.sh',
         keys = {
-            {"<leader>r"},
-            {"<leader>r", mode = "v"},
-            {"<CR>"},
+            {'<leader>r'},
+            {'<leader>r', mode = 'v'},
+            {'<CR>'},
         },
         config = function()
             require('sniprun').setup({
-                display = { "Api" },
+                display = { 'Api' },
                 selected_interpreters = { 'Python3_fifo' },
                 repl_enable = {'Python3_fifo'},
                 interpreter_options = {
                     Python3_fifo = {
-                        venv = {".venv", "../.venv"},
+                        venv = {'.venv', '../.venv'},
                     }
                 },
             })
@@ -192,7 +192,7 @@ return {
 
             function SelectCommandBlock()
                 local api = vim.api
-                local cmd_pattern = "^# COMMAND +%-%-+%s*$"  -- Adjust if your pattern is slightly different
+                local cmd_pattern = '^# COMMAND +%-%-+%s*$'  -- Adjust if your pattern is slightly different
 
                 local cur_line = api.nvim_win_get_cursor(0)[1] -- Current line (1-indexed)
                 local lines = api.nvim_buf_get_lines(0, 0, -1, false)
@@ -241,24 +241,24 @@ return {
 
             vim.keymap.set('v', '<leader>r', '<Plug>SnipRun', {silent = true})
             vim.keymap.set('n', '<leader>r', '<Plug>SnipRun', {silent = true})
-            vim.keymap.set('n', '<CR>', function() SelectCommandBlock() end, {silent = true, desc = "Run command block"})
+            vim.keymap.set('n', '<CR>', function() SelectCommandBlock() end, {silent = true, desc = 'Run command block'})
 
 
             local sa = require('sniprun.api')
 
             -- Listener that writes output to a file
             local file_writer_listener = function(d)
-                local home = os.getenv("HOME") or "~"
-                local filepath = home .. "/.local/share/nvim/sniprun_output"
-                local file = io.open(filepath, "a")  -- append mode
+                local home = os.getenv('HOME') or '~'
+                local filepath = home .. '/.local/share/nvim/sniprun_output'
+                local file = io.open(filepath, 'a')  -- append mode
 
                 if file then
-                    file:write("Status: " .. (d.status or "unknown") .. "\n")
-                    file:write("Message:\n" .. (d.message or "") .. "\n")
-                    file:write("----------\n")
+                    file:write('Status: ' .. (d.status or 'unknown') .. '\n')
+                    file:write('Message:\n' .. (d.message or '') .. '\n')
+                    file:write('----------\n')
                     file:close()
                 else
-                    print("Failed to open file for writing SnipRun output.")
+                    print('Failed to open file for writing SnipRun output.')
                 end
             end
 
@@ -268,11 +268,11 @@ return {
         end
     },
     {
-        "folke/which-key.nvim", -- show keymap hints
+        'folke/which-key.nvim', -- show keymap hints
         opts = {
             triggers = {
-                { "<leader>", mode = { "n" } },
-                { "g", mode = { "n" } },
+                { '<leader>', mode = { 'n' } },
+                { 'g', mode = { 'n' } },
             },
             layout = {
                 width = { min = 20, max = 60 }, -- min and max width of the columns
@@ -299,15 +299,15 @@ return {
             incremental_selection = {
                 enable = true,
                 keymaps = {
-                    node_incremental = "<cr>",
-                    node_decremental = "<backspace>",
+                    node_incremental = '<cr>',
+                    node_decremental = '<backspace>',
                 },
             },
         },
     },
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
-        keys = "<leader>t",
+        keys = '<leader>t',
         dependencies = {
             { 'nvim-lua/plenary.nvim' },
             {
@@ -332,18 +332,18 @@ return {
     },
     {
         'stevearc/aerial.nvim',
-        keys = "<leader>a",
+        keys = '<leader>a',
         config = function()
             require('aerial').setup({
                 backends = {
-                    ['_']  = {"lsp", "treesitter"},
-                    python = {"treesitter"},
-                    rust   = {"lsp"},
+                    ['_']  = {'lsp', 'treesitter'},
+                    python = {'treesitter'},
+                    rust   = {'lsp'},
                 },
                 keymaps = {
-                    ["<esc>"] = "actions.close",
-                    ["H"] = "actions.tree_decrease_fold_level",
-                    ["L"] = "actions.tree_increase_fold_level",
+                    ['<esc>'] = 'actions.close',
+                    ['H'] = 'actions.tree_decrease_fold_level',
+                    ['L'] = 'actions.tree_increase_fold_level',
                 },
 
                 post_jump_cmd = false,
@@ -355,7 +355,7 @@ return {
                 },
             })
             -- You probably also want to set a keymap to toggle aerial
-            vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle<CR>")
+            vim.keymap.set('n', '<leader>a', '<cmd>AerialToggle<CR>')
             opts = {} 
         end
     },
@@ -377,8 +377,8 @@ return {
     --                     client.server_capabilities.completionProvider.triggerCharacters = chars
     --                     vim.lsp.completion.enable(true, client.id, args.buf, {autotrigger = true})
     --                 end
-    --                 -- Auto-format ("lint") on save.
-    --                 -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
+    --                 -- Auto-format ('lint') on save.
+    --                 -- Usually not needed if server supports 'textDocument/willSaveWaitUntil'.
     --                 if not client:supports_method('textDocument/willSaveWaitUntil')
     --                     and client:supports_method('textDocument/formatting') then
     --                     vim.api.nvim_create_autocmd('BufWritePre', {
