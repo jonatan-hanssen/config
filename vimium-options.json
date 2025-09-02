@@ -1,0 +1,65 @@
+{
+  "hideHud": true,
+  "keyMappings": "# Insert your preferred key mappings here.\nmap h goBack\nmap l goForward\nmap H previousTab\nmap L nextTab\nunmap f\nunmap F\nmap s LinkHints.activateMode\nmap S LinkHints.activateModeToOpenInNewTab\nmap J scrollPageDown\nmap K scrollPageUp",
+  "grabBackFocus": true,
+  "settingsVersion": "2.3",
+  "userDefinedLinkHintCss": "div > .vimiumHintMarker {\n/* linkhint boxes */\nbackground: #ffffff;\nborder: 2px solid #00aaee;\npadding: 3px;\n}\n\ndiv > .vimiumHintMarker span {\n/* linkhint text */\ncolor: black;\nfont-weight: bold;\nfont-size: 15px;\n}\n\ndiv > .vimiumHintMarker > .matchingCharacter {\ncolor: gray\n}",
+  "exclusionRules": [
+    {
+      "passKeys": "",
+      "pattern": "https?://mail.google.com/*"
+    },
+    {
+      "passKeys": "jklfi",
+      "pattern": "https://www.youtube.com/watch*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://localhost:8888/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://www.overleaf.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://www.tablesgenerator.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://inkarnate.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://teams.microsoft.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://config.qmk.fm/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://tv.nrk.no/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://monkeytype.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://www.nytimes.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://ranelpadon.github.io/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://vim-adventures.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://app.roll20.net/*"
+    }
+  ]
+}
