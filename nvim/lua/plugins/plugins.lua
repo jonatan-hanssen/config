@@ -4,9 +4,10 @@ return {
     { 'kshenoy/vim-signature' }, -- see marks
     { 'tpope/vim-surround' }, -- surround motions
     { 'tpope/vim-repeat' }, -- repeat vim-surround
-    { 'ap/vim-css-color' }, -- see colors in the editor
+    -- { 'ap/vim-css-color' }, -- see colors in the editor
     { 'stevearc/vim-arduino', ft = 'arduino' }, -- arduino builds
     { 'folke/tokyonight.nvim', lazy = true }, -- other colorscheme
+    { 'embark-theme/vim', lazy = true }, -- other other colorscheme
     {
         'chaoren/vim-wordmotion', -- CamelCase and snake_case word boundaries
         keys = '<leader>w',
@@ -55,8 +56,8 @@ return {
             end
 
             -- Tab completion mapping
-            vim.api.nvim_set_keymap('i', '<TAB>', [[coc#pum#visible() ? coc#pum#next(1) : v:lua.CheckBackspace() ? '\<Tab>' : coc#refresh()]], {expr = true, silent = true})
-            vim.api.nvim_set_keymap('i', '<S-TAB>', [[coc#pum#visible() ? coc#pum#prev(1) : '\<C-h>']], {expr = true, silent = true})
+            vim.keymap.set('i', '<TAB>', [[coc#pum#visible() ? coc#pum#next(1) : v:lua.CheckBackspace() ? '<Tab>' : coc#refresh()]], {expr = true, silent = true})
+            vim.keymap.set('i', '<S-TAB>', [[coc#pum#visible() ? coc#pum#prev(1) : '\<C-h>']], {expr = true, silent = true})
 
 
 
@@ -70,10 +71,12 @@ return {
             end
 
             -- GoTo code navigation
-            vim.api.nvim_set_keymap('n', 'gd', '<Plug>(coc-definition)', {silent = true, desc = 'Go to definition'})
+            vim.keymap.set('n', 'gd', '<Plug>(coc-definition)', {silent = true, desc = 'Go to definition'})
+
+            vim.keymap.set('n', '<leader>r', '<Plug>(coc-rename)', {silent = true, desc = 'Rename workspace wide'})
 
             -- Toggle documentation preview
-            vim.api.nvim_set_keymap('n', '?', ':lua ShowDocumentation()<CR>', {silent = true, desc = 'Open documentation'})
+            vim.keymap.set('n', '?', ':lua ShowDocumentation()<CR>', {silent = true, desc = 'Open documentation'})
         end,
     },
     {
@@ -87,8 +90,10 @@ return {
     {
         'ap/vim-buftabline', -- buffers in the tabline
         config = function()
+
             vim.g.buftabline_show = 1
         end,
+
     },
     {
         'nvim-tree/nvim-tree.lua', -- file view
@@ -106,6 +111,7 @@ return {
 
                 -- custom mappings
                 vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
+
                 vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))
                 vim.keymap.set('n', '<ESC>', api.tree.close, opts('Close'))
             end
@@ -139,12 +145,17 @@ return {
                 }
             }
         end,
+
     },
     {
         'github/copilot.vim', -- LLM suggestions
         keys = '<leader>c',
-        config = function()
+
+        init = function()
             vim.g.copilot_no_tab_map = true
+        end,
+
+        config = function()
 
 
             vim.cmd([[Copilot disable]])
@@ -158,11 +169,11 @@ return {
                         expr = true,
                         replace_keycodes = false
                     })
-                    print('Copilot on')
+                    vim.cmd([[Copilot status]])
                 else
                     vim.g.copilot_is_disabled = 1
                     vim.cmd([[Copilot disable]])
-                    print('Copilot off')
+                    print('Copilot: Disabled')
                 end
             end, {})
 
@@ -173,8 +184,8 @@ return {
         'michaelb/sniprun', -- run parts of code, replaces notebooks
         build = 'sh install.sh',
         keys = {
-            {'<leader>r'},
-            {'<leader>r', mode = 'v'},
+            {'<leader><cr>'},
+            {'<leader><cr>', mode = 'v'},
             {'<CR>'},
         },
         config = function()
@@ -239,8 +250,8 @@ return {
 
             end
 
-            vim.keymap.set('v', '<leader>r', '<Plug>SnipRun', {silent = true})
-            vim.keymap.set('n', '<leader>r', '<Plug>SnipRun', {silent = true})
+            vim.keymap.set('v', '<leader><cr>', '<Plug>SnipRun', {silent = true})
+            vim.keymap.set('n', '<leader><cr>', '<Plug>SnipRun', {silent = true})
             vim.keymap.set('n', '<CR>', function() SelectCommandBlock() end, {silent = true, desc = 'Run command block'})
 
 
@@ -293,10 +304,12 @@ return {
                 -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
                 --  If you are experiencing weird indenting issues, add the language to
                 --  the list of additional_vim_regex_highlighting and disabled languages for indent.
+
                 additional_vim_regex_highlighting = false,
             },
             indent = { enable = true },
             incremental_selection = {
+
                 enable = true,
                 keymaps = {
                     node_incremental = '<cr>',
@@ -307,7 +320,7 @@ return {
     },
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
-        keys = '<leader>t',
+        keys = {'<leader>t', '<C-n>', '<leader><leader>'},
         dependencies = {
             { 'nvim-lua/plenary.nvim' },
             {
@@ -317,17 +330,23 @@ return {
         },
         config = function()
             require('telescope').load_extension('fzf')
+            require('telescope').load_extension('filetype_picker')
+            require('telescope').load_extension('user_commands')
 
             local builtin = require('telescope.builtin')
-            vim.keymap.set('n', '<leader>tt', builtin.find_files, { desc = 'Telescope find files' })
-            vim.keymap.set('n', '<leader>tp', builtin.live_grep, { desc = 'Telescope grep pattern' })
-            vim.keymap.set('n', '<leader>tg', builtin.git_files, { desc = 'Telescope git files' })
-            vim.keymap.set('n', '<leader>ts', builtin.grep_string, { desc = 'Telescope grep string' })
+            vim.keymap.set('n', '<leader>tt', builtin.find_files, { desc = 'Find file' })
+            vim.keymap.set('n', '<C-n>', builtin.find_files, { desc = 'Find file' })
+            vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = 'Find file' })
+            vim.keymap.set('n', '<leader>tp', builtin.live_grep, { desc = 'Grep pattern' })
+            vim.keymap.set('n', '<leader>tg', builtin.git_files, { desc = 'Find file in repo' })
+            vim.keymap.set('n', '<leader>ts', builtin.grep_string, { desc = 'Grep string under cursor' })
+            vim.keymap.set('n', '<leader>tf', '<cmd>Telescope filetype_picker<CR>', { desc = 'Pick filetype' })
+            vim.keymap.set('n', '<leader>tu', '<cmd>Telescope user_commands<CR>', { desc = 'Select user command' })
             vim.keymap.set('n', '<leader>tc', function()
                 builtin.find_files {
                     cwd = vim.fn.expand('~/.config')
                 }
-            end)
+            end, { desc = 'Find file in .config' })
         end
     },
     {
@@ -356,7 +375,7 @@ return {
             })
             -- You probably also want to set a keymap to toggle aerial
             vim.keymap.set('n', '<leader>a', '<cmd>AerialToggle<CR>')
-            opts = {} 
+            opts = {}
         end
     },
     -- {
@@ -364,6 +383,7 @@ return {
     --     config = function()
     --         vim.cmd[[set completeopt+=menuone,noselect,popup,preview]]
     --         vim.lsp.enable('pyright')
+
     --         vim.api.nvim_create_autocmd('LspAttach', {
     --             group = vim.api.nvim_create_augroup('my.lsp', {}),
     --             callback = function(args)
@@ -393,4 +413,5 @@ return {
     --         })
     --     end
     -- }, -- lsp defaults
+
 }

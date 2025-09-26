@@ -49,6 +49,12 @@ vim.api.nvim_create_user_command('SynStack', function()
     print(vim.inspect(highlight_names)) -- You can modify how you want to display the output
 end, {})
 
+vim.api.nvim_create_user_command('TrimWhitespace',function()
+    local view = vim.fn.winsaveview()
+    vim.cmd([[keeppatterns %s/\s\+$//e]])
+    vim.fn.winrestview(view)
+end, {})
+
 vim.api.nvim_create_user_command('CompileLatex', function()
     -- Check if Makefile exists in the current directory
     print('Compiling...')

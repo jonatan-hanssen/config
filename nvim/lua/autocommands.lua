@@ -45,7 +45,7 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.api.nvim_buf_set_keymap(0, 'n', '<C-b>', ":w<CR>:exec '!python3' shellescape(@%, 1)<CR>", { noremap = true, silent = true })
         vim.api.nvim_buf_set_keymap(0, 'i', '<C-b>', "<esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>", { noremap = true, silent = true })
-        vim.b.coc_diagnostic_disable = 1
+        -- vim.b.coc_diagnostic_disable = 1
         vim.api.nvim_buf_set_keymap(0, 'n', '<leader>b', ":!ruff format %<CR>", { noremap = true, silent = true })
         vim.opt_local.foldmethod = 'indent'
     end,
