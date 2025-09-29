@@ -121,6 +121,8 @@ alias e='nvim' # e is for edit
 alias t='cd' # t is for to
 alias i='ls' # i is for info
 
+alias snipwatch='nvim -u ~/.config/nvim/sniprun_init.lua ~/.local/share/nvim/sniprun_output'
+
 # cd also runs ls
 function cd() {
     new_directory="$*";
@@ -160,9 +162,8 @@ function ranger-cd {
     rm -f -- "$tempfile"
 }
 
-
-bindkey -s '^R' 'ranger-cd\n'
-
+alias rt='ranger-cd'
+alias r='ranger'
 
 # ------- alert if long since last pacman action ---------
 last_update=$(awk 'END{sub(/\[/,""); sub(/\]/,""); print $1}' /var/log/pacman.log)
@@ -223,6 +224,13 @@ export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
 bindkey -v
 bindkey "^H" backward-delete-char
 bindkey "^?" backward-delete-char
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+bindkey '^N' fzf-history-widget # For Zsh
+
+bindkey '^N' fzf-history-widget # For Zsh
+
+export FZF_DEFAULT_OPTS="--bind='j:down,k:up' --bind='start:unbind(i,a,j,k)' --bind='esc:disable-search+rebind(i,a,j,k)' --bind='i:enable-search+unbind(i,j,k)' --bind='a:enable-search+unbind(i,a,j,k)'"
 
 catimg -w 100 $XDG_CONFIG_HOME/zsh/cat.jpg
 echo "                Erm, what the flip?"
