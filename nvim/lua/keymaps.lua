@@ -10,12 +10,14 @@ end
 map("x", "ag", "ggoG")
 map("o", "ag", ":normal Vag<cr>")
 
-map("n", "<A-j>", ":m .+1<CR>")
-map("n", "<A-k>", ":m .-2<CR>")
-map("v", "<A-j>", ":m '>+1<CR>gv=gv")
-map("v", "<A-k>", ":m '<-2<CR>gv=gv")
+vim.keymap.set("n", "<leader>x", function()
+  if vim.g.colors_name == "onequarterlight" then
+    vim.cmd("colorscheme tokyonight-night")
+  else
+    vim.cmd("colorscheme onequarterlight")
+  end
+end, { desc = "Toggle dark colorZcheme" })
 
-map("n", "<leader>k", ":ColorschemeToggle<cr>", "Toggle to darK colorscheme")
 map("n", "<leader>p", "\"+p", "Paste from clipboard")
 map("n", "<leader>y", "\"+y", "Yank to clipboard")
 map("n", "<leader>Y", "\"+y$", "Yank to end of line to clipboard")
@@ -23,11 +25,9 @@ map("v", "<leader>y", "\"+y")
 
 map("n", "E", "b")
 
-
-
 map("n", "gp", ":put<CR>")
 
--- remove ighlight for last searched
+-- remove highlight for last searched
 map("n", "<leader><BS>", ":noh<CR>", "Remove highlights")
 
 -- schmoovement
@@ -38,6 +38,19 @@ vim.keymap.set("o", "K", ":keepjumps normal! {<CR>", { remap = true, silent = tr
 
 map("x", "J", ":<C-u>keepjumps normal! gv}<CR>")
 map("x", "K", ":<C-u>keepjumps normal! gv{<CR>")
+
+
+vim.keymap.set("n", "<leader>l", function()
+  local current = vim.opt.colorcolumn:get()
+  if #current == 0 then
+    -- If colorcolumn is off, set it to 88
+    vim.opt.colorcolumn = "88"
+  else
+    -- If colorcolumn is on, turn it off
+    vim.opt.colorcolumn = ""
+  end
+end, { desc = "Toggle colorcolumn at 88" })
+
 
 
 map("n", "}", "J")

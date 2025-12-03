@@ -37,7 +37,7 @@ opt.smartcase = true
 
 opt.spelllang = "nb,en"
 
-opt.title = true
+opt.title = false
 
 opt.titlestring = "nvim   %F"
 

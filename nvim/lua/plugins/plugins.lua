@@ -308,6 +308,7 @@ return {
                 additional_vim_regex_highlighting = false,
             },
             indent = { enable = true },
+            injections = { enable = true },
             incremental_selection = {
 
                 enable = true,
@@ -331,17 +332,18 @@ return {
         config = function()
             require('telescope').load_extension('fzf')
             require('telescope').load_extension('filetype_picker')
-            require('telescope').load_extension('user_commands')
 
             local builtin = require('telescope.builtin')
-            vim.keymap.set('n', '<leader>tt', builtin.find_files, { desc = 'Find file' })
-            vim.keymap.set('n', '<C-n>', builtin.find_files, { desc = 'Find file' })
             vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = 'Find file' })
+            vim.keymap.set('n', '<leader>tt', function() 
+                builtin.buffers { sort_lastused = true }
+            end, { desc = 'Find buffers' })
+            vim.keymap.set('n', '<C-n>', builtin.find_files, { desc = 'Find file' })
             vim.keymap.set('n', '<leader>tp', builtin.live_grep, { desc = 'Grep pattern' })
-            vim.keymap.set('n', '<leader>tg', builtin.git_files, { desc = 'Find file in repo' })
+            vim.keymap.set('n', '<leader>tn', builtin.git_files, { desc = 'FiNd file iN repo' })
             vim.keymap.set('n', '<leader>ts', builtin.grep_string, { desc = 'Grep string under cursor' })
-            vim.keymap.set('n', '<leader>tf', '<cmd>Telescope filetype_picker<CR>', { desc = 'Pick filetype' })
-            vim.keymap.set('n', '<leader>tu', '<cmd>Telescope user_commands<CR>', { desc = 'Select user command' })
+            vim.keymap.set('n', '<leader>tf', '<cmd>Telescope filetype_picker<CR>', { desc = 'Pick and set filetype' })
+            vim.keymap.set('n', '<leader>tu', builtin.commands, { desc = 'Select user command' })
             vim.keymap.set('n', '<leader>tc', function()
                 builtin.find_files {
                     cwd = vim.fn.expand('~/.config')
@@ -372,12 +374,99 @@ return {
                     default_direction = 'prefer_left',
                     min_width = {50, 0.3},
                 },
+
+                disable_max_lines = 10000000000,
+                disable_max_size = 10000000000,
             })
             -- You probably also want to set a keymap to toggle aerial
             vim.keymap.set('n', '<leader>a', '<cmd>AerialToggle<CR>')
             opts = {}
         end
     },
+    {
+        "hat0uma/csvview.nvim",
+        ---@module "csvview"
+
+        ---@type CsvView.Options
+        opts = {
+            parser = { comments = { "#", "//" } },
+            keymaps = {
+                -- Text objects for selecting fields
+                textobject_field_inner = { "if", mode = { "o", "x" } },
+                textobject_field_outer = { "af", mode = { "o", "x" } },
+                -- Excel-like navigation:
+                -- Use <Tab> and <S-Tab> to move horizontally between fields.
+                -- Use <Enter> and <S-Enter> to move vertically between rows and place the cursor at the end of the field.
+                -- Note: In terminals, you may need to enable CSI-u mode to use <S-Tab> and <S-Enter>.
+                jump_next_field_end = { "<Tab>", mode = { "n", "v" } },
+                jump_prev_field_end = { "<S-Tab>", mode = { "n", "v" } },
+                jump_next_row = { "<Enter>", mode = { "n", "v" } },
+                jump_prev_row = { "<S-Enter>", mode = { "n", "v" } },
+            },
+        },
+        cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
+    },
+    {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        config = function() 
+            require("nvim-treesitter.configs").setup({
+                textobjects = {
+                    move = {
+                        enable = true,
+                        set_jumps = true, -- whether to set jumps in the jumplist
+                        goto_next_start = {
+                            ["]m"] = "@function.outer",
+                            ["<leader>j"] = "@function.outer",
+                            ["]]"] = "@class.outer",
+                            ["]b"] = "@block.outer",
+                            ["]a"] = "@parameter.inner",
+                        },
+                        goto_next_end = {
+                            ["]M"] = "@function.outer",
+                            ["gJ"] = "@function.outer",
+                            ["]["] = "@class.outer",
+                            ["]B"] = "@block.outer",
+                            ["]A"] = "@parameter.inner",
+                        },
+                        goto_previous_start = {
+                            ["[m"] = "@function.outer",
+                            ["<leader>k"] = "@function.outer",
+                            ["[["] = "@class.outer",
+                            ["[b"] = "@block.outer",
+                            ["[a"] = "@parameter.inner",
+                        },
+                        goto_previous_end = {
+                            ["[M"] = "@function.outer",
+                            ["gK"] = "@function.outer",
+                            ["[]"] = "@class.outer",
+                            ["[B"] = "@block.outer",
+                            ["[A"] = "@parameter.inner",
+                        },
+                    },
+                    select = {
+                        enable = true,
+                        lookahead = true,
+                        keymaps = {
+                            ["af"] = "@function.outer",
+                            ["if"] = "@function.inner",
+                            ["ac"] = "@class.outer",
+                            ["ic"] = "@class.inner",
+                            ["ab"] = "@block.outer",
+                            ["ib"] = "@block.inner",
+                            ["al"] = "@loop.outer",
+                            ["il"] = "@loop.inner",
+                            ["a/"] = "@comment.outer",
+                            ["i/"] = "@comment.outer", -- no inner for comment
+                            ["aa"] = "@parameter.outer", -- parameter -> argument
+                            ["ia"] = "@parameter.inner",
+                        },
+                    },
+                },
+            })
+        end,
+    },
+
     -- {
     --     'neovim/nvim-lspconfig',
     --     config = function()
