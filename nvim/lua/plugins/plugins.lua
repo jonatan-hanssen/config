@@ -381,6 +381,27 @@ return {
             opts = {}
         end
     },
+        {
+        "Ron89/thesaurus_query.vim",
+        ft = { "text", "markdown" },  -- only load for .txt and .md files
+        event = { 'BufEnter *.wiki', 'BufRead *.wiki' },
+        config = function()
+            -- Keymaps
+            vim.api.nvim_set_keymap("n", "?", ":ThesaurusQueryReplaceCurrentWord<CR>", { noremap = true, silent = true })
+            -- vim.api.nvim_set_keymap("n", "<Leader>cl", ":ThesaurusQueryLookupCurrentWord<CR>",  { noremap = true, silent = true })
+            -- vim.api.nvim_set_keymap("v", "<Leader>cs", "y:ThesaurusQueryReplace <C-r>\"<CR>", { noremap = true, silent = true })
+
+            -- Settings
+            vim.g.tq_language = { "en" }  -- English only
+            vim.g.tq_enabled_backends = { "openoffice_en" }
+            vim.g.tq_online_backends_timeout = 1.0
+            vim.g.tq_truncation_on_definition_num = 3
+            vim.g.tq_truncation_on_syno_list_size = 200
+
+            -- Optional: local thesaurus files
+            vim.g.tq_openoffice_en_file = "~/downloads/MyThes-1.0/th_en_US_new"
+        end,
+    }
     -- {
     --     'neovim/nvim-lspconfig',
     --     config = function()
