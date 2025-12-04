@@ -1,14 +1,3 @@
-vim.g.darkmode = 0
-vim.api.nvim_create_user_command('ColorschemeToggle', function()
-    if vim.g.darkmode == 1 then
-        vim.cmd("colorscheme onequarterlight")
-        vim.g.darkmode = 0
-    else
-        vim.cmd("colorscheme tokyonight-night")
-        vim.g.darkmode = 1
-    end
-end, {})
-
 vim.api.nvim_create_user_command('ProseStart', function()
     vim.opt_local.linebreak = true
     local opts = { noremap = true, silent = true }

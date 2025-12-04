@@ -335,7 +335,9 @@ return {
 
             local builtin = require('telescope.builtin')
             vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = 'Find file' })
-            vim.keymap.set('n', '<leader>tt', builtin.buffers, { desc = 'Find buffers' })
+            vim.keymap.set('n', '<leader>tt', function() 
+                builtin.buffers { sort_lastused = true }
+            end, { desc = 'Find buffers' })
             vim.keymap.set('n', '<C-n>', builtin.find_files, { desc = 'Find file' })
             vim.keymap.set('n', '<leader>tp', builtin.live_grep, { desc = 'Grep pattern' })
             vim.keymap.set('n', '<leader>tn', builtin.git_files, { desc = 'FiNd file iN repo' })
@@ -381,7 +383,7 @@ return {
             opts = {}
         end
     },
-        {
+    {
         "Ron89/thesaurus_query.vim",
         ft = { "text", "markdown" },  -- only load for .txt and .md files
         event = { 'BufEnter *.wiki', 'BufRead *.wiki' },
@@ -401,7 +403,90 @@ return {
             -- Optional: local thesaurus files
             vim.g.tq_openoffice_en_file = "~/downloads/MyThes-1.0/th_en_US_new"
         end,
-    }
+    },
+    {
+        "hat0uma/csvview.nvim",
+        ---@module "csvview"
+
+        ---@type CsvView.Options
+        opts = {
+            parser = { comments = { "#", "//" } },
+            keymaps = {
+                -- Text objects for selecting fields
+                textobject_field_inner = { "if", mode = { "o", "x" } },
+                textobject_field_outer = { "af", mode = { "o", "x" } },
+                -- Excel-like navigation:
+                -- Use <Tab> and <S-Tab> to move horizontally between fields.
+                -- Use <Enter> and <S-Enter> to move vertically between rows and place the cursor at the end of the field.
+                -- Note: In terminals, you may need to enable CSI-u mode to use <S-Tab> and <S-Enter>.
+                jump_next_field_end = { "<Tab>", mode = { "n", "v" } },
+                jump_prev_field_end = { "<S-Tab>", mode = { "n", "v" } },
+                jump_next_row = { "<Enter>", mode = { "n", "v" } },
+                jump_prev_row = { "<S-Enter>", mode = { "n", "v" } },
+            },
+        },
+        cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
+    },
+    {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        config = function() 
+            require("nvim-treesitter.configs").setup({
+                textobjects = {
+                    move = {
+                        enable = true,
+                        set_jumps = true, -- whether to set jumps in the jumplist
+                        goto_next_start = {
+                            ["]m"] = "@function.outer",
+                            ["<leader>j"] = "@function.outer",
+                            ["]]"] = "@class.outer",
+                            ["]b"] = "@block.outer",
+                            ["]a"] = "@parameter.inner",
+                        },
+                        goto_next_end = {
+                            ["]M"] = "@function.outer",
+                            ["gJ"] = "@function.outer",
+                            ["]["] = "@class.outer",
+                            ["]B"] = "@block.outer",
+                            ["]A"] = "@parameter.inner",
+                        },
+                        goto_previous_start = {
+                            ["[m"] = "@function.outer",
+                            ["<leader>k"] = "@function.outer",
+                            ["[["] = "@class.outer",
+                            ["[b"] = "@block.outer",
+                            ["[a"] = "@parameter.inner",
+                        },
+                        goto_previous_end = {
+                            ["[M"] = "@function.outer",
+                            ["gK"] = "@function.outer",
+                            ["[]"] = "@class.outer",
+                            ["[B"] = "@block.outer",
+                            ["[A"] = "@parameter.inner",
+                        },
+                    },
+                    select = {
+                        enable = true,
+                        lookahead = true,
+                        keymaps = {
+                            ["af"] = "@function.outer",
+                            ["if"] = "@function.inner",
+                            ["ac"] = "@class.outer",
+                            ["ic"] = "@class.inner",
+                            ["ab"] = "@block.outer",
+                            ["ib"] = "@block.inner",
+                            ["al"] = "@loop.outer",
+                            ["il"] = "@loop.inner",
+                            ["a/"] = "@comment.outer",
+                            ["i/"] = "@comment.outer", -- no inner for comment
+                            ["aa"] = "@parameter.outer", -- parameter -> argument
+                            ["ia"] = "@parameter.inner",
+                        },
+                    },
+                },
+            })
+        end,
+    },
     -- {
     --     'neovim/nvim-lspconfig',
     --     config = function()
