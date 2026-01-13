@@ -88,11 +88,10 @@ return {
         end,
     },
     {
-        'ap/vim-buftabline', -- buffers in the tabline
-        config = function()
-
-            vim.g.buftabline_show = 1
-        end,
+        'jose-elias-alvarez/buftabline.nvim', -- buffers in the tabline
+        opts = {
+            auto_hide = true,
+        },
 
     },
     {
@@ -339,6 +338,7 @@ return {
                 builtin.buffers { sort_lastused = true }
             end, { desc = 'Find buffers' })
             vim.keymap.set('n', '<C-n>', builtin.find_files, { desc = 'Find file' })
+            -- this requires ripgrep to work
             vim.keymap.set('n', '<leader>tp', builtin.live_grep, { desc = 'Grep pattern' })
             vim.keymap.set('n', '<leader>tn', builtin.git_files, { desc = 'FiNd file iN repo' })
             vim.keymap.set('n', '<leader>ts', builtin.grep_string, { desc = 'Grep string under cursor' })
@@ -485,6 +485,14 @@ return {
                     },
                 },
             })
+        end,
+    },
+    {
+        "FabijanZulj/blame.nvim",
+        keys = '<leader>b',
+        config = function()
+            require('blame').setup {}
+            vim.keymap.set('n', '<leader>b', '<cmd>BlameToggle<CR>')
         end,
     },
     -- {
