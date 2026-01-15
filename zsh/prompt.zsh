@@ -14,3 +14,8 @@ export NEWLINE=$'\n'
 rightarrow=$(echo -en '\u25aa')
 export PROMPT2=" ${rightarrow} "
 export PROMPT='[%?] %F{blue}%~% %f ${vcs_info_msg_0_} %f${NEWLINE}${PROMPT2}'
+
+if command -v catimg >/dev/null 2>&1; then
+    catimg -w 100 $XDG_CONFIG_HOME/zsh/cat.jpg
+    echo "                Erm, what the flip?"
+fi

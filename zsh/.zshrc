@@ -7,8 +7,7 @@ source $XDG_CONFIG_HOME/zsh/functions.zsh
 source $XDG_CONFIG_HOME/zsh/options.zsh
 source $XDG_CONFIG_HOME/zsh/prompt.zsh
 source $XDG_CONFIG_HOME/zsh/termtitle.zsh
-# source $XDG_CONFIG_HOME/zsh/archonly.zsh
-source $XDG_CONFIG_HOME/zsh/banenoronly.zsh
+source $XDG_CONFIG_HOME/zsh/archonly.zsh
 
 # "plugins"
 source $XDG_CONFIG_HOME/zsh/z.zsh

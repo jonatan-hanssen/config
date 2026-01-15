@@ -1,3 +1,6 @@
+# prematurely exit if not arch
+[[ "$(uname -r)" == *arch* ]] || return 0
+
 # ------- alert if long since last pacman action ---------
 last_update=$(awk 'END{sub(/\[/,""); sub(/\]/,""); print $1}' /var/log/pacman.log)
 
@@ -26,6 +29,3 @@ gpg-connect-agent updatestartuptty /bye >/dev/null
 
 # this is to make latex installer work
 alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
-
-catimg -w 100 $XDG_CONFIG_HOME/zsh/cat.jpg
-echo "                Erm, what the flip?"
