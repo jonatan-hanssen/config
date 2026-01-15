@@ -27,12 +27,12 @@ action = "SpawnNewInstance"
 key = "Return"
 mods = "Shift"
 
-[[keyboard.bindings]]
-key = "T"
-mods = "Control"
-
-[keyboard.bindings.command]
-program = "/home/jona/.config/alacritty/themeswitch.sh"
+# [[keyboard.bindings]]
+# key = "T"
+# mods = "Control"
+#
+# [keyboard.bindings.command]
+# program = "/home/jona/.config/alacritty/themeswitch.sh"
 
 [[keyboard.bindings]]
 key = "Up"
