@@ -9,7 +9,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_BIN_HOME="$HOME/.local/bin"
 export XDG_DATA_DIRS="/usr/local/share:/usr/share"
 export XDG_CONFIG_DIRS="/etc/xdg"
-export PATH="/home/jona/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export GRIM_DEFAULT_DIR="$HOME/pictures"
 
 # variables read by other programs
@@ -24,6 +24,7 @@ export PYTHONSTARTUP=$HOME/.config/python/pythonrc
 # https://github.com/python/cpython/issues/118840
 # dumbasses dont want to implement vi mode >:(
 export PYTHON_BASIC_REPL=1
+export PYTHONBREAKPOINT="pdbp.set_trace"
 
 export HISTFILE="$XDG_CACHE_HOME/zsh/history"
 export HISTSIZE=2000

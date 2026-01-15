@@ -20,5 +20,12 @@ if (( $diff > 3 )); then
     fi
 fi
 
+alias pac='sudo pacman -Syu'
+# i dont remember why i did this
+gpg-connect-agent updatestartuptty /bye >/dev/null
+
+# this is to make latex installer work
+alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
+
 catimg -w 100 $XDG_CONFIG_HOME/zsh/cat.jpg
 echo "                Erm, what the flip?"

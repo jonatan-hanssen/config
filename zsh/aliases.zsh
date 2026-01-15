@@ -1,4 +1,3 @@
-
 # aliases
 alias ls="exa --icons --time-style=long-iso"
 alias tree="tree -L 3 -C"
@@ -6,9 +5,6 @@ alias mv='mv --interactive'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias cal='cal -m'
-alias jup='jupyter notebook'
-alias mosh='mosh --no-init'
 
 
 # git aliases
@@ -19,12 +15,13 @@ alias ncm="git commit -sm"
 alias na="git add"
 alias nau="git add -u"
 alias np="git push"
+alias npu="git push --set-upstream origin \$(git branch --show-current)"
+alias npl="git pull"
 alias nd="git diff"
 alias nr="git restore"
-alias npl="git pull"
-
-alias mc="make clean"
-
+alias nrs="git restore --staged"
+alias nch="git checkout"
+alias nl="git log --stat"
 
 # python aliases
 alias python='python3'
@@ -33,19 +30,9 @@ alias py="python3 -q"
 alias pdb="python3 -m pdb"
 alias act='source env/bin/activate'
 
-# other aliases
-alias sshuio='ssh -YC jonatahh@login.ifi.uio.no'
-alias uiomount='sshfs -o reconnect,ServerAliveInterval=2 uio:. ~/ifilokal/ifilokal'
-alias :q='exit'
-alias c='z' # c is easier to hit
-alias pac='sudo pacman -Syu'
 alias ra='ranger'
-
+alias rt='ranger-cd'
 alias close='disown && exit'
-
-# this is to make latex installer work
-alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
-
 
 # god tier single char aliases
 alias a='source a'
@@ -57,5 +44,4 @@ alias i='ls' # i is for info
 # this is kinda crazy right guys
 alias snipwatch='nvim -u ~/.config/nvim/sniprun_init.lua ~/.local/share/nvim/sniprun_output'
 
-alias rt='ranger-cd'
-alias ra='ranger'
+alias commits='echo "(build|bump|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)"'
