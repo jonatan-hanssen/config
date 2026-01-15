@@ -7,12 +7,9 @@ source $XDG_CONFIG_HOME/zsh/functions.zsh
 source $XDG_CONFIG_HOME/zsh/options.zsh
 source $XDG_CONFIG_HOME/zsh/prompt.zsh
 source $XDG_CONFIG_HOME/zsh/termtitle.zsh
-source $XDG_CONFIG_HOME/zsh/archonly.zsh
+# source $XDG_CONFIG_HOME/zsh/archonly.zsh
+source $XDG_CONFIG_HOME/zsh/banenoronly.zsh
 
 # "plugins"
 source $XDG_CONFIG_HOME/zsh/z.zsh
 source $XDG_CONFIG_HOME/zsh/fzf.zsh
-
-
-# i dont remember why i did this
-gpg-connect-agent updatestartuptty /bye >/dev/null
