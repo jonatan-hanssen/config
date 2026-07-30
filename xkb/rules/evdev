@@ -1,0 +1,4 @@
+! option   = symbols
+  colemak_jk_iso:basic  = +colemak_jk_iso(basic)
+
+! include %S/evdev
