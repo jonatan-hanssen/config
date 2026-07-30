@@ -2,6 +2,8 @@
     "suggest.noselect": true,
     "inlayHint.enable": false,
     "r.lsp.diagnostics": false,
+    "pyright.enable": true,
+    "ty.enable": false,
     "python.formatting.provider": "ruff",
     "coc.preferences.formatOnSaveFiletypes": ["python"],
     "languageserver": {

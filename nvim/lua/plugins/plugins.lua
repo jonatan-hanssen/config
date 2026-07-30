@@ -7,6 +7,7 @@ return {
     -- { 'ap/vim-css-color' }, -- see colors in the editor
     { 'stevearc/vim-arduino', ft = 'arduino' }, -- arduino builds
     { 'folke/tokyonight.nvim', lazy = true }, -- other colorscheme
+    { 'sindrets/diffview.nvim' }, -- git diff
     { 'embark-theme/vim', lazy = true }, -- other other colorscheme
     {
         'chaoren/vim-wordmotion', -- CamelCase and snake_case word boundaries
@@ -72,8 +73,11 @@ return {
 
             -- GoTo code navigation
             vim.keymap.set('n', 'gd', '<Plug>(coc-definition)', {silent = true, desc = 'Go to definition'})
+            vim.keymap.set('n', 'gr', '<Plug>(coc-references)', {silent = true, desc = 'Show references'})
 
             vim.keymap.set('n', '<leader>r', '<Plug>(coc-rename)', {silent = true, desc = 'Rename workspace wide'})
+
+            vim.keymap.set('n', '<leader>q', '<Plug>(coc-fix-current)', {silent = true, desc = 'Quickfix'})
 
             -- Toggle documentation preview
             vim.keymap.set('n', '?', ':lua ShowDocumentation()<CR>', {silent = true, desc = 'Open documentation'})
@@ -91,6 +95,7 @@ return {
         'jose-elias-alvarez/buftabline.nvim', -- buffers in the tabline
         opts = {
             auto_hide = true,
+            go_to_maps = false,
         },
 
     },
@@ -202,9 +207,9 @@ return {
 
             function SelectCommandBlock()
                 local api = vim.api
-                local cmd_pattern = '^# COMMAND +%-%-+%s*$'  -- Adjust if your pattern is slightly different
+                local cmd_pattern = '^# COMMAND +%-%-+%s*$'
 
-                local cur_line = api.nvim_win_get_cursor(0)[1] -- Current line (1-indexed)
+                local cur_line = api.nvim_win_get_cursor(0)[1]
                 local lines = api.nvim_buf_get_lines(0, 0, -1, false)
                 local total_lines = #lines
 
@@ -319,6 +324,39 @@ return {
         },
     },
     {
+        "nvim-treesitter/nvim-treesitter-context",
+        dependencies = {"nvim-treesitter/nvim-treesitter"},
+        config = function()
+            local context = require("treesitter-context")
+
+            -- initial setup
+            context.setup({
+                max_lines = 1,
+                mode = 'topline',
+                trim_scope = 'inner',
+            })
+
+            -- track toggle state
+            local current_max = 1
+
+            local function toggle_context_max_lines()
+                current_max = (current_max == 1) and 0 or 1
+
+                context.setup({
+                    max_lines = current_max,
+                })
+            end
+
+            -- keymap
+            vim.keymap.set(
+                "n",
+                "<leader>x",
+                toggle_context_max_lines,
+                { desc = "Toggle TS context max_lines" }
+            )
+        end,
+    },
+    {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
         keys = {'<leader>t', '<C-n>', '<leader><leader>'},
         dependencies = {
@@ -339,11 +377,12 @@ return {
             end, { desc = 'Find buffers' })
             vim.keymap.set('n', '<C-n>', builtin.find_files, { desc = 'Find file' })
             -- this requires ripgrep to work
-            vim.keymap.set('n', '<leader>tp', builtin.live_grep, { desc = 'Grep pattern' })
+            vim.keymap.set('n', '<leader>te', builtin.live_grep, { desc = 'Grep pattern' })
             vim.keymap.set('n', '<leader>tn', builtin.git_files, { desc = 'FiNd file iN repo' })
             vim.keymap.set('n', '<leader>ts', builtin.grep_string, { desc = 'Grep string under cursor' })
             vim.keymap.set('n', '<leader>tf', '<cmd>Telescope filetype_picker<CR>', { desc = 'Pick and set filetype' })
             vim.keymap.set('n', '<leader>tu', builtin.commands, { desc = 'Select user command' })
+            vim.keymap.set('n', '<leader>to', builtin.oldfiles, { desc = 'Open old files' })
             vim.keymap.set('n', '<leader>tc', function()
                 builtin.find_files {
                     cwd = vim.fn.expand('~/.config')
@@ -495,11 +534,50 @@ return {
             vim.keymap.set('n', '<leader>b', '<cmd>BlameToggle<CR>')
         end,
     },
+    {
+        'tamton-aquib/duck.nvim',
+        config = function()
+            vim.keymap.set('n', '<leader>oc', function() require("duck").hatch("🐈") end, {desc="Spawn a cat"})
+            vim.keymap.set('n', '<leader>or', function() require("duck").cook() end, {desc="Remove one cat"})
+            vim.keymap.set('n', '<leader>oa', function() require("duck").cook_all() end, {desc="Remove all cats"})
+        end
+    },
+    {
+        'lcheylus/overlength.nvim',
+        ft = "python",
+        opts = {
+            -- Overlength highlighting enabled by default
+            enabled = true,
+
+            -- Colors for OverLength highlight group
+            colors = {
+                ctermfg = nil,
+                ctermbg = 'darkgrey',
+                fg = nil,
+                bg = '#f7d7e1',
+            },
+
+            -- Mode to use textwidth local options
+            -- 0: Don't use textwidth at all, always use config.default_overlength.
+            -- 1: Use `textwidth, unless it's 0, then use config.default_overlength.
+            -- 2: Always use textwidth. There will be no highlighting where
+            --    textwidth == 0, unless added explicitly
+            textwidth_mode = 0,
+            -- Default overlength with no filetype
+            default_overlength = 88,
+            -- How many spaces past your overlength to start highlighting
+            grace_length = 1,
+            -- Highlight only the column or until the end of the line
+            highlight_to_eol = true,
+
+            -- List of filetypes to disable overlength highlighting
+        },
+    }
     -- {
     --     'neovim/nvim-lspconfig',
     --     config = function()
     --         vim.cmd[[set completeopt+=menuone,noselect,popup,preview]]
-    --         vim.lsp.enable('pyright')
+    --         vim.lsp.enable('ty')
 
     --         vim.api.nvim_create_autocmd('LspAttach', {
     --             group = vim.api.nvim_create_augroup('my.lsp', {}),
