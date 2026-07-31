@@ -27,5 +27,5 @@ export PYTHON_BASIC_REPL=1
 export PYTHONBREAKPOINT="pdbp.set_trace"
 
 export HISTFILE="$XDG_CACHE_HOME/zsh/history"
-export HISTSIZE=2000
+export HISTSIZE=15000
 export SAVEHIST=$HISTSIZE
