@@ -39,7 +39,7 @@ return {
         end,
     },
     {
-        'ggandor/leap.nvim', -- go to anywhere with 's'
+        'https://codeberg.org/andyg/leap.nvim', -- go to anywhere with 's'
         config = function()
             vim.keymap.set('n',        's', '<Plug>(leap-anywhere)')
             vim.keymap.set({'x', 'o'}, 's', '<Plug>(leap)')
@@ -297,7 +297,7 @@ return {
     {
         'nvim-treesitter/nvim-treesitter', -- treesitter configuration
         build = ':TSUpdate',
-        main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+        main = 'nvim-treesitter.config', -- Sets main module to use for opts
         -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
         opts = {
             ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'python' },
@@ -357,7 +357,7 @@ return {
         end,
     },
     {
-        'nvim-telescope/telescope.nvim', tag = '0.1.8',
+        'nvim-telescope/telescope.nvim', version = '*',
         keys = {'<leader>t', '<C-n>', '<leader><leader>'},
         dependencies = {
             { 'nvim-lua/plenary.nvim' },
@@ -468,9 +468,10 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
+        branch = "main",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         config = function() 
-            require("nvim-treesitter.configs").setup({
+            require("nvim-treesitter.config").setup({
                 textobjects = {
                     move = {
                         enable = true,
