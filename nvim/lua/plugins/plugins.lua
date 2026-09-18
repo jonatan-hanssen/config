@@ -92,14 +92,6 @@ return {
         end,
     },
     {
-        'jose-elias-alvarez/buftabline.nvim', -- buffers in the tabline
-        opts = {
-            auto_hide = true,
-            go_to_maps = false,
-        },
-
-    },
-    {
         'nvim-tree/nvim-tree.lua', -- file view
         keys = '<BS>',
         config = function()
@@ -295,48 +287,62 @@ return {
         },
     },
     {
-        'nvim-treesitter/nvim-treesitter', -- treesitter configuration
-        build = ':TSUpdate',
-        main = 'nvim-treesitter.config', -- Sets main module to use for opts
-        -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-        opts = {
-            ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'python' },
-            -- Autoinstall languages that are not installed
-            auto_install = true,
-            highlight = {
-                enable = true,
-                -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-                --  If you are experiencing weird indenting issues, add the language to
-                --  the list of additional_vim_regex_highlighting and disabled languages for indent.
+        "nvim-treesitter/nvim-treesitter",
+        branch = "main",
+        lazy = false,
+        build = ":TSUpdate",
 
-                additional_vim_regex_highlighting = false,
-            },
-            indent = { enable = true },
-            injections = { enable = true },
-            incremental_selection = {
+        config = function()
+            local languages = {
+                "bash",
+                "c",
+                "diff",
+                "html",
+                "lua",
+                "luadoc",
+                "markdown",
+                "markdown_inline",
+                "query",
+                "vim",
+                "vimdoc",
+                "python",
+            }
 
-                enable = true,
-                keymaps = {
-                    node_incremental = '<cr>',
-                    node_decremental = '<backspace>',
-                },
-            },
-        },
+            -- Configure nvim-treesitter itself.
+            require("nvim-treesitter").setup()
+
+            -- Install/update the parsers we want.
+            require("nvim-treesitter").install(languages)
+
+            -- Enable Treesitter features for the filetypes we use.
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = languages,
+                callback = function(args)
+                    -- Syntax highlighting.
+                    vim.treesitter.start(args.buf)
+
+                    -- Treesitter indentation.
+                    vim.bo[args.buf].indentexpr =
+                    "v:lua.require'nvim-treesitter'.indentexpr()"
+                end,
+            })
+        end,
     },
+
+
     {
         "nvim-treesitter/nvim-treesitter-context",
         dependencies = {"nvim-treesitter/nvim-treesitter"},
+
         config = function()
             local context = require("treesitter-context")
 
-            -- initial setup
             context.setup({
                 max_lines = 1,
-                mode = 'topline',
-                trim_scope = 'inner',
+                mode = "topline",
+                trim_scope = "inner",
             })
 
-            -- track toggle state
             local current_max = 1
 
             local function toggle_context_max_lines()
@@ -347,7 +353,6 @@ return {
                 })
             end
 
-            -- keymap
             vim.keymap.set(
                 "n",
                 "<leader>x",
@@ -356,6 +361,7 @@ return {
             )
         end,
     },
+
     {
         'nvim-telescope/telescope.nvim', version = '*',
         keys = {'<leader>t', '<C-n>', '<leader><leader>'},
@@ -469,7 +475,8 @@ return {
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
         branch = "main",
-        dependencies = { "nvim-treesitter/nvim-treesitter", branch = "main" },
+        dependencies = {"nvim-treesitter/nvim-treesitter"},
+
         config = function()
             require("nvim-treesitter-textobjects").setup({
                 select = {
@@ -477,12 +484,13 @@ return {
                     include_surrounding_whitespace = false,
                 },
                 move = {
-                    set_jumps = true, -- whether to set jumps in the jumplist
+                    set_jumps = true,
                 },
             })
 
-            -- select text objects
+            -- Select text objects.
             local select = require("nvim-treesitter-textobjects.select")
+
             local select_map = {
                 ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
@@ -493,30 +501,42 @@ return {
                 ["al"] = "@loop.outer",
                 ["il"] = "@loop.inner",
                 ["a/"] = "@comment.outer",
-                ["i/"] = "@comment.outer", -- no inner for comment
-                ["aa"] = "@parameter.outer", -- parameter -> argument
+                ["i/"] = "@comment.outer",
+                ["aa"] = "@parameter.outer",
                 ["ia"] = "@parameter.inner",
             }
+
             for lhs, query in pairs(select_map) do
                 vim.keymap.set({ "x", "o" }, lhs, function()
                     select.select_textobject(query, "textobjects")
                 end)
             end
 
-            -- move to next/previous start/end
+            -- Movement.
             local move = require("nvim-treesitter-textobjects.move")
 
             local function goto_next_start(query)
-                return function() move.goto_next_start(query, "textobjects") end
+                return function()
+                    move.goto_next_start(query, "textobjects")
+                end
             end
+
             local function goto_next_end(query)
-                return function() move.goto_next_end(query, "textobjects") end
+                return function()
+                    move.goto_next_end(query, "textobjects")
+                end
             end
+
             local function goto_previous_start(query)
-                return function() move.goto_previous_start(query, "textobjects") end
+                return function()
+                    move.goto_previous_start(query, "textobjects")
+                end
             end
+
             local function goto_previous_end(query)
-                return function() move.goto_previous_end(query, "textobjects") end
+                return function()
+                    move.goto_previous_end(query)
+                end
             end
 
             vim.keymap.set({ "n", "x", "o" }, "]m", goto_next_start("@function.outer"))
