@@ -30,7 +30,7 @@ opt.listchars= "lead:·,trail:·,tab:>·"
 g.netrw_banner = 0
 
 -- mouse
-opt.mouse = "a"
+opt.mouse = ""
 
 opt.ignorecase = true
 opt.smartcase = true

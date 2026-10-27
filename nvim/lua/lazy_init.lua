@@ -28,4 +28,5 @@ require("lazy").setup({
     checker = { enabled = false },
     change_detection = { enabled = false },
     timeout = 120, -- kill processes that take more than 2 minutes
+    concurrency = 2,
 })

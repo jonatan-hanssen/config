@@ -3,12 +3,27 @@ return {
     { 'itchyny/vim-gitbranch' }, -- git branch in statusline
     { 'kshenoy/vim-signature' }, -- see marks
     { 'tpope/vim-surround' }, -- surround motions
+    { 'nvim-tree/nvim-web-devicons' }, -- icons that several plugins use
     { 'tpope/vim-repeat' }, -- repeat vim-surround
     -- { 'ap/vim-css-color' }, -- see colors in the editor
     { 'stevearc/vim-arduino', ft = 'arduino' }, -- arduino builds
     { 'folke/tokyonight.nvim', lazy = true }, -- other colorscheme
     { 'sindrets/diffview.nvim' }, -- git diff
     { 'embark-theme/vim', lazy = true }, -- other other colorscheme
+    {
+        'akinsho/bufferline.nvim',
+        version = "*",
+        config = function()
+            require('bufferline').setup {
+                options = {
+                    always_show_bufferline = false, -- opens when more than one buffer
+                    show_close_icon = false,
+                    show_buffer_close_icons = false,
+                    indicator = { style = 'none' },
+                },
+            }
+        end,
+    },
     {
         'chaoren/vim-wordmotion', -- CamelCase and snake_case word boundaries
         keys = '<leader>w',
@@ -111,7 +126,7 @@ return {
                 vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))
                 vim.keymap.set('n', '<ESC>', api.tree.close, opts('Close'))
             end
-            vim.keymap.set('n', '<BS>', ':NvimTreeToggle<CR>', { silent = true, desc = 'Open nvim-tree' })
+            -- vim.keymap.set('n', '<BS>', ':NvimTreeToggle<CR>', { silent = true, desc = 'Open nvim-tree' })
 
             vim.api.nvim_create_autocmd('QuitPre', {
                 callback = function()
@@ -339,8 +354,8 @@ return {
 
             context.setup({
                 max_lines = 1,
-                mode = "topline",
-                trim_scope = "inner",
+                mode = 'topline',
+                trim_scope = 'inner',
             })
 
             local current_max = 1
@@ -364,7 +379,14 @@ return {
 
     {
         'nvim-telescope/telescope.nvim', version = '*',
-        keys = {'<leader>t', '<C-n>', '<leader><leader>'},
+        keys = {
+            '<leader>t',
+            '<leader>n',
+            '<leader>e',
+            '<leader>i',
+            '<leader>o',
+            '<leader><leader>'
+        },
         dependencies = {
             { 'nvim-lua/plenary.nvim' },
             {
@@ -375,20 +397,20 @@ return {
         config = function()
             require('telescope').load_extension('fzf')
             require('telescope').load_extension('filetype_picker')
-
             local builtin = require('telescope.builtin')
+
+
             vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = 'Find file' })
-            vim.keymap.set('n', '<leader>tt', function() 
+            -- this requires ripgrep to work
+            vim.keymap.set('n', '<leader>n', builtin.git_files, { desc = 'FiNd file iN repo' })
+            vim.keymap.set('n', '<leader>e', builtin.live_grep, { desc = 'Grep pattern' })
+            vim.keymap.set('n', '<leader>i', function() 
                 builtin.buffers { sort_lastused = true }
             end, { desc = 'Find buffers' })
-            vim.keymap.set('n', '<C-n>', builtin.find_files, { desc = 'Find file' })
-            -- this requires ripgrep to work
-            vim.keymap.set('n', '<leader>te', builtin.live_grep, { desc = 'Grep pattern' })
-            vim.keymap.set('n', '<leader>tn', builtin.git_files, { desc = 'FiNd file iN repo' })
+            vim.keymap.set('n', '<leader>o', builtin.oldfiles, { desc = 'Open old files' })
             vim.keymap.set('n', '<leader>ts', builtin.grep_string, { desc = 'Grep string under cursor' })
             vim.keymap.set('n', '<leader>tf', '<cmd>Telescope filetype_picker<CR>', { desc = 'Pick and set filetype' })
             vim.keymap.set('n', '<leader>tu', builtin.commands, { desc = 'Select user command' })
-            vim.keymap.set('n', '<leader>to', builtin.oldfiles, { desc = 'Open old files' })
             vim.keymap.set('n', '<leader>tc', function()
                 builtin.find_files {
                     cwd = vim.fn.expand('~/.config')
@@ -575,9 +597,9 @@ return {
     {
         'tamton-aquib/duck.nvim',
         config = function()
-            vim.keymap.set('n', '<leader>oc', function() require("duck").hatch("🐈") end, {desc="Spawn a cat"})
-            vim.keymap.set('n', '<leader>or', function() require("duck").cook() end, {desc="Remove one cat"})
-            vim.keymap.set('n', '<leader>oa', function() require("duck").cook_all() end, {desc="Remove all cats"})
+            vim.keymap.set('n', '<leader>,c', function() require("duck").hatch("🐈") end, {desc="Spawn a cat"})
+            vim.keymap.set('n', '<leader>,r', function() require("duck").cook() end, {desc="Remove one cat"})
+            vim.keymap.set('n', '<leader>,a', function() require("duck").cook_all() end, {desc="Remove all cats"})
         end
     },
     {
